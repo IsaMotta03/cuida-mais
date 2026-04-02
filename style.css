@@ -1,73 +1,271 @@
-*{
-    padding: 0px;
-    margin: 0px;
-    color: rgb(46, 46, 72);
-}
-body{
-    background-color: rgb(237, 249, 254);
-}
-aside {
-    position: fixed;
-    display: flex;
-    left: 0px;
-    background-color: rgb(128, 206, 244);
-    height: 100%;
-    width: 250px;
-    border: 0px solid;
-    border-bottom-right-radius: 2vh;
-    border-top-right-radius: 2vh;
-}
-aside header{
-    text-align: center;
-    padding-top: 3vh;
-    padding-bottom: 8vh;
-}
-aside header img{
-    width: 130px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
-ul{
-    list-style-type: none;
+body.painel {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #E6F5FD;
+    color: #2E2E48;
 }
-ul li{
-    margin-bottom: 25px;
+.barra-lateral {
+    width: 260px;
+    background-color: #80CEF4;
+    border-radius: 0 30px 30px 0;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0 20px 0;
+    position: relative;
+    z-index: 10;
 }
-h2{
-    font-size: 16px;
-}
-h3{
-    font-size: 14px;
-}
-h4{
-    font-size: 12px;
-}
-aside nav li a{
-    text-decoration: none;
+.logotipo {
+    padding: 0 25px;
+    margin: 0 0 50px 30px;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-aside nav li img{
-    width: 20px;
-    padding-left: 50px;
 
 }
-aside section a img.Perfil{
-    border-radius: 100%;
-    border: 1px solid rgb(237, 249, 254);
-    width: 30px;
+.logotipo img {
+    height: 50px;
 }
-aside section a img.Sair{
-    width: 20px;
+.menu-navegacao ul {
+    list-style: none;
+    flex-grow: 1;
 }
-aside section.principal{
-    border: 1px solid rgb(237, 249, 254);
-    background-color: rgba(237, 249, 254, 0.2);
-    border-radius: 20px;
-    margin: 25px;
-    
+.menu-navegacao li {
+    position: relative;
+    padding: 0;
 }
-aside section a{
+.menu-navegacao a {
     display: flex;
-    padding: 15px;
+    align-items: center;
+    text-decoration: none;
+    color: #1A1C30;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+.menu-navegacao li img {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+/* aqui é pra marcar o item selecionado */
+.menu-navegacao li.selecionado a {
+    color: #FFFFFF;
+}
+.menu-navegacao li.selecionado img {
+    filter: brightness(0) invert(1);
+}
+/* aquele negocinho verde do lado */
+.menu-navegacao li.selecionado::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 30px;
+    background-color: #CBDD98;
+    border-radius: 4px 0 0 4px;
+    z-index: 11;
+}
+/* a parte de baixo do menu */
+.rodape-lateral {
+    margin-top: auto;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.botao-escuro {
+    background-color: #2E2E48;
+    color: #E6F5FD;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+}
+.botao-escuro img {
+    margin-right: 10px;
+}
+.gerenciarPlanos {
+    width: 100%;
+}
+.link-configuracoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #1A1C30;
+    text-decoration: none;
+}
+.link-configuracoes img {
+    width: 16px;
+    margin-right: 10px;
+}
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #E6F5FD;
+    background-color: rgba(255, 255, 255, 0.31);
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+.informacoes-usuario {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.perfil {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+.detalhes-usuario {
+    display: flex;
+    flex-direction: column;
+}
+.nome-usuario {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1A1C30;
+}
+.email-usuario {
+    font-size: 9px;
+    color: #4B4F67;
+}
+.botao-sair {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+.sair {
+    width: 18px;
+}
+.conteudo-principal {
+    flex: 1;
+    padding: 30px 60px;
+    display: flex;
+    flex-direction: column;
+}
+.cabecalho-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.cabecalho-topo h1 {
+    font-size: 26px;
+    color: #2E2E48;
+    font-weight: 600;
+}
+.titulos-cabecalho p {
+    font-size: 14px;
+    color: #727B8E;
+    margin-top: 4px;
+}
+.botao-emergencia {
+    padding: 18px 36px;
+    font-size: 16px;
+    border-radius: 16px;
+    width: 260px;
+    height: 60px;
+}
+.botao-emergencia img {
+    width: 26px;
+}
+.botao-adicionar {
+    background-color: #CBDD98;
+    color: #182000;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    width: 260px;
+    height: 60px;
+}
+.area-conteudo {
+    flex: 1;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+.cartao-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+.icone-sino {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+.cartao-vazio h2 {
+    font-size: 22px;
+    color: #2E2E48;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.cartao-vazio p {
+    font-size: 14px;
+    color: #727B8E;
+    font-weight: 400;
+}
+
+
+
+
+.painel-pessoas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 90%;
+}
+#idoso {
+    grid-column: span 2;
+}
+.area-conteudo-pessoas {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
