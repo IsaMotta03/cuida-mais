@@ -268,4 +268,61 @@ body.painel {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
+}
+.area-conteudo-pessoas header{
+    position: absolute;
+    top: 20px;
+    left: 25px;
+}
+#familiar{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 100px 40px;
+}
+#familiar section{
+    display: flex;
+    background-color: #CBDD98;
+    padding: 15px 65px;
+    border-radius: 20px;
+    color: #FFFFFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    
+}
+#familiar section img{
+    position: relative;
+    right: 45px;
+}
+#familiar section h4{
+    position: relative;
+    right: 35px;
+    bottom: 5px;
+}
+#familiar section p{
+    font-size: 12px;
+    position: relative;
+    right: 78%;
+    top: 13px;
+}
+.area-conteudo-pessoas footer{
+    color: #727B8E;
+    position: absolute;
+    bottom: 20px;
+    right: 30%;
+}
+.area-conteudo-pessoas footer ul li{
+    display: inline;
+    margin: 10px;
+}
+.botao-adicionar-pessoas{
+    background-color: #80CEF4;
+    color: #FFFFFF;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    left: 240px;
+    padding: 12px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
