@@ -253,7 +253,7 @@ body.painel {
 
 .painel-pessoas {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 20px;
     height: 90%;
 }
