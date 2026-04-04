@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuida+ | Consultas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="painel">
+
+    <aside class="barra-lateral">
+        <header class="logotipo">
+            <img src="assets/icons/logo.svg" alt="Logotipo Cuida+">
+        </header>
+
+        <nav class="menu-navegacao">
+            <ul>
+                <li>
+                    <a href="visaogeral.html">
+                        <img src="assets/icons/visao-geral.svg" alt="Ícone Visão Geral">
+                        <span>Visão Geral</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pessoas.html">
+                        <img src="assets/icons/pessoas.svg" alt="Ícone Pessoas">
+                        <span>Pessoas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="medicamento.html">
+                        <img src="assets/icons/medicamentos.svg" alt="Ícone Medicamentos">
+                        <span>Medicamentos</span>
+                    </a>
+                </li>
+                <li class="selecionado">
+                    <a href="consultas.html">
+                        <img src="assets/icons/consultas.svg" alt="Ícone Consultas">
+                        <span>Consultas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento">
+                        <span>Acompanhamento</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="rodape-lateral">
+            <a href="#" class="botao-escuro gerenciarPlanos">
+                <img src="assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos">
+                <span>Gerenciar Planos</span>
+            </a>
+
+            <a href="#configuracoes" class="link-configuracoes">
+                <img src="assets/icons/configuracoes.svg" alt="Ícone Configurações">
+                <span>Configurações</span>
+            </a>
+
+            <section class="perfil-usuario">
+                <figure class="informacoes-usuario">
+                    <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil">
+                    <figcaption class="detalhes-usuario">
+                        <span class="nome-usuario">Fulano Siclano</span>
+                        <span class="email-usuario">fulano@uol.com</span>
+                    </figcaption>
+                </figure>
+                <a href="#sair" class="botao-sair" title="Sair da conta">
+                    <img src="assets/icons/logout.svg" alt="Ícone Sair" class="sair">
+                </a>
+            </section>
+        </section>
+    </aside>
+
+    <main class="conteudo-principal">
+        <header class="cabecalho-topo">
+            <section class="titulos-cabecalho">
+                <h1>Consultas</h1>
+                <p>0 consultas agendadas</p>
+            </section>
+            <a href="#" class="botao-adicionar">
+                <img src="assets/icons/consultas.svg" alt="Ícone Nova Consulta">
+                Nova Consulta
+            </a>
+        </header>
+
+        <div class="barra-mes">
+            <div class="seletor-mes">
+                <span class="mes-atual">Abril 2026</span>
+                <img src="assets/icons/bola-azul.svg" alt="Dropdown mês" class="icone-dropdown">
+            </div>
+            <div class="navegacao-mes">
+                <button class="btn-mes" aria-label="Mês anterior">&#8249;</button>
+                <button class="btn-mes" aria-label="Próximo mês">&#8250;</button>
+            </div>
+        </div>
+
+        <section class="area-conteudo">
+            <article class="cartao-vazio">
+                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                <h2>Nenhuma consulta agendada</h2>
+                <p>Cadastre novas consultas pra receber notificações.</p>
+            </article>
+        </section>
+    </main>
+
+</body>
+</html>

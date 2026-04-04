@@ -211,6 +211,11 @@ body.painel {
     width: 260px;
     height: 60px;
 }
+.botao-adicionar img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
 .area-conteudo {
     flex: 1;
     background-color: #FFFFFF;
@@ -325,4 +330,58 @@ body.painel {
     padding: 12px 12px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.barra-mes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.seletor-mes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.mes-atual {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2E2E48;
+}
+
+.icone-dropdown {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+}
+
+/* Botões de navegação de mês */
+.navegacao-mes {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-mes {
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #727B8E;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    line-height: 1;
+}
+
+.btn-mes:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #2E2E48;
 }
