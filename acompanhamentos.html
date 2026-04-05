@@ -33,14 +33,14 @@
                         <span>Medicamentos</span>
                     </a>
                 </li>
-                <li class="selecionado">
+                <li>
                     <a href="consultas.html">
                         <img src="assets/icons/consultas.svg" alt="Ícone Consultas">
                         <span>Consultas</span>
                     </a>
                 </li>
-                <li>
-                    <a href="acompanhamentos.html">
+                <li class="selecionado">
+                    <a href="#">
                         <img src="assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento">
                         <span>Acompanhamento</span>
                     </a>
@@ -76,32 +76,27 @@
 
     <main class="conteudo-principal">
         <header class="cabecalho-topo">
-            <section class="titulos-cabecalho">
-                <h1>Consultas</h1>
-                <p>0 consultas agendadas</p>
-            </section>
-            <a href="#" class="botao-adicionar">
-                <img src="assets/icons/consultas.svg" alt="Ícone Nova Consulta">
-                Nova Consulta
-            </a>
+                <h1 class="titulos-cabecalho">Acompanhamento</h1>
         </header>
 
-        <div class="barra-mes">
-            <div class="seletor-mes">
-                <span class="mes-atual">Abril 2026</span>
-                <img src="assets/icons/bola-azul.svg" alt="Dropdown mês" class="icone-dropdown">
-            </div>
-            <div class="navegacao-mes">
-                <button class="btn-mes" aria-label="Mês anterior">&#8249;</button>
-                <button class="btn-mes" aria-label="Próximo mês">&#8250;</button>
-            </div>
-        </div>
-
-        <section class="area-conteudo">
-            <article class="cartao-vazio">
+        <section class="painel-acompanhamento">
+            <article class="area-conteudo-acompanhamento" id="relatorio">
+                <header><h1>Relatório Geral</h1></header>
                 <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h2>Nenhuma consulta agendada</h2>
-                <p>Cadastre novas consultas pra receber notificações.</p>
+                <h2>Nenhum Idoso</h2>
+                <p>Cadastre novo idoso para exibir o relatório.</p>
+            </article>
+        
+            <article class="area-conteudo-acompanhamento" id="notas">
+                <header><h1>Notas</h1></header>
+                <a href="#" class="botao-adicionar-nota">+</a>
+                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                <h2>Nenhuma nota adicionada</h2>
+            </article>
+        
+            <article class="area-conteudo-acompanhamento" id="checklist">
+                <header><h1>Checklist diário</h1></header>
+                <button>+ Checks diários</button>
             </article>
         </section>
     </main>

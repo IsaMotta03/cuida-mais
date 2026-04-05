@@ -254,8 +254,6 @@ body.painel {
 }
 
 
-
-
 .painel-pessoas {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -384,4 +382,58 @@ body.painel {
 .btn-mes:hover {
     background-color: rgba(0, 0, 0, 0.06);
     color: #2E2E48;
+}
+
+.painel-acompanhamento {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    height: 90%;
+}
+#relatorio {
+    grid-column: 1;
+    grid-row: span 2;
+}
+#notas{
+    grid-column: 2;
+    grid-row: span 1;
+}
+#checklist{
+    grid-column: 2;
+    grid-row: 2;
+}
+.area-conteudo-acompanhamento{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.area-conteudo-acompanhamento header{
+    position: absolute;
+    top: 20px;
+    left: 25px;
+}
+#checklist button{
+    background-color: #deecb7;
+    position: relative;
+    bottom: 70px;
+    padding: 20px 160px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+.botao-adicionar-nota{
+    background-color: #80CEF4;
+    color: #FFFFFF;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    left: 140px;
+    padding: 12px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
