@@ -185,51 +185,44 @@
         
             <article class="area-conteudo-pessoas" id="familiar">
                 <header><h1>Familiares</h1></header>
-                <button type="button" id="abrir-modal-familiar" class="botao-pessoas">+</button>
-                <aside id="modal-container-familiar" class="modal-overlay">
-                    <section class="cartao">
-                        <header class="form-header">
-                        <h1>Novo Familiar</h1>
-                        <button type="button" id="fechar-modal-familiar" class="btn-fechar" aria-label="Fechar modal">✕</button>
-                        </header>
-                        
-                        <form class="formulario">
-                        <!-- Nome ocupa toda a largura (12 colunas) -->
-                        <p class="inputs col-span-full">
-                            <label for="nome-familiar">Nome</label>
-                            <input type="text" id="nome-familiar" name="nome" placeholder="José Bezerra" required>
+                <button id="abrirModal" class="botao-pessoas">+</button>
+
+                <dialog id="modalFamiliar" class="modal-container">
+                    <header class="modal-header">
+                        <h2>Novo Familiar</h2>
+                        <button id="fecharModal" class="btn-close">&times;</button>
+                    </header>
+                    
+                    <form class="modal-body">
+                        <p class="input-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" placeholder="José Bezerra">
                         </p>
 
-                        <!-- Parentesco ocupa metade da linha (6 colunas) -->
-                        <p class="inputs col-6">
-                            <label for="parentesco-familiar">Parentesco</label>
-                            <input type="text" id="parentesco-familiar" name="parentesco" placeholder="Filho" required>
-                        </p>
-                        
-                        <!-- Acesso ocupa a outra metade da linha (6 colunas) -->
-                        <p class="inputs col-6">
-                            <label for="acesso-familiar">Acesso</label>
-                            <input type="text" id="acesso-familiar" name="acesso" placeholder="Observador">
-                        </p>
-                        
-                        <!-- Código de Verificação ocupa 7 colunas para alinhar com o botão ao lado -->
-                        <p class="inputs col-7">
-                            <label for="cod-familiar">Código de Verificação</label>
-                            <input type="text" id="cod-familiar" name="cod" placeholder="854gb15">
-                        </p>
-                        
-                        <!-- Botão Enviar ocupa 5 colunas e fica alinhado ao lado do campo Código -->
-                        <p class="inputs col-5 btn-side-container">
+                        <article class="input-row">
+                            <p class="input-group">
+                                <label for="parentesco">Parentesco</label>
+                                <input type="text" id="parentesco" placeholder="Filho">
+                            </p>
+                            <p class="input-group">
+                                <label for="acesso">Acesso</label>
+                                <input type="text" id="acesso" placeholder="Observador">
+                            </p>
+                        </article>
+
+                        <article class="input-row align-end">
+                            <p class="input-group flex-grow">
+                                <label for="codigo">Código de Verificação</label>
+                                <input type="text" id="codigo" placeholder="854GB15">
+                            </p>
                             <button type="button" class="btn-enviar">Enviar</button>
-                        </p>
+                        </article>
 
-                        <!-- Rodapé centralizado ocupando toda a largura -->
-                        <footer class="form-footer col-span-full">
+                        <footer class="center">
                             <button type="submit" class="btn-confirmar">Confirmar</button>
                         </footer>
-                        </form>
-                    </section>
-                    </aside>
+                    </form>
+                </dialog>
 
                 <section>
                     <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" >
@@ -246,6 +239,6 @@
         </section>
     </main>
 
-    <script src="cuidaMais.js"></script>
+    <script src="pessoas.js"></script>
 </body>
 </html>
