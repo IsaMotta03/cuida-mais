@@ -517,16 +517,17 @@ h3 {
 }
 
 .btn-fechar { 
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #2E2E48;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
+ position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #2E2E48;
+    padding-right: 20px;
+    margin: 0;
 }
 
 .formulario {
@@ -562,16 +563,19 @@ h3 {
 .col-span-full { grid-column: span 12;}
 .col-5 { grid-column: span 5;}
 .col-4 { grid-column: span 4;}
-.col-2 { grid-column: span 2;} 
+.col-2 { grid-column: span 2;}
+.col-8 { grid-column: span 8;}
+.col-7 { grid-column: span 7;}
+.col-6 { grid-column: span 6;}
 
-.column-left {
+.coluna-esq {
   grid-column: span 7;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.column-right {
+.coluna-dir {
   grid-column: span 5;
   display: flex;
   flex-direction: column;
@@ -636,11 +640,6 @@ h3 {
     border: none;
     cursor: pointer;
 }
-:root {
-    --verde-claro: #d1e3a3;
-    --azul-fundo: #f0faff;
-    --texto-label: #333;
-}
 
 dialog.modal-container {
     border: none;
@@ -649,7 +648,6 @@ dialog.modal-container {
     width: 90%;
     max-width: 600px;
     height: auto;
-    background-color: var(--azul-fundo);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     overflow: hidden;
     position: fixed;
@@ -663,22 +661,24 @@ dialog.modal-container {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.modal-container .modal-header { /*RESOLVER MARGEM E BORDA*/
+.modal-container .header-fami { /*RESOLVER MARGEM E BORDA*/
     background-color: #c8dfa1;
     padding: 20px;
     text-align: center;
     position: relative;
-    display: block;
     width: 100%;
-    border: none;
-    margin: 0px;
+    box-sizing: border-box;
+    margin-top: -20px;  
+    margin-left: -25px;  
 }
 
-.modal-container .modal-header h2 {
-    margin: 0;
-    font-size: 18px;
+.modal-container .header-fami h2 {
+    justify-content: center;
+    align-items: center;
     color: #2E2E48;
-    background: none;
+    font-size: 18px;
+    margin: 0;
+
 }
 
 .modal-container .btn-close {
@@ -690,13 +690,13 @@ dialog.modal-container {
     border: none;
     font-size: 1.8rem;
     cursor: pointer;
-    color: #000;
+    color: #2E2E48;
     padding-right: 20px;
     margin: 0;
 }
 
 /* Body (Formulário) */
-.modal-container form.modal-body {
+.modal-container form.modal-caixa {
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -705,7 +705,7 @@ dialog.modal-container {
     background: transparent;
 }
 
-.modal-container article.input-row {
+.modal-container article.input-linha {
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -732,7 +732,7 @@ dialog.modal-container {
 .modal-container label {
     font-weight: bold;
     font-size: 0.9rem;
-    color: var(--texto-label);
+    color: #2E2E48;
     display: block;
     margin: 0;
     background: none;
@@ -740,29 +740,24 @@ dialog.modal-container {
 
 .modal-container input {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #cbd5e1;
     border-radius: 8px;
-    background: #fff;
+    background: #FFFFFF;
     width: 100%;
     box-sizing: border-box;
     margin: 0;
 }
 
-.modal-container .btn-enviar, 
 .modal-container .btn-confirmar {
-    background-color: var(--verde-claro);
+    background-color: #c8dfa1;
     border: none;
     border-radius: 12px;
-    padding: 12px 25px;
+    padding: 15px 60px;
     font-weight: bold;
     color: #FFFFFF;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: opacity 0.2s;
-}
-
-.modal-container .btn-confirmar {
-    padding: 15px 60px;
     font-size: 1rem;
 }
 
@@ -775,5 +770,154 @@ dialog.modal-container {
     padding-left: 57%;
     width: 100%;
 }
+/*ADICIONAR CUIDADOR*/
+/* Reset local para a modal de cuidador */
+.cartao-cuidador *, 
+.cartao-cuidador *::before, 
+.cartao-cuidador *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+/* Fundo escuro */
+.modal-overlay-cuidador {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    
+    display: none; 
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal-overlay-cuidador.visivel {
+    display: flex;
+    opacity: 1;
+}
+
+/* O corpo da modal */
+.cartao-cuidador {
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    overflow: hidden;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    box-shadow: 0 2px 6px black;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Header */
+.form-header-cuidador {
+    position: relative;
+    width: 100%;
+    margin-top: -20px;
+    margin-left: -25px;
+}
+
+.form-header-cuidador h1 { 
+    background-color: #c8dfa1;
+    color: #2E2E48;
+    text-align: center;
+    padding: 16px;
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Botão Fechar */
+.btn-fechar-cuidador { 
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #2E2E48;
+    padding: 0;
+    margin: 0;
+}
+
+/* Formulário (Grid) */
+.formulario-cuidador {
+    padding: 24px 30px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 15px 20px;
+    flex: 1;
+    overflow-y: auto;
+    margin: 60px 30px 120px;
+}
+
+/* Botão de Anexos */
+.btn-anexos {
+    display: inline-block;
+    background-color: #7cd1f9;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 11px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(124, 209, 249, 0.3);
+    width: 100%;
+}
+
+.btn-anexos img {
+    position: relative;
+    top: 6px;
+}
+.btn-enviar-container {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+.btn-enviar {
+    background-color: #c8dfa1;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.sr-only {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+/* Footer e Botão Confirmar */
+.form-footer-cuidador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 30px 0;
+    margin-top: 20px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.btn-confirmar-cuidador {
+    background-color: #c8dfa1;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 80px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
 
