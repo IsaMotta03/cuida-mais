@@ -264,6 +264,7 @@ h3 {
 }
 #idoso {
     grid-column: span 2;
+    padding: 70px 20px 20px 20px;
 }
 .area-conteudo-pessoas {
     background-color: #FFFFFF;
@@ -314,6 +315,9 @@ h3 {
     position: relative;
     right: 78%;
     top: 13px;
+}
+#cuidador{
+    padding: 70px 20px 20px 20px;
 }
 .area-conteudo-pessoas footer {
     color: #727B8E;
@@ -870,6 +874,212 @@ dialog.modal-container {
     font-size: 16px;
     cursor: pointer;
     position: relative;
+}
+/* ═══════════════════════════════════════════
+   CARDS DINÂMICOS — cole no seu style.css
+   ═══════════════════════════════════════════ */
+
+/* ── Containers de lista ── */
+.lista-idosos,
+.lista-cuidadores,
+.lista-familiares {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+    width: 100%;
+}
+
+/* ─────────────────────────────────────
+   CARD IDOSO  (branco, borda arredondada)
+───────────────────────────────────── */
+.card-idoso {
+    border: 1px solid #a8d8f0;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    min-width: 260px;
+    flex: 0 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.card-idoso-avatar img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-idoso-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-idoso-nome {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #2E2E48;
+}
+
+.card-idoso-idade {
+    font-size: 0.82rem;
+    color: #6b7280;
+}
+
+.card-idoso-comorbidades {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.label-comorbidades {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag-comorbidade {
+    background: #d7e9b9;
+    color: #2E2E48;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* ─────────────────────────────────────
+   CARD CUIDADOR  (azul claro)
+───────────────────────────────────── */
+.lista-cuidadores {
+    flex-direction: row;
+}
+
+.card-cuidador {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #a8d8f0;          /* azul médio — ajuste para a cor exata do seu design */
+    border-radius: 16px;
+    padding: 18px;
+    min-width: 180px;
+    flex: 1 1 180px;
+    max-width: 220px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card-cuidador-topo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-cuidador-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.6);
+}
+
+.card-cuidador-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-cuidador-nome {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.card-cuidador-idade {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.card-cuidador-detalhes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-cuidador-detalhes li span {
+    font-weight: 600;
+}
+
+.card-cuidador-id {
+    background: #c8dfa1;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+}
+
+.lista-familiares {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-familiar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 50px;
+    padding: 10px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.familiar-admin {
+    background: #c8e6a0;     /* verde suave — ajuste para sua paleta */
+}
+
+.familiar-observador {
+    background: #a8d8f0;     /* azul suave */
+}
+
+.card-familiar-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-familiar-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.card-familiar-info strong {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.card-familiar-info span {
+    font-size: 0.75rem;
+    color: #4b5563;
 }
 
 /* =============================================
