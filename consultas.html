@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="acompanhamento.html">
                         <img src="assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento">
                         <span>Acompanhamento</span>
                     </a>
@@ -78,33 +78,116 @@
         <header class="cabecalho-topo">
             <section class="titulos-cabecalho">
                 <h1>Consultas</h1>
-                <p>0 consultas agendadas</p>
+                <p id="contagem-consultas">0 consultas agendadas</p>
             </section>
-            <a href="#" class="botao-adicionar">
+            <button class="superior" id="btn-nova-consulta">
                 <img src="assets/icons/consultas.svg" alt="Ícone Nova Consulta">
                 Nova Consulta
-            </a>
+            </button>
         </header>
 
         <div class="barra-mes">
             <div class="seletor-mes">
-                <span class="mes-atual">Abril 2026</span>
+                <span class="mes-atual" id="mes-atual"></span>
                 <img src="assets/icons/bola-azul.svg" alt="Dropdown mês" class="icone-dropdown">
             </div>
             <div class="navegacao-mes">
-                <button class="btn-mes" aria-label="Mês anterior">&#8249;</button>
-                <button class="btn-mes" aria-label="Próximo mês">&#8250;</button>
+                <button class="btn-mes" id="btn-mes-anterior" aria-label="Mês anterior">&#8249;</button>
+                <button class="btn-mes" id="btn-mes-proximo" aria-label="Próximo mês">&#8250;</button>
             </div>
         </div>
 
-        <section class="area-conteudo">
-            <article class="cartao-vazio">
-                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h2>Nenhuma consulta agendada</h2>
-                <p>Cadastre novas consultas pra receber notificações.</p>
-            </article>
+        <section class="area-conteudo" id="area-conteudo">
+            <!-- Preenchido via JavaScript -->
         </section>
     </main>
 
+    <!-- Modal Nova Consulta -->
+    <div class="modal-overlay" id="modal-nova-consulta">
+        <div class="cartao cartao-consulta">
+
+            <div class="form-header">
+                <h1>Nova Consulta</h1>
+                <button class="btn-fechar" id="btn-fechar-modal">X</button>
+            </div>
+
+            <div class="formulario formulario-consulta">
+
+                <div class="inputs col-span-full">
+                    <label for="mc-especialidade">Especialidade</label>
+                    <input id="mc-especialidade" type="text" placeholder="Ex: Fisioterapia" autocomplete="off">
+                </div>
+
+                <div class="inputs col-7">
+                    <label for="mc-profissional">Profissional Responsável</label>
+                    <input id="mc-profissional" type="text" placeholder="">
+                </div>
+
+                <div class="inputs col-5">
+                    <label for="mc-hospital">Hospital / Clínica</label>
+                    <input id="mc-hospital" type="text" placeholder="">
+                </div>
+
+                <div class="inputs col-7">
+                    <label for="mc-endereco">Endereço</label>
+                    <input id="mc-endereco" type="text" placeholder="">
+                </div>
+
+                <div class="inputs col-5">
+                    <label for="mc-cep">CEP</label>
+                    <input id="mc-cep" type="text" placeholder="" maxlength="9">
+                </div>
+
+                <!-- Calendário + Horário -->
+                <div class="col-span-full consulta-datetime">
+
+                    <div class="consulta-calendario-wrap">
+                        <label>Selecione a data</label>
+                        <div id="mc-calendario" class="calendario-inline"></div>
+                    </div>
+
+                    <div class="consulta-horario-wrap">
+                        <label>Selecione o horário</label>
+                        <div class="seletor-horario-drum">
+                            <div class="drum-col" id="drum-hora"></div>
+                            <div class="drum-col" id="drum-min"></div>
+                            <div class="drum-col" id="drum-periodo"></div>
+                        </div>
+
+                        <div class="consulta-toggles">
+                            <label class="toggle-label">
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="mc-recorrente">
+                                    <span class="toggle-slider"></span>
+                                </div>
+                                Recorrentes
+                            </label>
+                            <label class="toggle-label">
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="mc-exame">
+                                    <span class="toggle-slider"></span>
+                                </div>
+                                Exames
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="inputs col-span-full">
+                    <label for="mc-obs">Observações</label>
+                    <input id="mc-obs" type="text" placeholder="Ex: Dores na lombar">
+                </div>
+
+            </div>
+
+            <div class="form-footer">
+                <button class="btn-confirmar" id="btn-confirmar-consulta">Confirmar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="consultas.js"></script>
 </body>
 </html>
