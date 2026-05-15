@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuida+ | Consultas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="painel">
+
+    <aside class="barra-lateral">
+        <header class="logotipo">
+            <img src="assets/icons/logo.svg" alt="Logotipo Cuida+">
+        </header>
+
+        <nav class="menu-navegacao">
+            <ul>
+                <li>
+                    <a href="visaogeral.html">
+                        <img src="assets/icons/visao-geral.svg" alt="Ícone Visão Geral">
+                        <span>Visão Geral</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pessoas.html">
+                        <img src="assets/icons/pessoas.svg" alt="Ícone Pessoas">
+                        <span>Pessoas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="medicamento.html">
+                        <img src="assets/icons/medicamentos.svg" alt="Ícone Medicamentos">
+                        <span>Medicamentos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="consultas.html">
+                        <img src="assets/icons/consultas.svg" alt="Ícone Consultas">
+                        <span>Consultas</span>
+                    </a>
+                </li>
+                <li class="selecionado">
+                    <a href="#">
+                        <img src="assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento">
+                        <span>Acompanhamento</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="rodape-lateral">
+            <a href="#" class="botao-escuro gerenciarPlanos">
+                <img src="assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos">
+                <span>Gerenciar Planos</span>
+            </a>
+
+            <a href="#configuracoes" class="link-configuracoes">
+                <img src="assets/icons/configuracoes.svg" alt="Ícone Configurações">
+                <span>Configurações</span>
+            </a>
+
+            <section class="perfil-usuario">
+                <figure class="informacoes-usuario">
+                    <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil">
+                    <figcaption class="detalhes-usuario">
+                        <span class="nome-usuario">Fulano Siclano</span>
+                        <span class="email-usuario">fulano@uol.com</span>
+                    </figcaption>
+                </figure>
+                <a href="#sair" class="botao-sair" title="Sair da conta">
+                    <img src="assets/icons/logout.svg" alt="Ícone Sair" class="sair">
+                </a>
+            </section>
+        </section>
+    </aside>
+
+    <main class="conteudo-principal">
+        <header class="cabecalho-topo">
+                <h1 class="titulos-cabecalho">Acompanhamento</h1>
+        </header>
+
+        <section class="painel-acompanhamento">
+            <article class="area-conteudo-acompanhamento" id="relatorio">
+                <header><h2>Relatório Geral</h2></header>
+                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                <h3>Nenhum Idoso</h3>
+                <p>Cadastre novo idoso para exibir o relatório.</p>
+            </article>
+        
+            <article class="area-conteudo-acompanhamento" id="notas">
+                <header><h2>Notas</h2></header>
+                <a href="#" class="botao-adicionar-nota">+</a>
+                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                <h3>Nenhuma nota adicionada</h3>
+            </article>
+        
+            <article class="area-conteudo-acompanhamento" id="checklist">
+                <header><h2>Checklist diário</h2></header>
+                <button>+ Checks diários</button>
+            </article>
+        </section>
+    </main>
+
+</body>
+</html>

@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="acompanhamentos.html">
                         <img src="assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento">
                         <span>Acompanhamento</span>
                     </a>
@@ -76,32 +76,216 @@
 
     <main class="conteudo-principal">
         <header class="cabecalho-topo">
-            <section>   
+            <section class="titulos-cabecalho">  
                 <h1>Pessoas</h1>
                 <p>0 pessoas cadastradas</p>
             </section>
-            <a href="#" class="botao-adicionar">+ Adicionar Idoso</a>
-            </a>
-        </header>
+            <button type="button" id="abrir-modal-idoso" class="superior">+ Adicionar Idoso</button>
+        </header>   
+
+        <aside id="modal-container-idoso" class="modal-overlay"><!-- Fundo escuro ao abrir -->
+                
+                <section class="cartao"> <!-- Cartao popup -->
+                    <header class="form-header">
+                    <h1>Novo Idoso</h1>
+                    <button type="button" id="fechar-modal-idoso" class="btn-fechar" >&times;</button>
+                    </header>
+                    
+                    <form class="formulario">
+                    <p class="inputs col-span-full">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Maria Lúcia" required>
+                    </p>
+
+                    <p class="inputs col-4">
+                        <label for="nascimento">Nascimento</label>
+                        <input type="date" id="nascimento" name="nascimento">
+                    </p>
+                    
+                    <p class="inputs col-4">
+                        <label for="sangue">Tipo Sanguíneo</label>
+                        <input type="text" id="sangue" name="sangue" placeholder="O+">
+                    </p>
+                    
+                    <p class="inputs col-2">
+                        <label for="altura">Altura</label>
+                        <input type="number" id="altura" name="altura" placeholder="163" min="0" step="1">
+                    </p>
+                    
+                    <p class="inputs col-2">
+                        <label for="peso">Peso</label>
+                        <input type="number" id="peso" name="peso" placeholder="95" min="0" step="1">
+                    </p>
+
+                    <p class="inputs col-5">
+                        <label for="medico">Médico Responsável</label>
+                        <input type="text" id="medico" name="medico" placeholder="Dr. José Almeida">
+                    </p>
+                    <p class="inputs col-2">
+                        <label for="crm">CRM</label>
+                        <input type="text" id="crm" name="crm" placeholder="000">
+                    </p>
+                    <p class="inputs col-5">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="71 00000-0000">
+                    </p>
+
+                    <article class="coluna-esq">
+                        <p class="inputs">
+                        <label for="responsavel">Responsável</label>
+                        <input type="text" id="responsavel" name="responsavel" placeholder="Romilda - Filha">
+                        </p>
+                        <p class="inputs">
+                        <label for="comorbidades">Comorbidades</label>
+                        <input type="text" id="comorbidades" name="comorbidades" placeholder="Diabetes, hipertensão">
+                        </p>
+                        <p class="inputs">
+                        <label for="observacoes">Observações</label>
+                        <input type="text" id="observacoes" name="observacoes" placeholder="Gostos, hobbies...">
+                        </p>
+                    </article>
+
+                    <article class="coluna-dir">
+                        <p class="inputs textarea-group">
+                        <label for="alergias">Alergias</label>
+                        <textarea id="alergias" name="alergias" placeholder="Medicamentos, alimentos"></textarea>
+                        </p>
+                        <p class="inputs">
+                        <label for="upload-laudos">Laudos</label>
+                        <input type="file" id="upload-laudos" name="laudos" multiple class="sr-only">
+                        <label id="btn-anexos" for="upload-laudos" class="btn-anexos" role="button" tabindex="0"><img src="assets/icons/clip.svg" alt=""> Anexos</label>
+                        </p>
+                    </article>
+
+                    <footer class="form-footer col-span-full">
+                        <button type="submit" class="btn-confirmar">Confirmar</button>
+                    </footer>
+                    </form>
+                </section>
+                </aside>
+        
 
         <section class="painel-pessoas">
             <article class="area-conteudo-pessoas" id="idoso">
-                <header><h1>Idosos</h1></header>
+                <header><h2>Idosos</h2></header>
                 <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h2>Nenhum Idoso</h2>
+                <h3>Nenhum Idoso</h3>
                 <p>Cadastre novo idoso para receber notificações.</p>
             </article>
         
             <article class="area-conteudo-pessoas" id="cuidador">
                 <header><h1>Cuidadores</h1></header>
-                <a href="#" class="botao-adicionar-pessoas">+</a>
+                <button type="button" id="abrir-modal-cuidador" class="botao-pessoas">+</button>
                 <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h2>Nenhum Cuidador</h2>
+                <h3>Nenhum Cuidador</h3>
+
+                <aside id="modal-container-cuidador" class="modal-overlay-cuidador"><!-- Fundo escuro ao abrir -->
+                
+                <section class="cartao-cuidador"> <!-- Cartao popup -->
+                    <header class="form-header-cuidador">
+                        <h1>Novo Cuidador</h1>
+                        <button type="button" id="fechar-modal-cuidador" class="btn-fechar-cuidador" >&times;</button>
+                    </header>
+                    
+                    <form class="formulario-cuidador">
+                    <p class="inputs col-span-full">
+                        <label for="nome-cuidador">Nome</label>
+                        <input type="text" id="nome-cuidador" name="nome" placeholder="Maria Lúcia" required>
+                    </p>
+
+                    <p class="inputs col-4">
+                        <label for="cpf-cuidador">CPF</label>
+                        <input type="text" id="cpf-cuidador" name="cpf" placeholder="000.000.000-00">
+                    </p>
+                    
+                    <p class="inputs col-4">
+                        <label for="tel-cuidador">Telefone</label>
+                        <input type="tel" id="tel-cuidador" name="tel" placeholder="71 00000-0000">
+                    </p>
+                    
+                    <p class="inputs col-4">
+                        <label for="nascimento-cuidador">Nascimento</label>
+                        <input type="date" id="nascimento-cuidador" name="nascimento">
+                    </p>
+
+                    <p class="inputs col-7">
+                        <label for="dias">Dias</label>
+                        <input type="text" id="dias" name="dias" placeholder="Ex: Segunda a Quarta">
+                    </p>
+                    
+                    <p class="inputs col-5">
+                        <label for="cnh">CNH</label>
+                        <input type="text" id="cnh" placeholder="0000000000">
+                    </p>
+                    <p class="inputs col-6">
+                        <label for="turno">Turno</label>
+                        <input type="text" id="turno" name="turno" placeholder="Ex: Integral">
+                    </p>
+
+                    <p class="inputs col-6">
+                        <label for="upload-doc">Documentos</label>
+                        <input type="file" id="upload-doc" name="doc" multiple class="sr-only">
+                        <label id="btn-anexos" for="upload-doc" class="btn-anexos" role="button" tabindex="0"><img src="assets/icons/clip.svg" alt=""> Anexos</label>
+                    </p>
+
+                    <p class="inputs col-8">
+                        <label for="cod-cuidador">Código de Verificação</label>
+                        <input type="text" id="cod-cuidador" name="cod-cuidador" placeholder="854GB15">
+                    </p>
+
+                    <p class="btn-enviar-container col-4">
+                        <button type="button" class="btn-enviar">Enviar</button>
+                    </p>
+                </form>
+                    <footer class="form-footer-cuidador col-span-full">
+                        <button type="submit" class="btn-confirmar-cuidador">Confirmar</button>
+                    </footer>
+                
+                </section>
+                </aside>
             </article>
         
             <article class="area-conteudo-pessoas" id="familiar">
                 <header><h1>Familiares</h1></header>
-                <a href="#" class="botao-adicionar-pessoas">+</a>
+                <button id="abrirModal" class="botao-pessoas">+</button>
+
+                <dialog id="modalFamiliar" class="modal-container">
+                    <header class="header-fami">
+                        <h2>Novo Familiar</h2>
+                        <button id="fecharModal" class="btn-close">&times;</button>
+                    </header>
+                    
+                    <form class="modal-caixa">
+                        <p class="input-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" placeholder="José Bezerra">
+                        </p>
+
+                        <article class="input-linha">
+                            <p class="input-group">
+                                <label for="parentesco">Parentesco</label>
+                                <input type="text" id="parentesco" placeholder="Filho">
+                            </p>
+                            <p class="input-group">
+                                <label for="acesso">Acesso</label>
+                                <input type="text" id="acesso" placeholder="Observador">
+                            </p>
+                        </article>
+
+                        <article class="input-linha align-end">
+                            <p class="input-group flex-grow">
+                                <label for="codigo">Código de Verificação</label>
+                                <input type="text" id="codigo" placeholder="854GB15">
+                            </p>
+                            <button type="button" class="btn-enviar">Enviar</button>
+                        </article>
+
+                        <footer class="center">
+                            <button type="submit" class="btn-confirmar">Confirmar</button>
+                        </footer>
+                    </form>
+                </dialog>
+
                 <section>
                     <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" >
                     <h4>Fulano Siclano</h4>
@@ -117,5 +301,6 @@
         </section>
     </main>
 
+    <script src="pessoas.js"></script>
 </body>
 </html>
