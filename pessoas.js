@@ -44,6 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ─────────────────────────────────────────
+    // PERSISTÊNCIA DE IDOSOS (para acompanhamentos.html)
+    // ─────────────────────────────────────────
+    const LS_IDOSOS = 'cuida_idosos';
+
+    function carregarIdososLS() {
+        try { return JSON.parse(localStorage.getItem(LS_IDOSOS)) || []; }
+        catch { return []; }
+    }
+
+    function salvarIdososLS(lista) {
+        localStorage.setItem(LS_IDOSOS, JSON.stringify(lista));
+    }
+
+    // Carrega idosos já cadastrados ao iniciar
+    let idososLS = carregarIdososLS();
+
+    // ─────────────────────────────────────────
     // BLOCO IDOSO
     // ─────────────────────────────────────────
 
@@ -59,6 +76,44 @@ document.addEventListener('DOMContentLoaded', () => {
         listaIdosos.className = 'lista-idosos';
         secaoIdosos.appendChild(listaIdosos);
     }
+
+    // Re-renderiza idosos já salvos no LS
+    function renderIdososSalvos() {
+        idososLS.forEach(idoso => renderCardIdoso(idoso));
+        if (idososLS.length > 0) {
+            removerEstadoVazio(secaoIdosos);
+            totalPessoas += idososLS.length;
+            const contador = document.querySelector('.titulos-cabecalho p');
+            if (contador) {
+                contador.textContent = `${totalPessoas} pessoa${totalPessoas !== 1 ? 's' : ''} cadastrada${totalPessoas !== 1 ? 's' : ''}`;
+            }
+        }
+    }
+
+    function renderCardIdoso(idoso) {
+        const tagsHTML = idoso.comorbidades
+            ? idoso.comorbidades.split(',').map(c =>
+                `<span class="tag-comorbidade">${c.trim()}</span>`
+              ).join('')
+            : '';
+
+        const card = document.createElement('article');
+        card.className = 'card-idoso';
+        card.dataset.id = idoso.id;
+        card.innerHTML = `
+            <div class="card-idoso-avatar">
+                <img src="assets/icons/idoso1.svg" alt="Avatar de ${idoso.nome}">
+            </div>
+            <div class="card-idoso-info">
+                <strong class="card-idoso-nome">${idoso.nome}</strong>
+                ${idoso.idadeTexto ? `<span class="card-idoso-idade">${idoso.idadeTexto}</span>` : ''}
+                ${tagsHTML ? `<div class="card-idoso-comorbidades"><span class="label-comorbidades">Comorbidades</span><div class="tags">${tagsHTML}</div></div>` : ''}
+            </div>
+        `;
+        listaIdosos.appendChild(card);
+    }
+
+    renderIdososSalvos();
 
     if (modalIdoso && btnAbrirIdoso && btnFecharIdoso) {
         btnAbrirIdoso.addEventListener('click', () => modalIdoso.classList.add('visivel'));
@@ -76,37 +131,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nome        = formIdoso.querySelector('#nome').value.trim();
                 const nascimento  = formIdoso.querySelector('#nascimento').value;
                 const comorbidades = formIdoso.querySelector('#comorbidades').value.trim();
+                const peso        = formIdoso.querySelector('#peso').value;
+                const altura      = formIdoso.querySelector('#altura').value;
 
                 if (!nome) return;
 
                 const idade = calcularIdade(nascimento);
                 const idadeTexto = idade !== null ? `${idade} anos (Idade)` : '';
 
+                // Objeto idoso para persistir
+                const novoIdoso = {
+                    id: gerarId(),
+                    nome,
+                    nascimento,
+                    comorbidades,
+                    peso: peso ? Number(peso) : null,
+                    altura: altura ? Number(altura) : null,
+                    idadeTexto,
+                };
+
+                // Salva no localStorage
+                idososLS.push(novoIdoso);
+                salvarIdososLS(idososLS);
+
                 // Remove estado vazio na primeira vez
                 removerEstadoVazio(secaoIdosos);
 
-                // Monta tags de comorbidades
-                const tagsHTML = comorbidades
-                    ? comorbidades.split(',').map(c =>
-                        `<span class="tag-comorbidade">${c.trim()}</span>`
-                      ).join('')
-                    : '';
-
-                // Cria card
-                const card = document.createElement('article');
-                card.className = 'card-idoso';
-                card.innerHTML = `
-                    <div class="card-idoso-avatar">
-                        <img src="assets/icons/idoso1.svg" alt="Avatar de ${nome}">
-                    </div>
-                    <div class="card-idoso-info">
-                        <strong class="card-idoso-nome">${nome}</strong>
-                        ${idadeTexto ? `<span class="card-idoso-idade">${idadeTexto}</span>` : ''}
-                        ${tagsHTML ? `<div class="card-idoso-comorbidades"><span class="label-comorbidades">Comorbidades</span><div class="tags">${tagsHTML}</div></div>` : ''}
-                    </div>
-                `;
-
-                listaIdosos.appendChild(card);
+                // Renderiza card
+                renderCardIdoso(novoIdoso);
                 atualizarContador(1);
 
                 // Limpa e fecha
