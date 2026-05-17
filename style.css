@@ -440,7 +440,6 @@ h3 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* .superior: cor de texto e gap do HEAD; img do bd09c59 (sem filter forçado) */
 .superior {
     background-color: #CBDD98;
     color: #2E2E48;
@@ -654,7 +653,6 @@ h3 {
     cursor: pointer;
 }
 
-/* Modal <dialog> (familiar) */
 dialog.modal-container {
     border: none;
     border-radius: 30px;
@@ -879,11 +877,10 @@ dialog.modal-container {
     cursor: pointer;
     position: relative;
 }
-/* ═══════════════════════════════════════════
-   CARDS DINÂMICOS — cole no seu style.css
-   ═══════════════════════════════════════════ */
 
-/* ── Containers de lista ── */
+/* ═══════════════════════════════════════════
+   CARDS DINÂMICOS
+   ═══════════════════════════════════════════ */
 .lista-idosos,
 .lista-cuidadores,
 .lista-familiares {
@@ -894,9 +891,6 @@ dialog.modal-container {
     width: 100%;
 }
 
-/* ─────────────────────────────────────
-   CARD IDOSO  (branco, borda arredondada)
-───────────────────────────────────── */
 .card-idoso {
     border: 1px solid #a8d8f0;
     display: flex;
@@ -909,51 +903,43 @@ dialog.modal-container {
     flex: 0 0 auto;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-
 .card-idoso-avatar img {
     width: 72px;
     height: 72px;
     border-radius: 50%;
     object-fit: cover;
 }
-
 .card-idoso-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
-
 .card-idoso-nome {
     font-size: 1.15rem;
     font-weight: 700;
     color: #2E2E48;
 }
-
 .card-idoso-idade {
     font-size: 0.82rem;
     color: #6b7280;
 }
-
 .card-idoso-comorbidades {
     display: flex;
     flex-direction: column;
     gap: 6px;
     margin-top: 6px;
 }
-
 .label-comorbidades {
     font-size: 0.75rem;
     color: #9ca3af;
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
-
 .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
 }
-
 .tag-comorbidade {
     background: #d7e9b9;
     color: #2E2E48;
@@ -963,18 +949,14 @@ dialog.modal-container {
     font-weight: 500;
 }
 
-/* ─────────────────────────────────────
-   CARD CUIDADOR  (azul claro)
-───────────────────────────────────── */
 .lista-cuidadores {
     flex-direction: row;
 }
-
 .card-cuidador {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: #a8d8f0;          /* azul médio — ajuste para a cor exata do seu design */
+    background: #a8d8f0;
     border-radius: 16px;
     padding: 18px;
     min-width: 180px;
@@ -983,13 +965,11 @@ dialog.modal-container {
     color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
 .card-cuidador-topo {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 .card-cuidador-avatar {
     width: 52px;
     height: 52px;
@@ -997,22 +977,18 @@ dialog.modal-container {
     object-fit: cover;
     border: 2px solid rgba(255,255,255,0.6);
 }
-
 .card-cuidador-info {
     display: flex;
     flex-direction: column;
 }
-
 .card-cuidador-nome {
     font-size: 1rem;
     font-weight: 700;
 }
-
 .card-cuidador-idade {
     font-size: 0.8rem;
     opacity: 0.85;
 }
-
 .card-cuidador-detalhes {
     list-style: none;
     padding: 0;
@@ -1022,11 +998,9 @@ dialog.modal-container {
     flex-direction: column;
     gap: 4px;
 }
-
 .card-cuidador-detalhes li span {
     font-weight: 600;
 }
-
 .card-cuidador-id {
     background: #c8dfa1;
     border-radius: 8px;
@@ -1042,7 +1016,6 @@ dialog.modal-container {
     flex-direction: column;
     gap: 10px;
 }
-
 .card-familiar {
     display: flex;
     align-items: center;
@@ -1053,34 +1026,24 @@ dialog.modal-container {
     box-sizing: border-box;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-.familiar-admin {
-    background: #c8e6a0;     /* verde suave — ajuste para sua paleta */
-}
-
-.familiar-observador {
-    background: #a8d8f0;     /* azul suave */
-}
-
+.familiar-admin    { background: #c8e6a0; }
+.familiar-observador { background: #a8d8f0; }
 .card-familiar-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
-
 .card-familiar-info {
     display: flex;
     flex-direction: column;
     line-height: 1.3;
 }
-
 .card-familiar-info strong {
     font-size: 0.9rem;
     font-weight: 700;
     color: #1a1a2e;
 }
-
 .card-familiar-info span {
     font-size: 0.75rem;
     color: #4b5563;
@@ -1095,7 +1058,6 @@ dialog.modal-container {
     max-height: 92vh;
     overflow-y: auto;
 }
-
 .consulta-datetime {
     display: flex;
     gap: 16px;
@@ -1114,7 +1076,6 @@ dialog.modal-container {
     font-weight: 500;
     color: #2E2E48;
 }
-
 .btn-dia {
     width: 32px;
     height: 32px;
@@ -1134,7 +1095,6 @@ dialog.modal-container {
     background-color: rgba(0, 0, 0, 0.06);
     color: #2E2E48;
 }
-
 .calendario-inline {
     background: #80CEF4;
     border-radius: 16px;
@@ -1172,9 +1132,7 @@ dialog.modal-container {
     font-family: 'Poppins', sans-serif;
     line-height: 1;
 }
-.cal-inline-btn:hover {
-    background: rgba(255,255,255,0.4);
-}
+.cal-inline-btn:hover { background: rgba(255,255,255,0.4); }
 .cal-inline-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -1196,18 +1154,13 @@ dialog.modal-container {
     cursor: pointer;
     transition: background 0.15s;
 }
-.cal-inline-dia:hover {
-    background: rgba(255,255,255,0.25);
-}
+.cal-inline-dia:hover { background: rgba(255,255,255,0.25); }
 .cal-inline-dia.selecionado {
     background: #CBDD98;
     color: #2E2E48;
     font-weight: 700;
 }
-.cal-inline-dia.vazio {
-    cursor: default;
-}
-
+.cal-inline-dia.vazio { cursor: default; }
 .seletor-horario-drum {
     background: #CBDD98;
     border-radius: 16px;
@@ -1224,9 +1177,7 @@ dialog.modal-container {
     align-items: center;
     padding: 4px 0;
 }
-.drum-col::-webkit-scrollbar {
-    display: none;
-}
+.drum-col::-webkit-scrollbar { display: none; }
 .drum-item {
     font-size: 14px;
     font-weight: 500;
@@ -1244,7 +1195,6 @@ dialog.modal-container {
     font-weight: 700;
     font-size: 16px;
 }
-
 .consulta-toggles {
     display: flex;
     flex-direction: column;
@@ -1256,7 +1206,7 @@ dialog.modal-container {
     align-items: center;
     gap: 10px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: #2E2E48;
     cursor: pointer;
 }
@@ -1266,11 +1216,7 @@ dialog.modal-container {
     height: 22px;
     flex-shrink: 0;
 }
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
 .toggle-slider {
     position: absolute;
     inset: 0;
@@ -1290,13 +1236,8 @@ dialog.modal-container {
     border-radius: 50%;
     transition: transform 0.25s;
 }
-.toggle-switch input:checked + .toggle-slider {
-    background: #80CEF4;
-}
-.toggle-switch input:checked + .toggle-slider::before {
-    transform: translateX(16px);
-}
-
+.toggle-switch input:checked + .toggle-slider { background: #80CEF4; }
+.toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); }
 .area-conteudo.com-consultas {
     padding: 0;
     align-items: stretch;
@@ -1321,11 +1262,7 @@ dialog.modal-container {
     color: #2E2E48;
     flex-shrink: 0;
 }
-.cal-dia-header img {
-    width: 18px;
-    height: 18px;
-    opacity: 0.5;
-}
+.cal-dia-header img { width: 18px; height: 18px; opacity: 0.5; }
 .cal-dia-corpo {
     flex: 1;
     display: grid;
@@ -1350,9 +1287,7 @@ dialog.modal-container {
     font-weight: 500;
     flex-shrink: 0;
 }
-.cal-eventos-col {
-    position: relative;
-}
+.cal-eventos-col { position: relative; }
 .cal-linha-hora {
     position: absolute;
     left: 0;
@@ -1374,18 +1309,16 @@ dialog.modal-container {
     transition: filter 0.15s;
     z-index: 2;
 }
-.cal-evento:hover {
-    filter: brightness(0.91);
-}
+.cal-evento:hover { filter: brightness(0.91); }
 .cal-evento-nome {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: rgba(255,255,255,0.92);
     letter-spacing: 0.4px;
     text-transform: uppercase;
 }
 .cal-evento-hora {
-    font-size: 10px;
+    font-size: 13px;
     color: rgba(255,255,255,0.75);
     font-weight: 500;
 }
@@ -1415,28 +1348,14 @@ dialog.modal-container {
     display: inline-block;
     flex-shrink: 0;
 }
-
 #relatorio {
     grid-column: 1;
-    grid-row: 1 / 4;   /* ocupa todas as linhas à esquerda */
+    grid-row: 1 / 4;
 }
-#galeria {
-    grid-column: 2;
-    grid-row: 1;
-    min-height: 220px;
-}
-#notas {
-    grid-column: 2;
-    grid-row: 2;
-    min-height: 220px;
-}
-#checklist {
-    grid-column: 2;
-    grid-row: 3;
-    min-height: 220px;
-}
- 
-/* ── Chip do idoso no cabeçalho ──────────────── */
+#galeria { grid-column: 2; grid-row: 1; min-height: 220px; }
+#notas   { grid-column: 2; grid-row: 2; min-height: 220px; }
+#checklist { grid-column: 2; grid-row: 3; min-height: 220px; }
+
 .chip-idoso {
     display: inline-flex;
     align-items: center;
@@ -1458,17 +1377,9 @@ dialog.modal-container {
     flex-direction: column;
     line-height: 1.25;
 }
-.chip-idoso__nome {
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-}
-.chip-idoso__idade {
-    font-size: 12px;
-    color: rgba(255,255,255,0.85);
-}
- 
-/* ── Galeria de fotos ────────────────────────── */
+.chip-idoso__nome { font-size: 14px; font-weight: 700; color: #fff; }
+.chip-idoso__idade { font-size: 12px; color: rgba(255,255,255,0.85); }
+
 .area-conteudo-acompanhamento#galeria {
     padding: 20px;
     align-items: flex-start;
@@ -1492,7 +1403,6 @@ dialog.modal-container {
     transition: background 0.2s;
 }
 .botao-adicionar-galeria:hover { background-color: #5bbee8; }
- 
 #galeriaVazia {
     display: flex;
     flex-direction: column;
@@ -1503,13 +1413,7 @@ dialog.modal-container {
     gap: 8px;
     padding-top: 16px;
 }
-.galeria-vazia h3 {
-    font-size: 15px;
-    color: #727B8E;
-    font-weight: 500;
-    margin: 0;
-}
- 
+.galeria-vazia h3 { font-size: 15px; color: #727B8E; font-weight: 500; margin: 0; }
 .galeria-grid {
     list-style: none;
     display: grid;
@@ -1519,19 +1423,9 @@ dialog.modal-container {
     margin-top: 12px;
     align-content: start;
     overflow-y: auto;
-    
-    
 }
-.galeria-item {
-    position: relative;
-    border-radius: 10px;
-    aspect-ratio: 1 / 1;
-}
-.galeria-item__img {
-    width: 90%;
-    height: 90%;
-    object-fit: cover;
-}
+.galeria-item { position: relative; border-radius: 10px; aspect-ratio: 1 / 1; }
+.galeria-item__img { width: 90%; height: 90%; object-fit: cover; }
 .galeria-item__remover {
     position: absolute;
     top: 4px;
@@ -1552,16 +1446,14 @@ dialog.modal-container {
     transition: opacity 0.15s;
 }
 .galeria-item:hover .galeria-item__remover { opacity: 1; }
- 
-/* ── Notas ───────────────────────────────────── */
+
 .area-conteudo-acompanhamento#notas {
     padding: 20px;
     align-items: flex-start;
     justify-content: flex-start;
 }
-/* Sobrescreve o posicionamento antigo do botão + */
 .area-conteudo-acompanhamento#notas .botao-adicionar-nota {
-    position: static;          /* cancela o absolute do CSS original */
+    position: static;
     background-color: #80CEF4;
     color: #fff;
     border: none;
@@ -1580,7 +1472,6 @@ dialog.modal-container {
     transition: background 0.2s;
     padding: 0;
 }
-
 #notasVazio {
     display: flex;
     flex-direction: column;
@@ -1591,17 +1482,8 @@ dialog.modal-container {
     gap: 8px;
     padding-top: 16px;
 }
-
-.painel-corpo{
-    text-align: center;
-    margin: auto;
-}
-.estado-vazio h3 {
-    font-size: 15px;
-    color: #727B8E;
-    font-weight: 500;
-    margin: 0;
-}
+.painel-corpo { text-align: center; margin: auto; }
+.estado-vazio h3 { font-size: 15px; color: #727B8E; font-weight: 500; margin: 0; }
 .notas-lista {
     list-style: none;
     display: flex;
@@ -1626,7 +1508,6 @@ dialog.modal-container {
     gap: 6px;
     font-size: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    
 }
 .nota-card__cabecalho {
     display: flex;
@@ -1634,12 +1515,7 @@ dialog.modal-container {
     align-items: flex-start;
     gap: 4px;
 }
-.nota-card__titulo {
-    font-size: 12px;
-    font-weight: 700;
-    color: #2E2E48;
-    word-break: break-word;
-}
+.nota-card__titulo { font-size: 12px; font-weight: 700; color: #2E2E48; word-break: break-word; }
 .nota-card__remover {
     background: none;
     border: none;
@@ -1658,20 +1534,13 @@ dialog.modal-container {
     line-height: 1.2;
     word-break: break-word;
 }
-.nota-card__rodape {
-    font-size: 10px;
-    color: #2E2E48;
-    margin-top: auto;
-    text-align: right;
-}
- 
-/* ── Checklist ───────────────────────────────── */
+.nota-card__rodape { font-size: 10px; color: #2E2E48; margin-top: auto; text-align: right; }
+
 .area-conteudo-acompanhamento#checklist {
     padding: 20px;
     align-items: flex-start;
     justify-content: flex-start;
 }
-/* Remove o posicionamento antigo do botão checklist */
 #checklist button.checklist-btn-adicionar {
     font-size: 14px;
     background-color: #deecb7;
@@ -1686,7 +1555,6 @@ dialog.modal-container {
     transition: background 0.2s;
 }
 #checklist button.checklist-btn-adicionar:hover { background-color: #cfe0a0; }
- 
 .checklist-resumo {
     display: flex;
     gap: 16px;
@@ -1695,9 +1563,7 @@ dialog.modal-container {
     align-items: center;
     margin-left: auto;
 }
-.checklist-resumo strong {
-    color: #2E2E48;
-}
+.checklist-resumo strong { color: #2E2E48; }
 .checklist-corpo {
     display: flex;
     flex-direction: column;
@@ -1707,12 +1573,7 @@ dialog.modal-container {
     overflow-y: auto;
     max-height: 200px;
 }
-.checklist-lista {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+.checklist-lista { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .check-item {
     display: flex;
     align-items: center;
@@ -1723,38 +1584,12 @@ dialog.modal-container {
     border: 1px solid #E2E8F0;
     transition: background 0.15s;
 }
-.check-item--concluido {
-    background-color: #EBF5E1;
-    border-color: #CBDD98;
-}
-.check-item__label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    flex: 1;
-}
-.check-item__input {
-    width: 16px;
-    height: 16px;
-    accent-color: #80CEF4;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.check-item__texto {
-    font-size: 13px;
-    color: #2E2E48;
-    font-weight: 500;
-}
-.check-item--concluido .check-item__texto {
-    text-decoration: line-through;
-    color: #888;
-}
-.check-item__acoes {
-    display: flex;
-    gap: 8px;
-    margin-left: 10px;
-}
+.check-item--concluido { background-color: #EBF5E1; border-color: #CBDD98; }
+.check-item__label { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
+.check-item__input { width: 16px; height: 16px; accent-color: #80CEF4; cursor: pointer; flex-shrink: 0; }
+.check-item__texto { font-size: 13px; color: #2E2E48; font-weight: 500; }
+.check-item--concluido .check-item__texto { text-decoration: line-through; color: #888; }
+.check-item__acoes { display: flex; gap: 8px; margin-left: 10px; }
 .check-item__btn-remover {
     background: none;
     border: none;
@@ -1766,332 +1601,251 @@ dialog.modal-container {
     transition: opacity 0.15s;
 }
 .check-item__btn-remover:hover { opacity: 1; }
-.check-item__btn-remover img {
-    width: 14px;
-    height: 14px;
-}
- 
-/* ── Ajuste do header interno dos artigos ─────── */
-.area-conteudo-acompanhamento header {
-    display: flex;
-    align-items: center;
-    /* mantém position absolute do CSS original para os sem galeria */
-}
-/* Sobrescreve absolute só onde há botão inline */
+.check-item__btn-remover img { width: 14px; height: 14px; }
+.area-conteudo-acompanhamento header { display: flex; align-items: center; }
 #galeria header,
 #notas header,
-#checklist header {
-    position: static;
-    width: 100%;
-    margin-bottom: 4px;
-}
-
+#checklist header { position: static; width: 100%; margin-bottom: 4px; }
 #galeria,
-#notas {
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 20px;
-    overflow: hidden;
-}
-
+#notas { align-items: flex-start; justify-content: flex-start; padding: 20px; overflow: hidden; }
 #galeria .painel-corpo,
-#notas .painel-corpo {
-    
-    width: 100%;
-    flex: 1;
-}
+#notas .painel-corpo { width: 100%; flex: 1; }
 .galeria-grid[hidden],
 .notas-lista[hidden],
-.estado-vazio[hidden] {
-    display: none !important;
-}
+.estado-vazio[hidden] { display: none !important; }
 
-/* RELATÓRIO GERAL -----------*/
-.btn-humor.ativo {
-    background-color: #28a745; /* Verde */
-    color: white ;
-    border-color: #28a745 ;
-    font-weight: 600;
-}
-
+/* RELATÓRIO */
+.btn-humor.ativo { background-color: #28a745; color: white; border-color: #28a745; font-weight: 600; }
 .btn-humor {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
-    background-color: #E6F5FD; /* Tom de fundo leve padrão do seu app */
-    font-size: 20px;
-    cursor: pointer;
+    width: 42px; height: 42px; border-radius: 50%; border: none;
+    background-color: #E6F5FD; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
+}
+#relatorioConteudo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
+#relatorioConteudo > div {
+    background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px;
+    padding: 16px; box-shadow: 0 1px 4px black, 0 1px 3px rgba(46,46,72,0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.relatorio-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
+.quadrante-relatorio {
+    background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px;
+    padding: 18px; box-shadow: 0 4px 12px rgba(46,46,72,0.04), 0 1px 3px rgba(46,46,72,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.quadrante-relatorio:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(46,46,72,0.07), 0 2px 4px rgba(46,46,72,0.03); }
+.secao-saude-box { position: relative; padding-top: 18px; display: flex; flex-direction: column; justify-content: space-between; }
+.titulo-quadrante { font-weight: 600; font-size: 14px; color: #2E2E48; display: block; }
+.subtitulo-quadrante { font-size: 13px; color: #7A7A9A; display: block; line-height: 1.4; }
+.secao-humor-box { display: flex; flex-direction: column; }
+.grade-humor-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; flex-grow: 1; }
+.btn-humor-card {
+    background-color: #cccbcb; border: 1px solid #E2EEF5; border-radius: 10px;
+    padding: 12px 8px; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s ease-in-out;
+}
+.btn-humor-card img { width: 28px; height: 28px; transition: transform 0.2s ease; }
+.btn-humor-card span { font-size: 12px; font-weight: 500; color: #4A4A68; }
+.btn-humor-card:hover { background-color: #EBF5FC; }
+.btn-humor-card:hover img { transform: scale(1.1); }
+.btn-humor-card.ativo { background-color: #bbeec7; border-color: #88d49a; }
+.btn-humor-card.ativo span { color: #FFFFFF; font-weight: 600; }
+.secao-medidas-box { display: flex; flex-direction: column; justify-content: center; }
+.label-medida-altura { background-color: #e0f0b4; padding: 10px; margin-left: -5px; border-radius: 12px 0 0 12px; }
+.valor-medida-altura { background-color: #e0f0b4; padding: 10px; margin-left: -5px; border-radius: 0 12px 12px 0; }
+.label-medida-peso { background-color: #a5ddf5; padding: 10px; margin-left: -5px; border-radius: 12px 0 0 12px; }
+.valor-medida-peso { background-color: #a5ddf5; padding: 10px; margin-left: -5px; border-radius: 0 12px 12px 0; }
+.valores-medidas { display: flex; justify-content: space-between; border-top: 1px solid #D0E3EF; padding-top: 30px; }
+.valor-medida-destaque { font-size: 15px; color: #2E2E48; }
+.secao-imc-box { display: flex; align-items: center; justify-content: space-between; }
+.valor-imc-total { font-size: 22px; color: #2E2E48; display: block; margin: 2px 0; padding: 5px; }
+.status-imc-texto { font-size: 12px; font-weight: 500; color: #595964; padding: 5px; }
+.relatorio-grid-container #btnAbrirModalSaude {
+    position: absolute; top: 18px; right: 18px; width: auto; margin-top: 0;
+    border: none; color: #2E2E48; cursor: pointer;
+}
+.grupo-inputs-saude-vias { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; margin-bottom: 10px; }
+.linha-saude-item { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.label-saude-item { font-size: 18px; font-weight: 500; color: #4A4A68; }
+.campo-saude-sufixo {
+    display: flex; align-items: center; background-color: #c4e1f5;
+    border: 1px solid #E2EEF5; border-radius: 8px; padding: 6px 12px; width: 120px;
+}
+.campo-saude-sufixo input {
+    border: none; background: transparent; width: 100%; font-size: 20px;
+    font-weight: 600; color: #2E2E48; outline: none; text-align: right; padding-right: 4px;
+}
+.campo-saude-sufixo input::-webkit-outer-spin-button,
+.campo-saude-sufixo input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.sufixo-saude { font-size: 13px; color: #94A3B8; font-weight: 500; white-space: nowrap; }
+
+/* =============================================
+   MEDICAMENTOS — blocos específicos da página
+   ============================================= */
+
+/* ── Grid de cards ─────────────────────────── */
+.med-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-content: start;
+    padding: 8px 2px;
+    overflow-y: auto;
+}
+
+/* ── area-conteudo quando há medicamentos ───── */
+.area-conteudo.tem-medicamentos {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 24px 30px;
+    overflow-y: auto;
+}
+
+/* ── Card individual ────────────────────────── */
+.med-card {
+    background: #FFFFFF;
+    border: 1px solid #d4edf9;
+    border-radius: 20px;
+    padding: 22px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+.med-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px);
+}
+
+.icone-med {
+  width: 44px; 
+  height: 44px;
+  object-fit: contain;
+}
+
+.med-card-icone {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: #E6F5FD;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    padding: 10px;
 }
-#relatorioConteudo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 15px;
-}
+.med-card-icone svg { width: 44px; height: 44px; }
 
-/* Regra aplicada a todas as quatro partes internas */
-#relatorioConteudo > div {
-    background-color: #FFFFFF; /* Fundo branco padrão para destacar a sombra */
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 1px 4px black, 0 1px 3px rgba(46, 46, 72, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.relatorio-grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 15px;
-}
-
-/* Base de estilo e sombra para os 4 quadrantes */
-.quadrante-relatorio {
-    background-color: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 4px 12px rgba(46, 46, 72, 0.04), 0 1px 3px rgba(46, 46, 72, 0.02);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.quadrante-relatorio:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(46, 46, 72, 0.07), 0 2px 4px rgba(46, 46, 72, 0.03);
-}
-
-/* Força o conteúdo de Saúde a distribuir os elementos verticalmente */
-.secao-saude-box {
-    position: relative;
-    padding-top: 18px;
+.med-card-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
 }
+.med-card-nome {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1d1d2e;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.med-card-sub { font-size: 0.9rem; color: #30353f; }
+.med-card-horarios { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 
-/* Títulos padrões de blocos */
-.titulo-quadrante {
-    font-weight: 600;
-    font-size: 14px;
+/* ── Chip de horário ────────────────────────── */
+.med-chip-horario {
+    background: #CBDD98;
     color: #2E2E48;
-    display: block;
+    border-radius: 50px;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
-.subtitulo-quadrante {
-    font-size: 13px;
-    color: #7A7A9A;
-    display: block;
-    line-height: 1.4;
-}
-
-/* ──────────────────────────────────────────
-   A MÁGICA: GRADE DE MOOD / HUMOR 2x2 
-   ────────────────────────────────────────── */
-.secao-humor-box {
+.med-chip-horario button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #5a7000;
+    line-height: 1;
+    padding: 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
+.med-chip-horario--card { background: #80CEF4; color: #fff; }
 
-.grade-humor-2x2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    width: 100%;
-    flex-grow: 1;
-}
-
-/* Estilo para os botões maiores em formato de card */
-.btn-humor-card {
-    background-color: #cccbcb;
-    border: 1px solid #E2EEF5;
-    border-radius: 10px;
-    padding: 12px 8px;
+/* ── Botão comprovante ──────────────────────── */
+.med-btn-comprovante {
+    background: #80CEF4;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 6px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.btn-humor-card img {
-    width: 28px;
-    height: 28px;
-    transition: transform 0.2s ease;
-}
-
-.btn-humor-card span {
-    font-size: 12px;
-    font-weight: 500;
-    color: #4A4A68;
-}
-
-.btn-humor-card:hover {
-    background-color: #EBF5FC;
-}
-.btn-humor-card:hover img {
-    transform: scale(1.1);
-}
-
-/* Estado ATIVO (Apenas o clicado ganha a cor verde) */
-.btn-humor-card.ativo {
-    background-color: #bbeec7 ;
-    border-color: #88d49a ;
-}
-.btn-humor-card.ativo span {
-    color: #FFFFFF;
+    font-size: 0.75rem;
     font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    min-width: 90px;
+    align-self: center;
+    transition: background 0.2s, transform 0.15s;
+    flex-shrink: 0;
+}
+.med-btn-comprovante:hover { background: #5bbee8; transform: scale(1.04); }
+.med-btn-comprovante--ok { background: #7ec87e !important; }
+
+/* ── Modal Novo Medicamento (largura) ─────── */
+.cartao-med-form {
+    max-width: 640px;
+    width: 95%;
+    max-height: 92vh;
+    overflow-y: auto;
 }
 
-/* ──────────────────────────────────────────
-   Ajustes para Medidas e IMC
-   ────────────────────────────────────────── */
-.secao-medidas-box {
+/* ── Wrapper horário dentro do form ─────────── */
+.med-horarios-wrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
 }
+.med-horario-esq { flex: 0 0 auto; }
+.med-horario-dir { flex: 1; }
+.med-drum-wrapper { display: flex; gap: 10px; align-items: center; }
 
-.label-medida-altura{
-    background-color: #e0f0b4;
-    padding: 10px;
-    margin-left: -5px;
-    border-radius: 12px 0 0 12px;
-}
-.valor-medida-altura{
-    background-color: #e0f0b4;
-    padding: 10px;
-    margin-left: -5px;
-    border-radius:0 12px 12px 00;
-}
-
-.label-medida-peso{
-    background-color: #a5ddf5;
-    padding: 10px;
-    margin-left: -5px;
-    border-radius: 12px 0 0 12px;
-}
-
-.valor-medida-peso{
-    background-color: #a5ddf5;
-    padding: 10px;
-    margin-left: -5px;
-    border-radius:0 12px 12px 00;
-}
-.valores-medidas {
-    display: flex; 
-    justify-content: space-between; 
-    border-top: 1px solid #D0E3EF; 
-    padding-top: 30px;
-}
-
-.valor-medida-destaque {
-    font-size: 15px; 
-    color: #2E2E48;
-}
-
-.secao-imc-box {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    
-}
-
-.valor-imc-total {
-    font-size: 22px; 
-    color: #2E2E48; 
-    display: block; 
-    margin: 2px 0;
-    padding: 5px;
-}
-
-.status-imc-texto {
-    font-size: 12px; 
-    font-weight: 500; 
-    color: #595964;
-    padding: 5px;
-}
-
-.relatorio-grid-container #btnAbrirModalSaude{
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: auto;
-    margin-top: 0;
+.med-btn-add-horario {
+    background: #80CEF4;
+    color: #fff;
     border: none;
-    color: #2E2E48;
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
     cursor: pointer;
-}
-
-/* ==========================================================================
-   ESTILOS EXCLUSIVOS DO INTERIOR DO STATUS DE SAÚDE
-   ========================================================================== */
-
-/* Container que segura as 3 linhas e ocupa o espaço entre o título e o botão */
-.grupo-inputs-saude-vias {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* Alinha o nome do exame à esquerda e o input com o sufixo à direita */
-.linha-saude-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    font-family: 'Poppins', sans-serif;
 }
+.med-btn-add-horario:hover { background: #5bbee8; }
 
-/* Nome do exame (Ex: Batimentos cardíacos) */
-.label-saude-item {
-    font-size: 18px;
-    font-weight: 500;
-    color: #4A4A68;
-}
+.med-horarios-chips { display: flex; flex-wrap: wrap; gap: 8px; min-height: 36px; }
+.med-horarios-vazio { font-size: 12px; color: #aaa; font-style: italic; }
 
-/* Caixinha cinza/azul clara que une o input e a unidade (bpm, mg/dL) */
-.campo-saude-sufixo {
-    display: flex;
-    align-items: center;
-    background-color: #c4e1f5;
-    border: 1px solid #E2EEF5;
-    border-radius: 8px;
-    padding: 6px 12px;
-    width: 120px; /* Mantém os 3 blocos com o mesmo tamanho alinhados à direita */
-}
-
-/* O input numérico sem bordas e alinhado à direita */
-.campo-saude-sufixo input {
-    border: none;
-    background: transparent;
-    width: 100%;
-    font-size: 20px;
-    font-weight: 600;
-    color: #2E2E48;
-    outline: none;
-    text-align: right;
-    padding-right: 4px;
-}
-
-/* Remove setas padrão do input numérico do navegador */
-.campo-saude-sufixo input::-webkit-outer-spin-button,
-.campo-saude-sufixo input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* A unidade de medida (Ex: bpm) */
-.sufixo-saude {
-    font-size: 13px;
-    color: #94A3B8;
-    font-weight: 500;
-    white-space: nowrap;
-}
+/* ── Modal Comprovante (largura) ────────────── */
+.cartao-comprovante-form { max-width: 540px; width: 95%; }

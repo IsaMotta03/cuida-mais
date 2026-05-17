@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li class="selecionado">
-                    <a href="medicamento.html#">
+                    <a href="medicamento.html">
                         <img src="assets/icons/medicamentos.svg" alt="Ícone Medicamentos">
                         <span>Medicamentos</span>
                     </a>
@@ -78,19 +78,165 @@
         <header class="cabecalho-topo">
             <section class="titulos-cabecalho">
                 <h1>Medicamentos</h1>
-                <p>0 medicamentos cadastrados</p>
+                <p id="contadorMedicamentos">0 medicamentos cadastrados</p>
             </section>
-            <a href="#" class="botao-adicionar">+ Adicionar</a>
+            <button class="botao-adicionar" id="btnAbrirModalMed">+ Adicionar</button>
         </header>
 
-        <section class="area-conteudo">
-            <article class="cartao-vazio">
+        <section class="area-conteudo" id="areaConteudo">
+            <!-- Estado vazio — JS remove quando há medicamentos -->
+            <article class="cartao-vazio" id="estadoVazio">
                 <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
                 <h3>Nenhum Medicamento</h3>
                 <p>Cadastre novos medicamentos para receber notificações.</p>
             </article>
+
+            <!-- Grid de cards — JS popula e exibe -->
+            <div class="med-grid" id="gridMedicamentos" style="display:none;"></div>
         </section>
     </main>
 
+    <!-- =============================================
+         MODAL: NOVO MEDICAMENTO
+    ============================================= -->
+    <div class="modal-overlay" id="modalNovoMed" role="dialog" aria-modal="true" aria-labelledby="tituloModalMed">
+        <div class="cartao cartao-med-form">
+            <div class="form-header">
+                <h1 id="tituloModalMed">Novo Medicamento</h1>
+                <button class="btn-fechar" id="btnFecharModalMed" aria-label="Fechar">×</button>
+            </div>
+
+            <form class="formulario" id="formNovoMed" novalidate>
+                <!-- Nome -->
+                <div class="inputs col-span-full">
+                    <label for="medNome">Nome do Medicamento</label>
+                    <input type="text" id="medNome" placeholder="Ex: Novalgina" autocomplete="off">
+                </div>
+
+                <!-- Dosagem / Médico / CID -->
+                <div class="inputs col-5">
+                    <label for="medDosagem">Dosagem</label>
+                    <input type="text" id="medDosagem" placeholder="500 mg">
+                </div>
+                <div class="inputs col-5">
+                    <label for="medMedico">Médico Responsável</label>
+                    <input type="text" id="medMedico" placeholder="Dr. José Almeida">
+                </div>
+                <div class="inputs col-2">
+                    <label for="medCid">CID</label>
+                    <input type="text" id="medCid" placeholder="000">
+                </div>
+
+                <!-- Recorrência / Observações -->
+                <div class="inputs col-5">
+                    <label for="medRecorrencia">Recorrência</label>
+                    <select id="medRecorrencia" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px;font-size:14px;font-family:'Poppins',sans-serif;outline:none;background:#fff;width:100%;">
+                        <option value="" disabled selected>Período</option>
+                        <option value="Uso contínuo">Uso contínuo</option>
+                        <option value="Diário">Diário</option>
+                        <option value="Segundas">Segundas</option>
+                        <option value="Terças">Terças</option>
+                        <option value="Quartas">Quartas</option>
+                        <option value="Quintas">Quintas</option>
+                        <option value="Sextas">Sextas</option>
+                        <option value="Sábados">Sábados</option>
+                        <option value="Domingos">Domingos</option>
+                    </select>
+                </div>
+                <div class="inputs col-7">
+                    <label for="medObs">Observações</label>
+                    <input type="text" id="medObs" placeholder="Ex: Tomar depois de refeição">
+                </div>
+
+                <!-- Seletor de horário + lista de horários definidos -->
+                <div class="col-span-full med-horarios-wrapper">
+                    <div class="med-horario-esq">
+                        <label style="font-size:14px;font-weight:500;color:#2E2E48;display:block;margin-bottom:8px;">Selecione o Horário</label>
+                        <div class="med-drum-wrapper">
+                            <div class="seletor-horario-drum" id="drumHorario">
+                                <div class="drum-col" id="drumHoras"></div>
+                                <div class="drum-col" id="drumMinutos"></div>
+                                <div class="drum-col" id="drumPeriodo">
+                                    <div class="drum-item" data-val="AM">AM</div>
+                                    <div class="drum-item" data-val="PM">PM</div>
+                                </div>
+                            </div>
+                            <button type="button" class="med-btn-add-horario" id="btnAddHorario">+</button>
+                        </div>
+                    </div>
+
+                    <div class="med-horario-dir">
+                        <label style="font-size:14px;font-weight:500;color:#2E2E48;display:block;margin-bottom:8px;">Horários definidos</label>
+                        <div class="med-horarios-chips" id="horariosChips">
+                            <span class="med-horarios-vazio">Nenhum horário adicionado</span>
+                        </div>
+
+                        <label style="font-size:14px;font-weight:500;color:#2E2E48;display:block;margin:14px 0 8px;">Anexar receita</label>
+                        <label class="btn-anexos" style="cursor:pointer;">
+                            <img src="assets/icons/anexo.svg" alt="" style="width:18px;height:18px;margin-right:6px;vertical-align:middle;">
+                            Receita
+                            <input type="file" id="medReceita" accept="image/*,.pdf" class="sr-only">
+                        </label>
+                        <span id="receitaNome" style="display:block;font-size:12px;color:#727B8E;margin-top:6px;"></span>
+                    </div>
+                </div>
+
+                <div class="form-footer col-span-full">
+                    <button type="submit" class="btn-confirmar">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =============================================
+         MODAL: COMPROVANTE (TOMOU A MEDICAÇÃO?)
+    ============================================= -->
+    <div class="modal-overlay" id="modalComprovante" role="dialog" aria-modal="true" aria-labelledby="tituloModalComp">
+        <div class="cartao cartao-comprovante-form">
+            <div class="form-header">
+                <h1 id="tituloModalComp">Tomou a medicação?</h1>
+                <button class="btn-fechar" id="btnFecharComprovante" aria-label="Fechar">×</button>
+            </div>
+
+            <form class="formulario" id="formComprovante" novalidate>
+                <input type="hidden" id="compMedId">
+
+                <div class="inputs col-span-full">
+                    <label for="compNome">Nome do Medicamento</label>
+                    <input type="text" id="compNome" placeholder="Ex: Novalgina" readonly style="background:#f8fafc;">
+                </div>
+
+                <div class="inputs col-6">
+                    <label for="compDosagem">Dosagem</label>
+                    <input type="text" id="compDosagem" placeholder="500 mg" readonly style="background:#f8fafc;">
+                </div>
+                <div class="inputs col-6">
+                    <label for="compObsComp">Observações</label>
+                    <input type="text" id="compObsComp" placeholder="Ex: Reclamou do comprimido">
+                </div>
+
+                <div class="inputs col-span-full">
+                    <label>Comprovação</label>
+                    <div style="display:flex;gap:12px;">
+                        <label class="btn-anexos" style="flex:1;cursor:pointer;text-align:center;">
+                            Imagem
+                            <input type="file" id="compImagem" accept="image/*" class="sr-only">
+                        </label>
+                        <label class="btn-anexos" style="flex:1;cursor:pointer;text-align:center;">
+                            Vídeo
+                            <input type="file" id="compVideo" accept="video/*" class="sr-only">
+                        </label>
+                    </div>
+                    <span id="compArquivoNome" style="display:block;font-size:12px;color:#727B8E;margin-top:6px;"></span>
+                </div>
+
+                <div class="form-footer col-span-full">
+                    <button type="submit" class="btn-confirmar">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="medicamento.js"></script>
 </body>
 </html>
