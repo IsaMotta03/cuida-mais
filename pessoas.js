@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // UTILITÁRIOS
     // ─────────────────────────────────────────
 
-    /** Calcula idade a partir de uma string de data (YYYY-MM-DD) */
     function calcularIdade(dataNasc) {
         if (!dataNasc) return null;
         const hoje = new Date();
@@ -14,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
         return idade;
     }
+
     function avatarAleatorio(lista) {
-    return lista[Math.floor(Math.random() * lista.length)];
+        return lista[Math.floor(Math.random() * lista.length)];
     }
 
-    /** Gera um ID aleatório estilo "89bz64" */
     function gerarId() {
         const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
         let id = '';
@@ -26,8 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return id;
     }
 
-    /** Atualiza o contador "X pessoas cadastradas" no cabeçalho */
+    // ─────────────────────────────────────────
+    // CONTADOR DE PESSOAS
+    // ─────────────────────────────────────────
+
     let totalPessoas = 0;
+
     function atualizarContador(delta) {
         totalPessoas += delta;
         const contador = document.querySelector('.titulos-cabecalho p');
@@ -36,40 +39,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /** Remove o estado vazio (ícone de sino + mensagem) de uma seção */
     function removerEstadoVazio(container) {
         container.querySelector('.icone-sino')?.remove();
         container.querySelector('h3')?.remove();
-        container.querySelector('p:not(.btn-enviar-container)')?.remove();
+        // Evita remover parágrafos dentro de botões ou formulários
+        const p = container.querySelector('p:not(.btn-enviar-container)');
+        if (p && !p.closest('form') && !p.closest('aside')) p.remove();
     }
 
     // ─────────────────────────────────────────
-    // PERSISTÊNCIA DE IDOSOS (para acompanhamentos.html)
+    // LOCALSTORAGE — chaves
     // ─────────────────────────────────────────
-    const LS_IDOSOS = 'cuida_idosos';
 
-    function carregarIdososLS() {
-        try { return JSON.parse(localStorage.getItem(LS_IDOSOS)) || []; }
-        catch { return []; }
+    const LS_IDOSOS     = 'cuida_idosos';
+    const LS_CUIDADORES = 'cuida_cuidadores';
+    const LS_FAMILIARES = 'cuida_familiares';
+
+    function carregar(chave)       { try { return JSON.parse(localStorage.getItem(chave)) || []; } catch { return []; } }
+    function salvar(chave, lista)  { localStorage.setItem(chave, JSON.stringify(lista)); }
+
+    // Arrays em memória
+    let idososLS     = carregar(LS_IDOSOS);
+    let cuidadoresLS = carregar(LS_CUIDADORES);
+    let familiaresLS = carregar(LS_FAMILIARES);
+
+    // Inicializa contador com o total já persistido
+    totalPessoas = idososLS.length + cuidadoresLS.length + familiaresLS.length;
+    const contadorEl = document.querySelector('.titulos-cabecalho p');
+    if (contadorEl) {
+        contadorEl.textContent = `${totalPessoas} pessoa${totalPessoas !== 1 ? 's' : ''} cadastrada${totalPessoas !== 1 ? 's' : ''}`;
     }
-
-    function salvarIdososLS(lista) {
-        localStorage.setItem(LS_IDOSOS, JSON.stringify(lista));
-    }
-
-    // Carrega idosos já cadastrados ao iniciar
-    let idososLS = carregarIdososLS();
 
     // ─────────────────────────────────────────
     // BLOCO IDOSO
     // ─────────────────────────────────────────
 
-    const modalIdoso    = document.getElementById('modal-container-idoso');
-    const btnAbrirIdoso = document.getElementById('abrir-modal-idoso');
+    const modalIdoso     = document.getElementById('modal-container-idoso');
+    const btnAbrirIdoso  = document.getElementById('abrir-modal-idoso');
     const btnFecharIdoso = document.getElementById('fechar-modal-idoso');
-    const secaoIdosos   = document.getElementById('idoso');
+    const secaoIdosos    = document.getElementById('idoso');
 
-    // Cria o container de cards de idosos se ainda não existir
     let listaIdosos = secaoIdosos.querySelector('.lista-idosos');
     if (!listaIdosos) {
         listaIdosos = document.createElement('div');
@@ -77,26 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
         secaoIdosos.appendChild(listaIdosos);
     }
 
-    // Re-renderiza idosos já salvos no LS
-    function renderIdososSalvos() {
-        idososLS.forEach(idoso => renderCardIdoso(idoso));
-        if (idososLS.length > 0) {
-            removerEstadoVazio(secaoIdosos);
-            totalPessoas += idososLS.length;
-            const contador = document.querySelector('.titulos-cabecalho p');
-            if (contador) {
-                contador.textContent = `${totalPessoas} pessoa${totalPessoas !== 1 ? 's' : ''} cadastrada${totalPessoas !== 1 ? 's' : ''}`;
-            }
-        }
-    }
-
     function renderCardIdoso(idoso) {
         const tagsHTML = idoso.comorbidades
-            ? idoso.comorbidades.split(',').map(c =>
-                `<span class="tag-comorbidade">${c.trim()}</span>`
-              ).join('')
+            ? idoso.comorbidades.split(',').map(c => `<span class="tag-comorbidade">${c.trim()}</span>`).join('')
             : '';
-
         const card = document.createElement('article');
         card.className = 'card-idoso';
         card.dataset.id = idoso.id;
@@ -113,7 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
         listaIdosos.appendChild(card);
     }
 
-    renderIdososSalvos();
+    // Renderiza idosos salvos ao carregar a página
+    if (idososLS.length > 0) {
+        removerEstadoVazio(secaoIdosos);
+        idososLS.forEach(renderCardIdoso);
+    }
 
     if (modalIdoso && btnAbrirIdoso && btnFecharIdoso) {
         btnAbrirIdoso.addEventListener('click', () => modalIdoso.classList.add('visivel'));
@@ -127,41 +124,34 @@ document.addEventListener('DOMContentLoaded', () => {
             formIdoso.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                // Coleta dados
-                const nome        = formIdoso.querySelector('#nome').value.trim();
-                const nascimento  = formIdoso.querySelector('#nascimento').value;
+                const nome         = formIdoso.querySelector('#nome').value.trim();
+                const nascimento   = formIdoso.querySelector('#nascimento').value;
                 const comorbidades = formIdoso.querySelector('#comorbidades').value.trim();
-                const peso        = formIdoso.querySelector('#peso').value;
-                const altura      = formIdoso.querySelector('#altura').value;
+                const peso         = formIdoso.querySelector('#peso').value;
+                const altura       = formIdoso.querySelector('#altura').value;
 
                 if (!nome) return;
 
-                const idade = calcularIdade(nascimento);
-                const idadeTexto = idade !== null ? `${idade} anos (Idade)` : '';
+                const idade      = calcularIdade(nascimento);
+                const idadeTexto = idade !== null ? `${idade} anos` : '';
 
-                // Objeto idoso para persistir
                 const novoIdoso = {
                     id: gerarId(),
                     nome,
                     nascimento,
                     comorbidades,
-                    peso: peso ? Number(peso) : null,
-                    altura: altura ? Number(altura) : null,
+                    peso:   peso   ? Number(peso)   : null,
+                    altura: altura ? Number(altura)  : null,
                     idadeTexto,
                 };
 
-                // Salva no localStorage
                 idososLS.push(novoIdoso);
-                salvarIdososLS(idososLS);
+                salvar(LS_IDOSOS, idososLS);
 
-                // Remove estado vazio na primeira vez
                 removerEstadoVazio(secaoIdosos);
-
-                // Renderiza card
                 renderCardIdoso(novoIdoso);
                 atualizarContador(1);
 
-                // Limpa e fecha
                 formIdoso.reset();
                 modalIdoso.classList.remove('visivel');
             });
@@ -172,10 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // BLOCO CUIDADOR
     // ─────────────────────────────────────────
 
-    const modalCuidador    = document.getElementById('modal-container-cuidador');
-    const btnAbrirCuidador = document.getElementById('abrir-modal-cuidador');
+    const modalCuidador     = document.getElementById('modal-container-cuidador');
+    const btnAbrirCuidador  = document.getElementById('abrir-modal-cuidador');
     const btnFecharCuidador = document.getElementById('fechar-modal-cuidador');
-    const secaoCuidadores  = document.getElementById('cuidador');
+    const secaoCuidadores   = document.getElementById('cuidador');
 
     let listaCuidadores = secaoCuidadores.querySelector('.lista-cuidadores');
     if (!listaCuidadores) {
@@ -184,11 +174,52 @@ document.addEventListener('DOMContentLoaded', () => {
         secaoCuidadores.appendChild(listaCuidadores);
     }
 
+    function renderCardCuidador(c) {
+        const card = document.createElement('article');
+        card.className = 'card-cuidador';
+        card.innerHTML = `
+            <div class="card-cuidador-topo">
+                <img src="${c.avatar}" alt="Avatar de ${c.nome}" class="card-cuidador-avatar">
+                <div class="card-cuidador-info">
+                    <strong class="card-cuidador-nome">${c.nome}</strong>
+                    ${c.idadeTexto ? `<span class="card-cuidador-idade">${c.idadeTexto}</span>` : ''}
+                </div>
+            </div>
+            <ul class="card-cuidador-detalhes">
+                ${c.turno ? `<li><span>Turno:</span> ${c.turno}</li>` : ''}
+                ${c.dias  ? `<li><span>Escala:</span> ${c.dias}</li>`  : ''}
+                <li><span>Possui CNH?</span> ${c.temCnh}</li>
+            </ul>
+            <div class="card-cuidador-id">Id: ${c.id}</div>
+        `;
+        listaCuidadores.appendChild(card);
+    }
+
+    // Renderiza cuidadores salvos ao carregar a página
+    if (cuidadoresLS.length > 0) {
+        removerEstadoVazio(secaoCuidadores);
+        cuidadoresLS.forEach(renderCardCuidador);
+    }
+
+    // FIX: o modal de cuidador usa classe "modal-overlay-cuidador", não "modal-overlay".
+    // O CSS existente controla visibilidade via .modal-overlay.visivel — precisamos
+    // replicar esse comportamento usando display diretamente, pois a classe CSS é diferente.
+    function abrirModalCuidador()  {
+        if (!modalCuidador) return;
+        modalCuidador.style.display = 'flex';
+        modalCuidador.style.opacity = '1';
+    }
+    function fecharModalCuidador() {
+        if (!modalCuidador) return;
+        modalCuidador.style.display = 'none';
+        modalCuidador.style.opacity = '0';
+    }
+
     if (modalCuidador && btnAbrirCuidador && btnFecharCuidador) {
-        btnAbrirCuidador.addEventListener('click', () => modalCuidador.classList.add('visivel'));
-        btnFecharCuidador.addEventListener('click', () => modalCuidador.classList.remove('visivel'));
+        btnAbrirCuidador.addEventListener('click', abrirModalCuidador);
+        btnFecharCuidador.addEventListener('click', fecharModalCuidador);
         window.addEventListener('click', (e) => {
-            if (e.target === modalCuidador) modalCuidador.classList.remove('visivel');
+            if (e.target === modalCuidador) fecharModalCuidador();
         });
 
         const btnConfirmarCuidador = modalCuidador.querySelector('.btn-confirmar-cuidador');
@@ -202,43 +233,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!nome) return;
 
-                const idade = calcularIdade(nascimento);
+                const idade      = calcularIdade(nascimento);
                 const idadeTexto = idade !== null ? `${idade} anos` : '';
-                const idCuidador = gerarId();
-                const temCnh = cnh ? 'Sim.' : 'Não.';
+                const id         = gerarId();
+                const temCnh     = cnh ? 'Sim.' : 'Não.';
+                const avatar     = avatarAleatorio(['assets/icons/cuidador1.svg', 'assets/icons/cuidador2.svg']);
+
+                const novoCuidador = { id, nome, nascimento, turno, dias, temCnh, idadeTexto, avatar };
+
+                cuidadoresLS.push(novoCuidador);
+                salvar(LS_CUIDADORES, cuidadoresLS);
 
                 removerEstadoVazio(secaoCuidadores);
-
-                const card = document.createElement('article');
-                card.className = 'card-cuidador';
-                card.innerHTML = `
-                    <div class="card-cuidador-topo">
-                        <img src="${avatarAleatorio(['assets/icons/cuidador1.svg', 'assets/icons/cuidador2.svg'])}" alt="Avatar de ${nome}" class="card-cuidador-avatar">
-                        <div class="card-cuidador-info">
-                            <strong class="card-cuidador-nome">${nome}</strong>
-                            ${idadeTexto ? `<span class="card-cuidador-idade">${idadeTexto}</span>` : ''}
-                        </div>
-                    </div>
-                    <ul class="card-cuidador-detalhes">
-                        ${turno ? `<li><span>Turno:</span> ${turno}</li>` : ''}
-                        ${dias  ? `<li><span>Escala:</span> ${dias}</li>` : ''}
-                        <li><span>Possui CNH?</span> ${temCnh}</li>
-                    </ul>
-                    <div class="card-cuidador-id">Id: ${idCuidador}</div>
-                `;
-
-                listaCuidadores.appendChild(card);
+                renderCardCuidador(novoCuidador);
                 atualizarContador(1);
 
-                // Limpa campos e fecha
-                modalCuidador.querySelector('#nome-cuidador').value = '';
-                modalCuidador.querySelector('#nascimento-cuidador').value = '';
-                modalCuidador.querySelector('#turno').value = '';
-                modalCuidador.querySelector('#dias').value = '';
-                modalCuidador.querySelector('#cnh').value = '';
-                modalCuidador.querySelector('#cpf-cuidador').value = '';
-                modalCuidador.querySelector('#tel-cuidador').value = '';
-                modalCuidador.classList.remove('visivel');
+                // Limpa campos
+                ['#nome-cuidador','#nascimento-cuidador','#turno','#dias',
+                 '#cnh','#cpf-cuidador','#tel-cuidador','#cod-cuidador'].forEach(sel => {
+                    const el = modalCuidador.querySelector(sel);
+                    if (el) el.value = '';
+                });
+
+                fecharModalCuidador();
             });
         }
     }
@@ -247,18 +264,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // BLOCO FAMILIAR
     // ─────────────────────────────────────────
 
-    const modalFamiliar    = document.getElementById('modalFamiliar');
-    const btnAbrirFamiliar = document.getElementById('abrirModal');
+    const modalFamiliar     = document.getElementById('modalFamiliar');
+    const btnAbrirFamiliar  = document.getElementById('abrirModal');
     const btnFecharFamiliar = document.getElementById('fecharModal');
-    const secaoFamiliares  = document.getElementById('familiar');
+    const secaoFamiliares   = document.getElementById('familiar');
 
-    // Container de cards de familiares
     let listaFamiliares = secaoFamiliares.querySelector('.lista-familiares');
     if (!listaFamiliares) {
         listaFamiliares = document.createElement('div');
         listaFamiliares.className = 'lista-familiares';
-        // Insere antes do footer de legenda
         secaoFamiliares.appendChild(listaFamiliares);
+    }
+
+    function renderCardFamiliar(f) {
+        // Remove avatar estático hardcoded do HTML na primeira vez
+        secaoFamiliares.querySelector('section')?.remove();
+
+        const pilula = document.createElement('div');
+        pilula.className = `card-familiar ${f.isAdmin ? 'familiar-admin' : 'familiar-observador'}`;
+        pilula.innerHTML = `
+            <img src="${f.avatar}" alt="Avatar de ${f.nome}" class="card-familiar-avatar">
+            <div class="card-familiar-info">
+                <strong>${f.nome}</strong>
+                <span>${f.parentesco || (f.isAdmin ? 'Administrador' : 'Observador')}</span>
+            </div>
+        `;
+        listaFamiliares.appendChild(pilula);
+    }
+
+    // Renderiza familiares salvos ao carregar a página
+    if (familiaresLS.length > 0) {
+        // Remove o bloco estático do HTML antes de renderizar os salvos
+        secaoFamiliares.querySelector('section')?.remove();
+        familiaresLS.forEach(renderCardFamiliar);
     }
 
     if (modalFamiliar && btnAbrirFamiliar) {
@@ -283,25 +321,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!nome) return;
 
-                // Define cor da pílula: verde = administrador, azul = observador (default)
                 const isAdmin = acesso.includes('admin');
-                const classePilula = isAdmin ? 'familiar-admin' : 'familiar-observador';
-                const acessoLabel  = isAdmin ? 'Administrador' : 'Observador';
+                const avatar  = avatarAleatorio([
+                    'assets/icons/familiar1.svg',
+                    'assets/icons/familiar2.svg',
+                    'assets/icons/familiar3.svg'
+                ]);
 
-                // Remove seção estática de exemplo se existir (avatar hardcoded)
-                secaoFamiliares.querySelector('section')?.remove();
+                const novoFamiliar = { id: gerarId(), nome, parentesco, isAdmin, avatar };
 
-                const pilula = document.createElement('div');
-                pilula.className = `card-familiar ${classePilula}`;
-                pilula.innerHTML = `
-                    <img src="${avatarAleatorio(['assets/icons/familiar1.svg', 'assets/icons/familiar2.svg', 'assets/icons/familiar3.svg'])}" alt="Avatar de ${nome}" class="card-familiar-avatar">
-                    <div class="card-familiar-info">
-                        <strong>${nome}</strong>
-                        <span>${parentesco || acessoLabel}</span>
-                    </div>
-                `;
+                familiaresLS.push(novoFamiliar);
+                salvar(LS_FAMILIARES, familiaresLS);
 
-                listaFamiliares.appendChild(pilula);
+                renderCardFamiliar(novoFamiliar);
                 atualizarContador(1);
 
                 formFamiliar.reset();

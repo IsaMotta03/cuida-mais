@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuida+ | Consultas</title>
+    <title>Cuida+ | Acompanhamento</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="painel">
-
+ 
     <aside class="barra-lateral">
         <header class="logotipo">
             <img src="assets/icons/logo.svg" alt="Logotipo Cuida+">
         </header>
-
+ 
         <nav class="menu-navegacao">
             <ul>
                 <li>
@@ -47,18 +47,18 @@
                 </li>
             </ul>
         </nav>
-
+ 
         <section class="rodape-lateral">
             <a href="#" class="botao-escuro gerenciarPlanos">
                 <img src="assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos">
                 <span>Gerenciar Planos</span>
             </a>
-
+ 
             <a href="#configuracoes" class="link-configuracoes">
                 <img src="assets/icons/configuracoes.svg" alt="Ícone Configurações">
                 <span>Configurações</span>
             </a>
-
+ 
             <section class="perfil-usuario">
                 <figure class="informacoes-usuario">
                     <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil">
@@ -73,33 +73,224 @@
             </section>
         </section>
     </aside>
-
+ 
     <main class="conteudo-principal">
         <header class="cabecalho-topo">
-                <h1 class="titulos-cabecalho">Acompanhamento</h1>
+            <div class="titulos-cabecalho">
+                <h1>Acompanhamento</h1>
+                <!-- Chip com dados do idoso carregado via JS -->
+                <div class="chip-idoso" id="chipIdoso" hidden>
+                    <img src="assets/images/avatar-idoso.png" alt="Foto do idoso" class="chip-idoso__foto" id="chipIdosoFoto">
+                    <div class="chip-idoso__info">
+                        <strong class="chip-idoso__nome" id="chipIdosoNome"></strong>
+                        <span class="chip-idoso__idade" id="chipIdosoIdade"></span>
+                    </div>
+                </div>
+            </div>
         </header>
-
+ 
+        <!-- Grade principal: Relatório (col 1, rows 1-2), Notas (col 2 row 1), Checklist (col 2 row 2) -->
         <section class="painel-acompanhamento">
+ 
+            <!-- RELATÓRIO GERAL -->
             <article class="area-conteudo-acompanhamento" id="relatorio">
                 <header><h2>Relatório Geral</h2></header>
-                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h3>Nenhum Idoso</h3>
-                <p>Cadastre novo idoso para exibir o relatório.</p>
+                
+                <div id="relatorioVazio" style="display: none; text-align: center; padding: 20px;">
+                    <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                    <h3>Nenhum Idoso</h3>
+                    <p>Cadastre novo idoso para exibir o relatório.</p>
+                </div>
+
+                <div id="relatorioConteudo" class="relatorio-grid-container">
+                    
+                    <div class="quadrante-relatorio secao-saude-box">
+                        <div>
+                            <span class="titulo-quadrante">Status de Saúde</span>
+                            <span class="subtitulo-quadrante" style="display: block; margin-bottom: 12px;">Preencha e gerencie o histórico de acompanhamento clínico diário.</span>
+                        </div>
+                        
+                        <div class="grupo-inputs-saude-vias">
+                            <div class="linha-saude-item">
+                                <span class="label-saude-item">Batimentos cardíacos</span>
+                                <div class="campo-saude-sufixo">
+                                    <input type="number" id="saudeBatimentos" placeholder="80">
+                                    <span class="sufixo-saude">bpm</span>
+                                </div>
+                            </div>
+
+                            <div class="linha-saude-item">
+                                <span class="label-saude-item">Glicose</span>
+                                <div class="campo-saude-sufixo">
+                                    <input type="number" id="saudeGlicose" placeholder="95">
+                                    <span class="sufixo-saude">mg/dl</span>
+                                </div>
+                            </div>
+
+                            <div class="linha-saude-item">
+                                <span class="label-saude-item">Colesterol</span>
+                                <div class="campo-saude-sufixo">
+                                    <input type="number" id="saudeColesterol" placeholder="180">
+                                    <span class="sufixo-saude">mg/dl</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="quadrante-relatorio secao-humor-box">
+                        <span class="titulo-quadrante" style="margin-bottom: 12px;">Humor do dia</span>
+                        <div class="grade-humor-2x2">
+                            <button class="btn-humor-card" data-humor="feliz" title="Feliz">
+                                <img src="assets/icons/feliz.svg" alt="Feliz">
+                                <span>Feliz</span>
+                            </button>
+                            <button class="btn-humor-card" data-humor="neutro" title="Neutro">
+                                <img src="assets/icons/neutro.svg" alt="Neutro">
+                                <span>Neutro</span>
+                            </button>
+                            <button class="btn-humor-card" data-humor="triste" title="Triste">
+                                <img src="assets/icons/triste.svg" alt="Triste">
+                                <span>Triste</span>
+                            </button>
+                            <button class="btn-humor-card" data-humor="depressivo" title="Depressivo">
+                                <img src="assets/icons/depressivo.svg" alt="Depressivo">
+                                <span>Depressivo</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="quadrante-relatorio secao-medidas-box">
+                        <span class="titulo-quadrante" style="margin-bottom: 5px;">Medidas Corporais</span>
+                        <div class="valores-medidas">
+                            <div>
+                                <span class="label-medida-peso">Peso</span>
+                                <strong class="valor-medida-peso"><span id="relatorioPeso">--</span> kg</strong>
+                            </div>
+                            <div style="text-align: right;">
+                                <span class="label-medida-altura">Altura</span>
+                                <strong class="valor-medida-altura"><span id="relatorioAltura">--</span> cm</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quadrante-relatorio secao-imc-box" id="boxIMCContainer">
+                        <div style="flex-grow: 1;">
+                            <span class="titulo-quadrante">Índice de Massa Corporal</span>
+                            <strong class="valor-imc-total" id="relatorioIMC">--</strong>
+                            <span id="relatorioClassificacao" class="status-imc-texto">--</span>
+                        </div>
+                    </div>
+
+                </div>
             </article>
-        
-            <article class="area-conteudo-acompanhamento" id="notas">
-                <header><h2>Notas</h2></header>
-                <a href="#" class="botao-adicionar-nota">+</a>
-                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h3>Nenhuma nota adicionada</h3>
+ 
+            <!-- GALERIA DE FOTOS -->
+            <article class="area-conteudo-acompanhamento area-conteudo-acompanhamento--coluna" id="galeria">
+                <header class="painel-header">
+                    <h2>Galeria de Fotos</h2>
+                    <button class="botao-adicionar-galeria" id="btnAdicionarFoto" title="Adicionar foto">+</button>
+                    <input type="file" id="inputFoto" accept="image/*" hidden>
+                </header>
+ 
+                <!-- Área de conteúdo que cresce -->
+                <div class="painel-corpo" id="galeriaCorp">
+                    <!-- Estado vazio -->
+                    <div class="estado-vazio" id="galeriaVazia">
+                        <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                        <h3>Nenhuma foto adicionada</h3>
+                    </div>
+ 
+                    <!-- Grid de fotos -->
+                    <ul class="galeria-grid" id="galeriaGrid" hidden></ul>
+                </div>
             </article>
-        
+ 
+            <!-- NOTAS -->
+            <article class="area-conteudo-acompanhamento area-conteudo-acompanhamento--coluna" id="notas">
+                <header class="painel-header">
+                    <h2>Notas</h2>
+                    <button class="botao-adicionar-nota" id="btnAdicionarNota" title="Adicionar nota">+</button>
+                </header>
+ 
+                <!-- Área de conteúdo que cresce -->
+                <div class="painel-corpo" id="notasCorp">
+                    <!-- Estado vazio -->
+                    <div class="estado-vazio" id="notasVazio">
+                        <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
+                        <h3>Nenhuma nota adicionada</h3>
+                    </div>
+ 
+                    <!-- Lista de notas -->
+                    <ul class="notas-lista" id="notasLista" hidden></ul>
+                </div>
+            </article>
+ 
+            <!-- CHECKLIST DIÁRIO -->
             <article class="area-conteudo-acompanhamento" id="checklist">
-                <header><h2>Checklist diário</h2></header>
-                <button>+ Checks diários</button>
+                <header>
+                    <h2>Checklist diário</h2>
+                    <div class="checklist-resumo">
+                        <span>Prioridades <strong id="checkTotal">0</strong></span>
+                        <span>Concluídas <strong id="checkConcluidas">0</strong> de <strong id="checkTotalRepeat">0</strong></span>
+                    </div>
+                </header>
+ 
+                <div class="checklist-corpo">
+                    <button class="checklist-btn-adicionar" id="btnAdicionarCheck">+ Checks diários</button>
+                    <ul class="checklist-lista" id="checkLista"></ul>
+                </div>
             </article>
+ 
         </section>
     </main>
-
+ 
+    <!-- =============================================
+         MODAL: ADICIONAR NOTA
+         ============================================= -->
+    <div class="modal-overlay" id="modalNota" role="dialog" aria-modal="true" aria-labelledby="modalNotaTitulo">
+        <div class="cartao">
+            <div class="form-header">
+                <h1 id="modalNotaTitulo">Adicionar Nota</h1>
+                <button class="btn-fechar" id="btnFecharNota" aria-label="Fechar modal">×</button>
+            </div>
+            <div class="formulario" style="display:flex; flex-direction:column; gap:16px;">
+                <div class="inputs col-span-full">
+                    <label for="notaTitulo">Título</label>
+                    <input type="text" id="notaTitulo" placeholder="Ex: Queixa de dores" maxlength="60">
+                </div>
+                <div class="inputs col-span-full">
+                    <label for="notaTexto">Descrição</label>
+                    <textarea id="notaTexto" rows="4" placeholder="Descreva a nota…"></textarea>
+                </div>
+                <div class="inputs col-span-full">
+                    <label for="notaAutor">Cuidador responsável</label>
+                    <input type="text" id="notaAutor" placeholder="Ex: Cuidador 01">
+                </div>
+                <button class="botao-adicionar" id="btnSalvarNota" style="width:100%;">Salvar nota</button>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- =============================================
+         MODAL: ADICIONAR CHECK
+         ============================================= -->
+    <div class="modal-overlay" id="modalCheck" role="dialog" aria-modal="true" aria-labelledby="modalCheckTitulo">
+        <div class="cartao">
+            <div class="form-header">
+                <h1 id="modalCheckTitulo">Adicionar Check diário</h1>
+                <button class="btn-fechar" id="btnFecharCheck" aria-label="Fechar modal">×</button>
+            </div>
+            <div class="formulario" style="display:flex; flex-direction:column; gap:16px;">
+                <div class="inputs col-span-full">
+                    <label for="checkTexto">Tarefa</label>
+                    <input type="text" id="checkTexto" placeholder="Ex: Ingestão regular de água" maxlength="80">
+                </div>
+                <button class="botao-adicionar" id="btnSalvarCheck" style="width:100%;">Adicionar</button>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="acompanhamentos.js"></script>
 </body>
 </html>

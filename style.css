@@ -381,10 +381,14 @@ h3 {
     grid-template-columns: 2fr 1fr;
     gap: 20px;
     height: 90%;
+    grid-template-rows: auto auto auto;
+    overflow-y: auto;
 }
 #relatorio {
     grid-column: 1;
     grid-row: span 2;
+    padding: 30px;
+    
 }
 #notas {
     grid-column: 2;
@@ -415,14 +419,14 @@ h3 {
     left: 25px;
 }
 #checklist button {
-    font-size: 18px;
-    background-color: #deecb7;
-    position: relative;
-    bottom: 70px;
-    padding: 20px 160px;
+    font-size: 16px;
+    background-color: #80CEF4;
+    position: static;
+    padding: 10px 10px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
+    width: 100%;
 }
 .botao-adicionar-nota {
     background-color: #80CEF4;
@@ -1410,4 +1414,684 @@ dialog.modal-container {
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
+}
+
+#relatorio {
+    grid-column: 1;
+    grid-row: 1 / 4;   /* ocupa todas as linhas à esquerda */
+}
+#galeria {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 220px;
+}
+#notas {
+    grid-column: 2;
+    grid-row: 2;
+    min-height: 220px;
+}
+#checklist {
+    grid-column: 2;
+    grid-row: 3;
+    min-height: 220px;
+}
+ 
+/* ── Chip do idoso no cabeçalho ──────────────── */
+.chip-idoso {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #80CEF4;
+    border-radius: 50px;
+    padding: 8px 18px 8px 8px;
+    margin-top: 8px;
+}
+.chip-idoso__foto {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+.chip-idoso__info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+.chip-idoso__nome {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+.chip-idoso__idade {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+}
+ 
+/* ── Galeria de fotos ────────────────────────── */
+.area-conteudo-acompanhamento#galeria {
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.botao-adicionar-galeria {
+    background-color: #80CEF4;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+.botao-adicionar-galeria:hover { background-color: #5bbee8; }
+ 
+#galeriaVazia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    gap: 8px;
+    padding-top: 16px;
+}
+.galeria-vazia h3 {
+    font-size: 15px;
+    color: #727B8E;
+    font-weight: 500;
+    margin: 0;
+}
+ 
+.galeria-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 100%;
+    margin-top: 12px;
+    align-content: start;
+    overflow-y: auto;
+    
+    
+}
+.galeria-item {
+    position: relative;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+}
+.galeria-item__img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+}
+.galeria-item__remover {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+.galeria-item:hover .galeria-item__remover { opacity: 1; }
+ 
+/* ── Notas ───────────────────────────────────── */
+.area-conteudo-acompanhamento#notas {
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+/* Sobrescreve o posicionamento antigo do botão + */
+.area-conteudo-acompanhamento#notas .botao-adicionar-nota {
+    position: static;          /* cancela o absolute do CSS original */
+    background-color: #80CEF4;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    padding: 0;
+}
+
+#notasVazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    gap: 8px;
+    padding-top: 16px;
+}
+
+.painel-corpo{
+    text-align: center;
+    margin: auto;
+}
+.estado-vazio h3 {
+    font-size: 15px;
+    color: #727B8E;
+    font-weight: 500;
+    margin: 0;
+}
+.notas-lista {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    overflow: auto;
+    overflow-x: auto;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 8px;
+    padding-bottom: 4px;
+    max-height: 160px;
+}
+.nota-card {
+    background-color: #FFFDE7;
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-width: 120px;
+    max-width: 140px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    
+}
+.nota-card__cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px;
+}
+.nota-card__titulo {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2E2E48;
+    word-break: break-word;
+}
+.nota-card__remover {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+    flex-shrink: 0;
+    padding: 0 2px;
+}
+.nota-card__remover:hover { color: #e07b7b; }
+#notas .nota-card__texto {
+    font-size: 12px;
+    text-align: left;
+    color: #4B4F67;
+    line-height: 1.2;
+    word-break: break-word;
+}
+.nota-card__rodape {
+    font-size: 10px;
+    color: #2E2E48;
+    margin-top: auto;
+    text-align: right;
+}
+ 
+/* ── Checklist ───────────────────────────────── */
+.area-conteudo-acompanhamento#checklist {
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+/* Remove o posicionamento antigo do botão checklist */
+#checklist button.checklist-btn-adicionar {
+    font-size: 14px;
+    background-color: #deecb7;
+    position: static;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    color: #2E2E48;
+    transition: background 0.2s;
+}
+#checklist button.checklist-btn-adicionar:hover { background-color: #cfe0a0; }
+ 
+.checklist-resumo {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #727B8E;
+    align-items: center;
+    margin-left: auto;
+}
+.checklist-resumo strong {
+    color: #2E2E48;
+}
+.checklist-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+.checklist-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.check-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F8FAFC;
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid #E2E8F0;
+    transition: background 0.15s;
+}
+.check-item--concluido {
+    background-color: #EBF5E1;
+    border-color: #CBDD98;
+}
+.check-item__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+.check-item__input {
+    width: 16px;
+    height: 16px;
+    accent-color: #80CEF4;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.check-item__texto {
+    font-size: 13px;
+    color: #2E2E48;
+    font-weight: 500;
+}
+.check-item--concluido .check-item__texto {
+    text-decoration: line-through;
+    color: #888;
+}
+.check-item__acoes {
+    display: flex;
+    gap: 8px;
+    margin-left: 10px;
+}
+.check-item__btn-remover {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+}
+.check-item__btn-remover:hover { opacity: 1; }
+.check-item__btn-remover img {
+    width: 14px;
+    height: 14px;
+}
+ 
+/* ── Ajuste do header interno dos artigos ─────── */
+.area-conteudo-acompanhamento header {
+    display: flex;
+    align-items: center;
+    /* mantém position absolute do CSS original para os sem galeria */
+}
+/* Sobrescreve absolute só onde há botão inline */
+#galeria header,
+#notas header,
+#checklist header {
+    position: static;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+#galeria,
+#notas {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#galeria .painel-corpo,
+#notas .painel-corpo {
+    
+    width: 100%;
+    flex: 1;
+}
+.galeria-grid[hidden],
+.notas-lista[hidden],
+.estado-vazio[hidden] {
+    display: none !important;
+}
+
+/* RELATÓRIO GERAL -----------*/
+.btn-humor.ativo {
+    background-color: #28a745; /* Verde */
+    color: white ;
+    border-color: #28a745 ;
+    font-weight: 600;
+}
+
+.btn-humor {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background-color: #E6F5FD; /* Tom de fundo leve padrão do seu app */
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+#relatorioConteudo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Regra aplicada a todas as quatro partes internas */
+#relatorioConteudo > div {
+    background-color: #FFFFFF; /* Fundo branco padrão para destacar a sombra */
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 4px black, 0 1px 3px rgba(46, 46, 72, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.relatorio-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Base de estilo e sombra para os 4 quadrantes */
+.quadrante-relatorio {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(46, 46, 72, 0.04), 0 1px 3px rgba(46, 46, 72, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quadrante-relatorio:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 46, 72, 0.07), 0 2px 4px rgba(46, 46, 72, 0.03);
+}
+
+/* Força o conteúdo de Saúde a distribuir os elementos verticalmente */
+.secao-saude-box {
+    position: relative;
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Títulos padrões de blocos */
+.titulo-quadrante {
+    font-weight: 600;
+    font-size: 14px;
+    color: #2E2E48;
+    display: block;
+}
+.subtitulo-quadrante {
+    font-size: 13px;
+    color: #7A7A9A;
+    display: block;
+    line-height: 1.4;
+}
+
+/* ──────────────────────────────────────────
+   A MÁGICA: GRADE DE MOOD / HUMOR 2x2 
+   ────────────────────────────────────────── */
+.secao-humor-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.grade-humor-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    flex-grow: 1;
+}
+
+/* Estilo para os botões maiores em formato de card */
+.btn-humor-card {
+    background-color: #cccbcb;
+    border: 1px solid #E2EEF5;
+    border-radius: 10px;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-humor-card img {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.2s ease;
+}
+
+.btn-humor-card span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #4A4A68;
+}
+
+.btn-humor-card:hover {
+    background-color: #EBF5FC;
+}
+.btn-humor-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Estado ATIVO (Apenas o clicado ganha a cor verde) */
+.btn-humor-card.ativo {
+    background-color: #bbeec7 ;
+    border-color: #88d49a ;
+}
+.btn-humor-card.ativo span {
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+/* ──────────────────────────────────────────
+   Ajustes para Medidas e IMC
+   ────────────────────────────────────────── */
+.secao-medidas-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.label-medida-altura{
+    background-color: #e0f0b4;
+    padding: 10px;
+    margin-left: -5px;
+    border-radius: 12px 0 0 12px;
+}
+.valor-medida-altura{
+    background-color: #e0f0b4;
+    padding: 10px;
+    margin-left: -5px;
+    border-radius:0 12px 12px 00;
+}
+
+.label-medida-peso{
+    background-color: #a5ddf5;
+    padding: 10px;
+    margin-left: -5px;
+    border-radius: 12px 0 0 12px;
+}
+
+.valor-medida-peso{
+    background-color: #a5ddf5;
+    padding: 10px;
+    margin-left: -5px;
+    border-radius:0 12px 12px 00;
+}
+.valores-medidas {
+    display: flex; 
+    justify-content: space-between; 
+    border-top: 1px solid #D0E3EF; 
+    padding-top: 30px;
+}
+
+.valor-medida-destaque {
+    font-size: 15px; 
+    color: #2E2E48;
+}
+
+.secao-imc-box {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    
+}
+
+.valor-imc-total {
+    font-size: 22px; 
+    color: #2E2E48; 
+    display: block; 
+    margin: 2px 0;
+    padding: 5px;
+}
+
+.status-imc-texto {
+    font-size: 12px; 
+    font-weight: 500; 
+    color: #595964;
+    padding: 5px;
+}
+
+.relatorio-grid-container #btnAbrirModalSaude{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: auto;
+    margin-top: 0;
+    border: none;
+    color: #2E2E48;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS DO INTERIOR DO STATUS DE SAÚDE
+   ========================================================================== */
+
+/* Container que segura as 3 linhas e ocupa o espaço entre o título e o botão */
+.grupo-inputs-saude-vias {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Alinha o nome do exame à esquerda e o input com o sufixo à direita */
+.linha-saude-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Nome do exame (Ex: Batimentos cardíacos) */
+.label-saude-item {
+    font-size: 18px;
+    font-weight: 500;
+    color: #4A4A68;
+}
+
+/* Caixinha cinza/azul clara que une o input e a unidade (bpm, mg/dL) */
+.campo-saude-sufixo {
+    display: flex;
+    align-items: center;
+    background-color: #c4e1f5;
+    border: 1px solid #E2EEF5;
+    border-radius: 8px;
+    padding: 6px 12px;
+    width: 120px; /* Mantém os 3 blocos com o mesmo tamanho alinhados à direita */
+}
+
+/* O input numérico sem bordas e alinhado à direita */
+.campo-saude-sufixo input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E2E48;
+    outline: none;
+    text-align: right;
+    padding-right: 4px;
+}
+
+/* Remove setas padrão do input numérico do navegador */
+.campo-saude-sufixo input::-webkit-outer-spin-button,
+.campo-saude-sufixo input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* A unidade de medida (Ex: bpm) */
+.sufixo-saude {
+    font-size: 13px;
+    color: #94A3B8;
+    font-weight: 500;
+    white-space: nowrap;
 }
