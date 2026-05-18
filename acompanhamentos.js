@@ -416,8 +416,7 @@ function escapeHtml(str) {
 function calcularEExibirIMC() {
     const listaIdosos = lerStorage('cuida_idosos', []);
     
-    // Supondo que você pega o idoso selecionado atualmente ou o primeiro da lista
-    // Se você tiver uma chave 'idoso_atual_id' salva, use ela para filtrar.
+    // Pega o primeiro idoso cadastrado da lista
     const idoso = listaIdosos[0]; 
 
     if (!idoso || !idoso.peso || !idoso.altura) {
@@ -429,17 +428,23 @@ function calcularEExibirIMC() {
     }
 
     const peso = parseFloat(idoso.peso);
-    const altura = parseFloat(idoso.altura);
+    let altura = parseFloat(idoso.altura);
     
-    // Atualiza os dados na tela
+    // CORREÇÃO CRUCIAL: Se a altura estiver armazenada em centímetros (ex: 167),
+    // converte para metros (ex: 1.67) para o cálculo correto do IMC
+    if (altura > 3) {
+        altura = altura / 100;
+    }
+
+    // Atualiza os dados textuais na tela de Acompanhamento de forma limpa
     document.getElementById('relatorioPeso').textContent = peso.toFixed(1);
     document.getElementById('relatorioAltura').textContent = altura.toFixed(2);
 
-    // Cálculo do IMC
+    // Cálculo correto do IMC: peso / (altura em metros)²
     const imc = peso / (altura * altura);
     document.getElementById('relatorioIMC').textContent = imc.toFixed(1);
 
-    // Classificação baseada na tabela de idosos (OPAS/Lipschitz)
+    // Classificação baseada na tabela de idosos (OPAS/Lipschitz) que você estruturou
     let classificacao = "";
     if (imc <= 22) {
         classificacao = "Baixo Peso";

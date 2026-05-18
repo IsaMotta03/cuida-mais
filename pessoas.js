@@ -260,86 +260,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ─────────────────────────────────────────
-    // BLOCO FAMILIAR
-    // ─────────────────────────────────────────
 
-    const modalFamiliar     = document.getElementById('modalFamiliar');
-    const btnAbrirFamiliar  = document.getElementById('abrirModal');
-    const btnFecharFamiliar = document.getElementById('fecharModal');
-    const secaoFamiliares   = document.getElementById('familiar');
+// ─────────────────────────────────────────
+// BLOCO FAMILIAR
+// ─────────────────────────────────────────
+const modalFamiliar     = document.getElementById('modalFamiliar');
+const btnAbrirFamiliar  = document.getElementById('abrirModal');
+const btnFecharFamiliar = document.getElementById('fecharModal');
+const secaoFamiliares   = document.getElementById('familiar');
 
-    let listaFamiliares = secaoFamiliares.querySelector('.lista-familiares');
-    if (!listaFamiliares) {
-        listaFamiliares = document.createElement('div');
-        listaFamiliares.className = 'lista-familiares';
+let listaFamiliares = secaoFamiliares.querySelector('.lista-familiares');
+if (!listaFamiliares) {
+    listaFamiliares = document.createElement('div');
+    listaFamiliares.className = 'lista-familiares';
+    // Insere antes do footer de legendas para manter a ordem visual correta
+    const footerFamiliar = secaoFamiliares.querySelector('footer');
+    if (footerFamiliar) {
+        secaoFamiliares.insertBefore(listaFamiliares, footerFamiliar);
+    } else {
         secaoFamiliares.appendChild(listaFamiliares);
     }
+}
 
-    function renderCardFamiliar(f) {
-        // Remove avatar estático hardcoded do HTML na primeira vez
-        secaoFamiliares.querySelector('section')?.remove();
+/* ==========================================================================
+   AGORA SIM: Eventos para Abrir e Fechar o Modal
+   ========================================================================== */
+if (btnAbrirFamiliar && modalFamiliar) {
+    btnAbrirFamiliar.addEventListener('click', () => {
+        modalFamiliar.showModal(); // Abre o <dialog> de forma nativa
+    });
+}
 
-        const pilula = document.createElement('div');
-        pilula.className = `card-familiar ${f.isAdmin ? 'familiar-admin' : 'familiar-observador'}`;
-        pilula.innerHTML = `
-            <img src="${f.avatar}" alt="Avatar de ${f.nome}" class="card-familiar-avatar">
-            <div class="card-familiar-info">
-                <strong>${f.nome}</strong>
-                <span>${f.parentesco || (f.isAdmin ? 'Administrador' : 'Observador')}</span>
-            </div>
-        `;
-        listaFamiliares.appendChild(pilula);
-    }
+if (btnFecharFamiliar && modalFamiliar) {
+    btnFecharFamiliar.addEventListener('click', (e) => {
+        e.preventDefault(); // Evita que o formulário tente recarregar a página
+        modalFamiliar.close(); // Fecha o <dialog> nativo
+    });
+}
 
-    // Renderiza familiares salvos ao carregar a página
-    if (familiaresLS.length > 0) {
-        // Remove o bloco estático do HTML antes de renderizar os salvos
-        secaoFamiliares.querySelector('section')?.remove();
-        familiaresLS.forEach(renderCardFamiliar);
-    }
+function renderCardFamiliar(f) {
+    const pilula = document.createElement('div');
+    pilula.className = `card-familiar ${f.isAdmin ? 'familiar-admin' : 'familiar-observador'}`;
+    pilula.innerHTML = `
+        <img src="${f.avatar || 'assets/images/avatar.png'}" alt="Avatar de ${f.nome}" class="card-familiar-avatar">
+        <div class="card-familiar-info">
+            <strong>${f.nome}</strong>
+            <span>${f.parentesco || (f.isAdmin ? 'Administrador' : 'Observador')}</span>
+        </div>
+    `;
+    listaFamiliares.appendChild(pilula);
+}
 
-    if (modalFamiliar && btnAbrirFamiliar) {
-        btnAbrirFamiliar.addEventListener('click', () => modalFamiliar.showModal());
+/* ==========================================================================
+   NOVO: CAPTURA OS DADOS DO FORMULÁRIO E ADICIONA À TELA
+   ========================================================================== */
+const formularioFamiliar = modalFamiliar.querySelector('form.modal-caixa');
 
-        if (btnFecharFamiliar) {
-            btnFecharFamiliar.addEventListener('click', () => modalFamiliar.close());
+if (formularioFamiliar) {
+    formularioFamiliar.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede a página de recarregar e sumir os dados
+
+        // 1. Pega os valores exatamente como estão nos IDs do HTML
+        const nomeInput       = document.getElementById('nome-familiar').value.trim();
+        const parentescoInput = document.getElementById('parentesco-familiar').value.trim();
+        
+        // .trim().toLowerCase() remove espaços e transforma tudo em minúsculo para facilitar a busca
+        const acessoInput     = document.getElementById('acesso-familiar').value.trim().toLowerCase();
+
+        // Validação básica para não salvar em branco
+        if (!nomeInput) {
+            alert('Por favor, digite o nome do familiar.');
+            return;
         }
 
-        modalFamiliar.addEventListener('mousedown', (e) => {
-            if (e.target === modalFamiliar) modalFamiliar.close();
-        });
-
-        const formFamiliar = modalFamiliar.querySelector('form');
-        if (formFamiliar) {
-            formFamiliar.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const nome       = formFamiliar.querySelector('#nome-familiar').value.trim();
-                const parentesco = formFamiliar.querySelector('#parentesco-familiar').value.trim();
-                const acesso     = formFamiliar.querySelector('#acesso-familiar').value.trim().toLowerCase();
-
-                if (!nome) return;
-
-                const isAdmin = acesso.includes('admin');
-                const avatar  = avatarAleatorio([
-                    'assets/icons/familiar1.svg',
-                    'assets/icons/familiar2.svg',
-                    'assets/icons/familiar3.svg'
-                ]);
-
-                const novoFamiliar = { id: gerarId(), nome, parentesco, isAdmin, avatar };
-
-                familiaresLS.push(novoFamiliar);
-                salvar(LS_FAMILIARES, familiaresLS);
-
-                renderCardFamiliar(novoFamiliar);
-                atualizarContador(1);
-
-                formFamiliar.reset();
-                modalFamiliar.close();
-            });
+        // 2. LOGICA DA COR: Só será admin se a palavra digitada CONTIVER "admin". 
+        // Se o usuário digitar "observador" ou "obs", vai dar 'false' e aplicará a cor azul.
+        let ehAdmin = true;
+        if (acessoInput.includes('observador') || acessoInput.includes('obs')) {
+            ehAdmin = false;
         }
-    }
 
-});
+        // 3. Monta o objeto do novo familiar com o status correto
+        const novoFamiliar = {
+            id: `${Date.now()}`,
+            nome: nomeInput,
+            parentesco: parentescoInput,
+            avatar: 'assets/images/avatar.png',
+            isAdmin: ehAdmin // Passa o resultado da nossa verificação acima
+        };
+
+        // 4. Renderiza o novo card na tela na hora
+        renderCardFamiliar(novoFamiliar);
+
+        // 5. Salva no LocalStorage (caso a variável exista no seu projeto)
+        if (typeof familiaresLS !== 'undefined') {
+            familiaresLS.push(novoFamiliar);
+            localStorage.setItem('cuida_familiares', JSON.stringify(familiaresLS));
+        }
+
+        // 6. Reseta os campos e fecha o modal de forma elegante
+        formularioFamiliar.reset();
+        modalFamiliar.close();
+    });
+}
+
+// Renderiza familiares salvos ao carregar a página
+if (typeof familiaresLS !== 'undefined' && familiaresLS.length > 0) {
+    familiaresLS.forEach(renderCardFamiliar);
+}
+})

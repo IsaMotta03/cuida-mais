@@ -12,7 +12,7 @@
         <header class="logotipo">
             <img src="assets/icons/logo.svg" alt="Logotipo Cuida+">
         </header>
-
+ 
         <nav class="menu-navegacao">
             <ul>
                 <li class="selecionado">
@@ -47,7 +47,7 @@
                 </li>
             </ul>
         </nav>
-
+ 
         <section class="rodape-lateral">
             <a href="#" class="botao-escuro gerenciarPlanos">
                 <img src="assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos">
@@ -58,7 +58,7 @@
                 <img src="assets/icons/configuracoes.svg" alt="Ícone Configurações">
                 <span>Configurações</span>
             </a>
-
+ 
             <section class="perfil-usuario">
                 <figure class="informacoes-usuario">
                     <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil">
@@ -73,24 +73,109 @@
             </section>
         </section>
     </aside>
-
+ 
     <main class="conteudo-principal">
+        <!-- Cabeçalho com nome + chip do idoso + emergência -->
         <header class="cabecalho-topo">
-            <h1>Bem-vindo, Fulano!</h1>
+            <div class="titulos-cabecalho">
+                <h1>Bem-vindo, Fulano!</h1>
+                <!-- Chip com idoso carregado via JS -->
+                <div class="chip-idoso" id="chipIdoso" hidden>
+                    <img src="assets/icons/idoso1.svg" alt="Foto do idoso" class="chip-idoso__foto">
+                    <div class="chip-idoso__info">
+                        <strong class="chip-idoso__nome" id="chipIdosoNome"></strong>
+                        <span class="chip-idoso__idade" id="chipIdosoIdade"></span>
+                    </div>
+                </div>
+            </div>
             <a href="#" class="botao-escuro botao-emergencia">
                 <img src="assets/icons/emergencia.svg" alt="Ícone Ambulância">
                 <span>Emergência</span>
             </a>
         </header>
+ 
+        <!-- Dashboard principal -->
+        <div class="vg-dashboard">
+            <article class="vg-card vg-card-relatorio">
+                <h2>Relatório Geral</h2>
+                    <div class="vg-relatorio-corpo-limpo">
+                        <div class="vg-secao-humor">
+                            <span class="vg-quadrante-titulo">Humor do dia:</span>
+                            <div id="vg-relatorio-humor" class="vg-humor-container"></div>
+                        </div>
 
-        <section class="area-conteudo">
-            <article class="cartao-vazio">
-                <img src="assets/icons/sino.svg" alt="Ícone de Sino" class="icone-sino">
-                <h3>Cadastre sua primeira pessoa</h3>
-                <p>Cadastre novas consultas pra receber notificações.</p>
+                        <div class="vg-linha-notas-relatorio">
+                            <span class="vg-quadrante-titulo">Notas e Observações Recentes</span>
+                            <div id="vg-lista-notas-painel" class="vg-notas-painel-lista">
+                                </div>
+                        </div>
+                    </div>
             </article>
-        </section>
+ 
+            <article class="vg-card vg-card-indicadores">
+                <h2>Indicadores</h2>
+                <div class="vg-indicadores-corpo"></div>
+            </article>
+ 
+            <article class="vg-card vg-card-consultas">
+                <h2>Consultas</h2>
+                <div class="vg-consultas-corpo">
+                    <div class="vg-vazio">
+                        <img src="assets/icons/sino.svg" alt="Sino">
+                        <h3>Nenhuma consulta</h3>
+                        <p>Cadastre consultas para vê-las aqui.</p>
+                    </div>
+                </div>
+            </article>
+ 
+            <article class="vg-card vg-card-tarefas">
+                <div class="vg-tarefas-header">
+                    <h2>Tarefas do dia</h2>
+                    <div class="vg-tarefas-resumo">
+                        <span>Criadas <strong id="vg-checkTotal">0</strong></span>
+                        <span>Concluídas <strong id="vg-checkConcluidas">0</strong> de <strong id="vg-checkTotalRepeat">0</strong></span>
+                    </div>
+                </div>
+                <button class="vg-btn-add" id="vg-btnAdicionarCheck">+ Nova tarefa</button>
+                <ul class="vg-checklist-lista checklist-lista" id="vg-checkLista"></ul>
+            </article>
+ 
+            <article class="vg-card vg-card-medicamentos">
+                <h2>Medicamentos </h2>
+ 
+                <!-- Estado vazio -->
+                <div id="vg-medVazio" class="vg-vazio">
+                    <img src="assets/icons/sino.svg" alt="Sino">
+                    <h3>Nenhum medicamento</h3>
+                    <p>Cadastre medicamentos para vê-los aqui.</p>
+                </div>
+ 
+                <!-- Grid de cards mini -->
+                <div class="vg-med-grid" id="vg-medGrid" hidden></div>
+            </article>
+ 
+        </div><!-- /vg-dashboard -->
     </main>
-
+ 
+    <!-- =============================================
+         MODAL: ADICIONAR CHECK (visão geral)
+         ============================================= -->
+    <div class="modal-overlay" id="vg-modalCheck" role="dialog" aria-modal="true">
+        <div class="cartao">
+            <div class="form-header">
+                <h1>Nova Tarefa</h1>
+                <button class="btn-fechar" id="vg-btnFecharCheck" aria-label="Fechar modal">x</button>
+            </div>
+            <div class="formulario" style="display:flex;flex-direction:column;gap:16px;">
+                <div class="inputs col-span-full">
+                    <label for="vg-checkTexto">Tarefa</label>
+                    <input type="text" id="vg-checkTexto" placeholder="Ex: Ingestão regular de água" maxlength="80">
+                </div>
+                <button class="botao-adicionar" id="vg-btnSalvarCheck" style="width:100%;">Adicionar</button>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="visaogeral.js"></script>
 </body>
 </html>

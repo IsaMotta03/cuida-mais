@@ -216,7 +216,7 @@ body.painel {
     flex: 1;
     background-color: #FFFFFF;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,6 +231,7 @@ body.painel {
     text-align: center;
     max-width: 600px;
     width: 100%;
+    
 }
 .icone-sino {
     width: 32px;
@@ -286,36 +287,31 @@ h3 {
     color: #727B8E;
     margin-top: 4px;
 }
+#familiar header {
+    width: 100%;
+    display: block;
+    align-items: flex-start;
+    
+}
 #familiar {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    padding: 100px 40px;
+    align-items: center; /* Faz os filhos ocuparem toda a largura disponível */
+    padding: 24px;        /* Espaçamento interno controlado, sem empurrar tudo */
 }
 #familiar section {
+    margin-top: 50px;
     display: flex;
     background-color: #CBDD98;
     padding: 15px 65px;
-    border-radius: 20px;
+    border-radius: 50px;
     color: #FFFFFF;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 100%;
+
 }
-#familiar section img {
-    position: relative;
-    right: 45px;
-}
-#familiar section h4 {
-    font-size: 16px;
-    position: relative;
-    right: 35px;
-    bottom: 5px;
-}
-#familiar section p {
-    font-size: 14px;
-    position: relative;
-    right: 78%;
-    top: 13px;
-}
+
 #cuidador{
     padding: 70px 20px 20px 20px;
 }
@@ -886,8 +882,8 @@ dialog.modal-container {
 .lista-familiares {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 16px;
+    gap: 5px;
+    margin-top: 3px;
     width: 100%;
 }
 
@@ -1013,35 +1009,49 @@ dialog.modal-container {
 }
 
 .lista-familiares {
+    display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    
+    max-height: 260px;
+    overflow-y: auto;
+    
 }
+#familiar .familiar-modelo-estatico,
 .card-familiar {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     border-radius: 50px;
-    padding: 10px 16px;
+    padding: 12px 20px;
     width: 100%;
+    margin-bottom: 12px; /* Cria o espaçamento perfeito entre o Fulano e os de baixo */
     box-sizing: border-box;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    position: relative;
 }
 .familiar-admin    { background: #c8e6a0; }
 .familiar-observador { background: #a8d8f0; }
+
+#familiar .familiar-modelo-estatico img,
 .card-familiar-avatar {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     object-fit: cover;
+    margin: 0;
+    flex-shrink: 0;
 }
 .card-familiar-info {
     display: flex;
     flex-direction: column;
-    line-height: 1.3;
+    justify-content: center;
+    gap: 2px;
 }
 .card-familiar-info strong {
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: #1a1a2e;
 }
 .card-familiar-info span {
@@ -1593,12 +1603,15 @@ dialog.modal-container {
 .check-item__btn-remover {
     background: none;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    padding: 2px;
+    padding: 8px;
     display: flex;
     align-items: center;
     opacity: 0.5;
     transition: opacity 0.15s;
+    background-color: #80CEF4;
+
 }
 .check-item__btn-remover:hover { opacity: 1; }
 .check-item__btn-remover img { width: 14px; height: 14px; }
@@ -1640,7 +1653,7 @@ dialog.modal-container {
 .secao-humor-box { display: flex; flex-direction: column; }
 .grade-humor-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; flex-grow: 1; }
 .btn-humor-card {
-    background-color: #cccbcb; border: 1px solid #E2EEF5; border-radius: 10px;
+    background-color: #dfdcdc; border: 1px solid #E2EEF5; border-radius: 10px;
     padding: 12px 8px; display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s ease-in-out;
 }
@@ -1849,3 +1862,271 @@ dialog.modal-container {
 
 /* ── Modal Comprovante (largura) ────────────── */
 .cartao-comprovante-form { max-width: 540px; width: 95%; }
+
+/* ── Visão Geral: layout do dashboard ── */
+.vg-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 280px;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+/* Linha 1 ─ Relatório, Indicadores, Consultas */
+.vg-card-relatorio  { grid-column: 1; grid-row: 1; }
+.vg-card-indicadores{ grid-column: 2; grid-row: 1; }
+.vg-card-consultas  { grid-column: 3; grid-row: 1 / 3; }
+
+/* Linha 2 ─ Tarefas, Medicamentos */
+.vg-card-tarefas    { grid-column: 1; grid-row: 2; }
+.vg-card-medicamentos{ grid-column: 2; grid-row: 2; }
+
+/* Card base */
+.vg-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(46,46,72,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+}
+
+.vg-card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2E2E48;
+    margin: 0;
+}
+
+/* ── Placeholder vazio genérico ── */
+.vg-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 0;
+    color: #B0B8C8;
+    font-size: 13px;
+    text-align: center;
+    flex: 1;
+}
+.vg-vazio img { width: 36px; opacity: 0.5; }
+.vg-vazio h3 { font-size: 14px; color: #C0C8D6; margin: 0; }
+
+/* ── Relatório: quadrantes mini ── */
+.vg-relatorio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.vg-quadrante {
+    background: #F4FAFF;
+    border: 1px solid #D4EDF9;
+    border-radius: 12px;
+    padding: 14px;
+}
+.vg-quadrante-titulo {
+    font-size: 11px;
+    font-weight: 600;
+    color: #727B8E;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* ── Tarefas ── */
+.vg-tarefas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.vg-tarefas-resumo {
+    font-size: 12px;
+    color: #727B8E;
+    display: flex;
+    gap: 10px;
+}
+.vg-tarefas-resumo strong { color: #2E2E48; }
+
+.vg-btn-add {
+    background: #deecb7;
+    color: #182000;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.vg-btn-add:hover { background: #cfe0a0; }
+
+.vg-checklist-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+/* ── Medicamentos grid mini ── */
+.vg-med-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    overflow-y: auto;
+    padding-bottom: 5px;
+    max-height: 240px;
+}
+
+.vg-med-card {
+    padding: 14px ;
+    border-radius: 14px ;
+    padding: 8px;
+    background-color: #e8f6fd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    min-height:120px;
+}
+.vg-med-card .med-card-icone {
+    width: 44px ;
+    height: 44px ;
+    border-radius: 10px 
+}
+.vg-med-card .med-card-nome { font-size: 0.9rem ; }
+.vg-med-card .med-card-sub  { font-size: 0.75rem ; }
+/* hide comprovante button in overview */
+.vg-med-card .med-btn-comprovante { display: none; }
+
+/* ── Consultas placeholder ── */
+.vg-consultas-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* ── Indicadores placeholder ── */
+.vg-indicadores-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+.vg-indicadores-vazio-row {
+    display: flex;
+    gap: 10px;
+}
+.vg-ind-box {
+    flex: 1;
+    background: #F4FAFF;
+    border: 1px solid #D4EDF9;
+    border-radius: 12px;
+    padding: 14px 12px;
+    min-height: 60px;
+}
+
+        /* Contêiner principal dos indicadores */
+.vg-indicadores-corpo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+/* Estilo base compartilhado por todos os cartões de indicadores */
+.indicador-item-card {
+    display: flex;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 14px;
+}
+
+/* Título interno e ícone de cada indicador */
+.indicador-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.indicador-header span:first-child {
+    font-size: 1rem;
+}
+
+.indicador-header span:last-child {
+    font-size: 0.72rem;
+    color: #2E2E48;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Estilização dos números e unidades de medida */
+.indicador-valor {
+    font-weight: 700;
+    color: #2E2E48;
+}
+
+.indicador-valor span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #727B8E;
+}
+
+/* --- Variações específicas para os Quadrados do Topo (Batimentos e Glicose) --- */
+.indicador-item-card--topo {
+    flex-direction: column;
+    justify-content: center;
+    min-height: 90px;
+}
+
+.indicador-item-card--topo .indicador-valor {
+    font-size: 1.3rem;
+    margin-left: 8px;
+}
+
+/* Cores específicas: Batimentos */
+.indicador-card--batimentos {
+    background-color: #ffdbdb;
+    border-bottom: 4px solid #E07B7B;
+}
+
+/* Cores específicas: Glicose */
+.indicador-card--glicose {
+    background-color: #e7f8f8;
+    border-bottom: 4px solid #80CEF4;
+}
+
+/* --- Variação específica para o Retângulo de Baixo (Colesterol) --- */
+.indicador-card--colesterol {
+    grid-column: span 2; /* Faz ocupar a largura total de 2 colunas */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fcf3d5;
+    border-left: 4px solid #E8C97A;
+    min-height: 55px;
+    padding: 14px 20px;
+}
+
+.indicador-card--colesterol .indicador-valor {
+    font-size: 1.2rem;
+}
+
+.indicador-card--colesterol .indicador-header {
+    margin-bottom: 0; /* Alinhamento horizontal perfeito */
+    gap: 8px;
+}
+
+.indicador-card--colesterol .indicador-header span:first-child {
+    font-size: 1.1rem;
+}
