@@ -1,9 +1,28 @@
 // =============================================
-//  Cuida+ — consultas.js  (corrigido)
+//  Cuida+ — consultas.js
 // =============================================
 
 // --- Dados ---
-let consultas = [];
+const LS_KEY = 'cuidamais_consultas';
+
+function salvarConsultas() {
+    localStorage.setItem(LS_KEY, JSON.stringify(consultas));
+}
+
+function carregarConsultas() {
+    try {
+        const raw = localStorage.getItem(LS_KEY);
+        if (!raw) return [];
+        return JSON.parse(raw).map(c => ({
+            ...c,
+            data: new Date(c.data), // reidrata string ISO → Date
+        }));
+    } catch {
+        return [];
+    }
+}
+
+let consultas = carregarConsultas();
 
 // Grade de horários
 const HORA_INICIO = 6;
@@ -223,8 +242,9 @@ btnConfirmar.addEventListener('click', () => {
     };
 
     consultas.push(novaConsulta);
+    salvarConsultas(); // persiste após cada inserção
 
-    // FIX: navega para o mês E dia da consulta recém-adicionada
+    // navega para o mês E dia da consulta recém-adicionada
     dataAtual      = new Date(novaConsulta.data.getFullYear(), novaConsulta.data.getMonth(), 1);
     diaSelecionado = new Date(novaConsulta.data);
 
@@ -251,8 +271,8 @@ function renderizarPaginaConsultas() {
     // Dias únicos com consulta no mês, ordenados
     const diasComConsulta = [...new Set(consultasMes.map(c => c.data.getDate()))].sort((a, b) => a - b);
 
-    // FIX: verifica se diaSelecionado está no mês atual E tem consultas
-    //      se não estiver, cai para o primeiro dia com consulta do mês
+    // verifica se diaSelecionado está no mês atual E tem consultas
+    // se não estiver, cai para o primeiro dia com consulta do mês
     const diaNoMesAtual = (
         diaSelecionado.getFullYear() === dataAtual.getFullYear() &&
         diaSelecionado.getMonth()    === dataAtual.getMonth()    &&
@@ -335,7 +355,7 @@ function renderizarPaginaConsultas() {
         </div>
     `;
 
-    // FIX: registra navegação por dia APÓS o innerHTML ser definido
+    // registra navegação por dia APÓS o innerHTML ser definido
     if (temAntes) {
         document.getElementById('btn-dia-anterior').addEventListener('click', () => {
             diaSelecionado = new Date(
@@ -414,4 +434,13 @@ btnMesProximo.addEventListener('click', () => {
 // =============================================
 atualizarMesLabel();
 atualizarContagem();
-mostrarEstadoVazio();
+
+// Exibe grade se já houver dados salvos no mês atual, senão estado vazio
+if (consultas.some(c =>
+    c.data.getFullYear() === dataAtual.getFullYear() &&
+    c.data.getMonth()    === dataAtual.getMonth()
+)) {
+    renderizarPaginaConsultas();
+} else {
+    mostrarEstadoVazio();
+}

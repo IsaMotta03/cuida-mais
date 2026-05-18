@@ -1931,7 +1931,7 @@ dialog.modal-container {
     padding: 14px;
 }
 .vg-quadrante-titulo {
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 600;
     color: #727B8E;
     text-transform: uppercase;
@@ -2129,4 +2129,119 @@ dialog.modal-container {
 
 .indicador-card--colesterol .indicador-header span:first-child {
     font-size: 1.1rem;
+}
+/* =============================================
+   VISÃO GERAL — Humor do dia (card único)
+   ============================================= */
+
+/* Seção humor dentro do relatório geral */
+.vg-secao-humor {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.vg-quadrante-titulo {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #121418;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Card visual do humor selecionado —
+   mesma estética do btn-humor-card.ativo do acompanhamento */
+.vg-humor-card-ativo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #bbeec7;
+    border: 1px solid #88d49a;
+    border-radius: 12px;
+    padding: 10px 16px;
+    width: fit-content;
+    margin-bottom: 15px;
+}
+
+.vg-humor-card-ativo img {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.vg-humor-card-ativo span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2E2E48;
+}
+
+/* Fallback quando nenhum humor foi registrado */
+.vg-humor-nao-registrado {
+    font-size: 13px;
+    color: #B0B8C8;
+    font-style: italic;
+}
+
+/* =============================================
+   VISÃO GERAL — Consultas (lista de itens)
+   ============================================= */
+.vg-consulta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 4px;
+    border-bottom: 1px solid #F0F4FA;
+}
+.vg-consulta-item:last-child { border-bottom: none; }
+
+.vg-consulta-cor {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.vg-consulta-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.vg-consulta-nome {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2E2E48;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vg-consulta-sub {
+    font-size: 11px;
+    color: #727B8E;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vg-consulta-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1px;
+    flex-shrink: 0;
+}
+
+.vg-consulta-dia {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2E2E48;
+}
+
+.vg-consulta-hora {
+    font-size: 11px;
+    color: #727B8E;
 }
