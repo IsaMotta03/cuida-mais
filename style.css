@@ -154,6 +154,11 @@ body.painel {
     border: none;
     cursor: pointer;
     text-decoration: none;
+    transition: transform 0.3 ease;
+}
+.botao-sair button:hover{
+    cursor: pointer;
+    transform: scale(1.3);
 }
 .sair {
     width: 18px;
@@ -2244,4 +2249,258 @@ dialog.modal-container {
 .vg-consulta-hora {
     font-size: 11px;
     color: #727B8E;
+}
+
+/* TELA DE LOGIN */
+.grid-login{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+    background-color: #e8f5fd ;
+    display: flex; 
+    flex-direction: row; 
+    position: relative;
+}
+.fundo-azul-onda {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    background-color: #80CEF4; 
+    border-bottom-right-radius: 120px;
+    border-bottom-left-radius: 120px;
+    
+    z-index: 1;
+}
+.lado-ilustracao {
+    width: 50%; 
+    height: 60vh;
+    position: relative;
+    padding: 40px;
+    z-index: 2;
+
+}
+
+.lado-formulario {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Círculo verde decorativo que fica atrás do cuidador */
+.bolha {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: #C6D9A5; 
+    border-radius: 50%;
+    bottom: -50%;
+    left: 50%;
+    z-index: 1;
+}
+
+/* Posiciona a imagem do cuidador e idoso por cima da bolha */
+.ilustracao-pessoas {
+    position: absolute;
+    bottom: -80%;
+    left: 20%;
+    height: 100vh;
+    width: auto;
+
+    z-index: 2;
+    object-fit: contain;
+}
+
+/* ── LINKS DE CADASTRO ── */
+.link-cadastro-topo {
+    position: absolute;
+    top: 40px;
+    right: 10%;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.link-cadastro-topo a, .link-cadastro-rodape a {
+    color: #80CEF4;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Oculta o link repetido do rodapé, já que na imagem ele fica apenas no topo */
+.link-cadastro-rodape {
+    display: none;
+}
+
+/* ── FORMULÁRIO  ── */
+.lado-formulario {
+    background: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin: 40px auto;
+    max-width: 450px;
+    padding: 40px;
+    justify-content: flex-start;
+}
+
+.login-bemvindo {
+    font-size: 0.95rem;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.login-titulo {
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* ── BOTÕES SOCIAIS ── */
+.botoes-sociais {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.btn-social {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #E2E8F0;
+    background-color: #F8FAFC;
+    border-radius: 10px;
+    padding: 12px;
+    color: #4A5568;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-social-icone {
+    flex: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E2E8F0;
+    background-color: #F8FAFC;
+    border-radius: 10px;
+    padding: 12px;
+    transition: background 0.2s;
+}
+
+.btn-social:hover, .btn-social-icone:hover {
+    background-color: #EDF2F7;
+}
+
+/* Divisor "ou" */
+.divisor {
+    text-align: center;
+    color: #A0AEC0;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* ── INPUTS E CAMPOS DE TEXTO ── */
+.campo-grupo {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-grupo label {
+    font-size: 0.85rem;
+    color: #4A5568;
+    font-weight: 500;
+}
+
+.campo-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.campo-icone {
+    position: absolute;
+    left: 14px;
+    color: #A0AEC0;
+    display: flex;
+    align-items: center;
+}
+
+.campo-wrapper input {
+    width: 100%;
+    padding: 14px 14px 14px 42px; /* Espaço para o ícone da esquerda */
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #333;
+    outline: none;
+    background-color: #FFF;
+}
+
+.campo-wrapper input::placeholder {
+    color: #CBD5E1;
+}
+
+/* Ícone de mostrar/ocultar senha */
+.campo-olho {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #A0AEC0;
+    cursor: pointer;
+}
+
+/* Link esqueceu a senha */
+.link-esqueceu {
+    display: block;
+    text-align: right;
+    color: #80CEF4;
+    font-size: 0.8rem;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+/* ── BOTÃO PRINCIPAL (SIGN IN) ── */
+.btn-entrar {
+    width: 100%;
+    background-color: #C6D9A5; /* Verde oliva idêntico ao da imagem */
+    color: #FFF;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(198, 217, 165, 0.3);
+    transition: background 0.2s;
+}
+
+.btn-entrar:hover {
+    filter: brightness(0.95);
+}
+
+/* Mensagem de erro oculta por padrão */
+.msg-erro {
+    display: none; 
+    background-color: #FED7D7;
+    color: #C53030;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    text-align: center;
 }
