@@ -438,6 +438,7 @@ h3 {
     display: grid;
     gap: 20px;
     height: 90%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
         "relatorio galeria"
         "relatorio checklist"
@@ -467,24 +468,24 @@ h3 {
 
 #secao-saude-box {
     display: flex;
-    width: 50%;
+    flex-direction: column;
     grid-area: saude;
 }
 
 #secao-humor-box {
     display: flex;
-    width: 50%;
+    flex-direction: column;
     grid-area: humor;
 }
 
 #secao-medidas-box {
     display: flex;
-    width: 50%;
+    flex-direction: column;
     grid-area: medidas;
 }
 
 #secao-imc-box {
-    width: 50%;
+    flex-direction: column;
     display: flex;
     grid-area: imc;
 }
@@ -515,6 +516,12 @@ h3 {
     grid-area: checklist;
 }
 
+#checklist header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: start;
+}
 
 
 .area-conteudo-acompanhamento {
@@ -1680,7 +1687,7 @@ dialog.modal-container {
     justify-content: flex-start;
 }
 
-.botao-adicionar-galeria {
+.botao-adicionar-azul {
     background-color: #80CEF4;
     color: #fff;
     border: none;
@@ -1895,7 +1902,7 @@ dialog.modal-container {
 }
 
 #checklist button.checklist-btn-adicionar {
-    font-size: 14px;
+    font-size: 18px;
     background-color: #deecb7;
     position: static;
     padding: 12px 20px;
@@ -1912,18 +1919,34 @@ dialog.modal-container {
     background-color: #cfe0a0;
 }
 
-.checklist-resumo {
+#checklist .checklist-resumo {
     display: flex;
-    gap: 16px;
-    font-size: 12px;
+    font-size: 20px;
     color: #727B8E;
     align-items: center;
-    margin-left: auto;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.checklist-resumo strong {
+#checklist .checklist-resumo #checkTotal {
     color: #2E2E48;
+    background-color: #cfe0a09f;
+    border-radius: 30px;
+    padding: 3px 8px;
+    border: none;
 }
+#acompanhamento-checklist-concluidas {
+    display: flex;
+}
+#conteiner-concluidas {
+    color: #2E2E48;
+    background-color: #bae4f9;
+    border-radius: 40px;
+    margin-left: 7px;
+    padding: 3px 8px;
+    border: none;
+}
+
 
 .checklist-corpo {
     display: flex;
@@ -1975,7 +1998,7 @@ dialog.modal-container {
 }
 
 .check-item__texto {
-    font-size: 13px;
+    font-size: 16px;
     color: #2E2E48;
     font-weight: 500;
 }
@@ -2020,11 +2043,15 @@ dialog.modal-container {
 }
 
 #galeria header,
-#notas header,
-#checklist header {
-    position: static;
+#notas header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    margin-bottom: 4px;
+}
+#galeria h2,
+#notas h2 {
+    margin: 0;
 }
 
 #galeria,
@@ -2070,15 +2097,15 @@ dialog.modal-container {
 }
 
 .titulo-quadrante {
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 18px;
     color: #2E2E48;
     display: block;
 }
 
 .grade-humor-2x2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: 1fr 1fr;
     height: calc(100% - 31px);
     grid-template-areas: 
@@ -2115,13 +2142,13 @@ dialog.modal-container {
 }
 
 .btn-humor-card img {
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     transition: transform 0.2s ease;
 }
 
 .btn-humor-card span {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #4A4A68;
 }
@@ -2140,7 +2167,6 @@ dialog.modal-container {
 }
 
 .btn-humor-card.ativo span {
-    color: #FFFFFF;
     font-weight: 600;
 }
 
@@ -2177,6 +2203,7 @@ dialog.modal-container {
     justify-content: space-between;
     border-top: 1px solid #D0E3EF;
     padding-top: 30px;
+    gap: 15px;
 }
 
 .valor-medida-destaque {

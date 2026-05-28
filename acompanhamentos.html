@@ -110,7 +110,7 @@
 
                 <div id="relatorioConteudo" class="relatorio-grid-container">
 
-                    <div class="quadrante-relatorio secao-saude-box">
+                    <div class="quadrante-relatorio id=" secao-saude-box">
                         <div>
                             <span class="titulo-quadrante">Status de Saúde</span>
                         </div>
@@ -149,12 +149,12 @@
                             <div class="linha-saude-item">
                                 <div class="conteiner-medidores-saude">
                                     <span class="label-saude-item">Temperatura</span>
-                                <div class="campo-saude-sufixo">
-                                    <input type="number" id="saudeTemperatura" placeholder="36.1">
-                                    <span class="sufixo-saude">°C</span>
+                                    <div class="campo-saude-sufixo">
+                                        <input type="number" id="saudeTemperatura" placeholder="36.1">
+                                        <span class="sufixo-saude">°C</span>
+                                    </div>
                                 </div>
-                                </div>
-                                
+
                                 <div class="img-saude-medidores">
                                     <img src="imagens/Fire.svg" alt="simbolo pressão arterial">
                                 </div>
@@ -163,7 +163,7 @@
 
                     </div>
 
-                    <div class="quadrante-relatorio secao-humor-box">
+                    <div class="quadrante-relatorio" id="secao-humor-box">
                         <span class="titulo-quadrante" style="margin-bottom: 12px;">Humor do dia</span>
                         <div class="grade-humor-2x2">
                             <button class="btn-humor-card" id="feliz" data-humor="feliz" title="Feliz">
@@ -174,7 +174,7 @@
                                 <img src="assets/icons/neutro.svg" alt="Neutro">
                                 <span>Neutro</span>
                             </button>
-                            <button class="btn-humor-card" id="triste"data-humor="triste" title="Triste">
+                            <button class="btn-humor-card" id="triste" data-humor="triste" title="Triste">
                                 <img src="assets/icons/triste.svg" alt="Triste">
                                 <span>Triste</span>
                             </button>
@@ -185,7 +185,7 @@
                         </div>
                     </div>
 
-                    <div class="quadrante-relatorio secao-medidas-box">
+                    <div class="quadrante-relatorio" id="secao-medidas-box">
                         <span class="titulo-quadrante" style="margin-bottom: 5px;">Medidas Corporais</span>
                         <div class="valores-medidas">
                             <div>
@@ -199,9 +199,9 @@
                         </div>
                     </div>
 
-                    <div class="quadrante-relatorio secao-imc-box" id="boxIMCContainer">
+                    <div class="quadrante-relatorio" id="secao-imc-box" id="boxIMCContainer">
                         <div style="flex-grow: 1;">
-                            <span class="titulo-quadrante">Índice de Massa Corporal</span>
+                            <span class="titulo-quadrante">IMC</span>
                             <strong class="valor-imc-total" id="relatorioIMC">--</strong>
                             <span id="relatorioClassificacao" class="status-imc-texto">--</span>
                         </div>
@@ -214,7 +214,9 @@
             <article class="area-conteudo-acompanhamento area-conteudo-acompanhamento--coluna" id="galeria">
                 <header class="painel-header">
                     <h2>Galeria de Fotos</h2>
-                    <button class="botao-adicionar-galeria" id="btnAdicionarFoto" title="Adicionar foto">+</button>
+                    <button class="botao-adicionar-azul" id="btnAdicionarFoto" title="Adicionar foto">
+                        +
+                    </button>
                     <input type="file" id="inputFoto" accept="image/*" hidden>
                 </header>
 
@@ -256,9 +258,19 @@
                 <header>
                     <h2>Checklist diário</h2>
                     <div class="checklist-resumo">
-                        <span>Prioridades <strong id="checkTotal">0</strong></span>
-                        <span>Concluídas <strong id="checkConcluidas">0</strong> de <strong
-                                id="checkTotalRepeat">0</strong></span>
+                        <span>
+                            Prioridades
+                            <strong id="checkTotal">0</strong>
+                        </span>
+                        <span id="acompanhamento-checklist-concluidas">
+                            Concluídas
+                            <div id="conteiner-concluidas">
+                                <strong id="checkConcluidas">0</strong>
+                                de
+                                <strong id="checkTotalRepeat">0</strong>
+                            </div>
+
+                        </span>
                     </div>
                 </header>
 
