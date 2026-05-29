@@ -2699,6 +2699,25 @@ dialog.modal-container {
     display: flex;
     gap: 4px;
 }
+.vg-med-card {
+    border: 1px solid #78c0e6c4;
+    background-color: #78c0e61e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.vg-med-card .icone-med {
+    width: 50px;
+    height: 50px;
+}
+.med-card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 /* Card base */
 .vg-card {
   background: #ffffff;
@@ -2801,7 +2820,7 @@ dialog.modal-container {
 /* ── Medicamentos grid mini ── */
 .vg-med-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   overflow-y: auto;
   padding-bottom: 5px;

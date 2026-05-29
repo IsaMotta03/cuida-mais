@@ -150,7 +150,7 @@ function carregarMedicamentosGrid() {
         const card = document.createElement('div');
         card.className = 'med-card vg-med-card';
         card.innerHTML = `
-            <div class="med-card-icone"><img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med"></div>
+            <img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med">
             <div class="med-card-info">
                 <strong class="med-card-nome">${escapeHtml(med.nome)}</strong>
                 <span class="med-card-sub">Dosagem: ${escapeHtml(med.dosagem || '—')}</span>
