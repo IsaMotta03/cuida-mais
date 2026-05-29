@@ -495,11 +495,13 @@ h3 {
     justify-content: space-between;
     width: 100%;
 }
+
 #relatorio #titulo-relatorio a {
     color: #4A4A68;
     text-decoration: none;
 }
-#relatorio #titulo-relatorio a:hover{
+
+#relatorio #titulo-relatorio a:hover {
     color: black;
     text-decoration: none;
 }
@@ -1919,14 +1921,14 @@ dialog.modal-container {
     background-color: #cfe0a0;
 }
 
-#checklist .checklist-resumo {
+.checklist-resumo {
     display: flex;
-    font-size: 20px;
+    flex-direction: column;
     color: #727B8E;
-    align-items: center;
     justify-content: space-between;
     width: 100%;
 }
+
 
 #checklist .checklist-resumo #checkTotal {
     color: #2E2E48;
@@ -1935,9 +1937,11 @@ dialog.modal-container {
     padding: 3px 8px;
     border: none;
 }
+
 #acompanhamento-checklist-concluidas {
     display: flex;
 }
+
 #conteiner-concluidas {
     color: #2E2E48;
     background-color: #bae4f9;
@@ -2043,12 +2047,13 @@ dialog.modal-container {
 }
 
 #galeria header,
-#notas header{
+#notas header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
+
 #galeria h2,
 #notas h2 {
     margin: 0;
@@ -2108,21 +2113,25 @@ dialog.modal-container {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: 1fr 1fr;
     height: calc(100% - 31px);
-    grid-template-areas: 
-    "feliz neutro "
-    "triste depressivo";
+    grid-template-areas:
+        "feliz neutro "
+        "triste depressivo";
     gap: 10px;
     width: 100%;
 }
+
 #feliz {
     grid-area: feliz;
 }
+
 #neutro {
     grid-area: neutro;
 }
+
 #triste {
     grid-area: triste;
 }
+
 #depressivo {
     grid-area: depressivo;
 }
@@ -2237,7 +2246,8 @@ dialog.modal-container {
     margin-top: 10px;
     padding: 9px;
 }
-.img-saude-medidores{
+
+.img-saude-medidores {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2512,41 +2522,113 @@ dialog.modal-container {
 /* ── Visão Geral: layout do dashboard ── */
 .vg-dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr 280px;
-    grid-template-rows: auto auto;
-    gap: 20px;
-    flex: 1;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+        "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+        "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+        "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento"
+        "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento";
+    grid-gap: 20px;
     overflow-y: auto;
-    padding-bottom: 20px;
 }
 
-/* Linha 1 ─ Relatório, Indicadores, Consultas */
 .vg-card-relatorio {
-    grid-column: 1;
-    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    grid-area: vgRelatorio;
 }
 
 .vg-card-indicadores {
-    grid-column: 2;
-    grid-row: 1;
+    grid-area: vgIndicadores;
 }
 
 .vg-card-consultas {
-    grid-column: 3;
-    grid-row: 1 / 3;
+    grid-area: vgConsultas;
 }
 
-/* Linha 2 ─ Tarefas, Medicamentos */
 .vg-card-tarefas {
-    grid-column: 1;
-    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    grid-area: vgTarefas;
 }
 
 .vg-card-medicamentos {
-    grid-column: 2;
-    grid-row: 2;
+    grid-area: vgMedicamentos;
 }
 
+.vgBotaoMedicamento {
+    grid-area: botaoMedicamento;
+    box-shadow: 0 2px 4px #30353f71;
+}
+.vgBotaoMedicamento:hover {
+    background-color: #78c0e6;
+    cursor: pointer;
+}
+
+.vg-relatorio-corpo-limpo {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+.vg-conteiner {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+.vg-conteiner-humorSemanal {
+    grid-row: 1 / 2;
+    grid-column: 1 / 3;
+}
+
+.vg-conteiner-humor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-row: 1 / 2;
+    grid-column: 3 / 4;
+}
+
+.vg-conteiner-notas {
+    grid-row: 2 / 3;
+    grid-column: 1 / 4;
+}
+
+.vgBotaoMedicamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #78c0e6c9;
+    border: 1px solid #78c0e6;
+    border-radius: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+.vgBotaoMedicamento img {
+    width: 65px;
+}
+#vg-checkTotal {
+    border-radius: 10px;
+    background-color: rgba(207, 224, 160, 0.624);
+    padding: 2px 5px;
+}
+#mini-conteiner-concluidas-vg {
+    border-radius: 10px;
+    background-color: rgb(186, 228, 249);
+    padding: 2px 5px;
+}
+#span-concluidas {
+    display: flex;
+    gap: 4px;
+}
 /* Card base */
 .vg-card {
     background: #FFFFFF;
@@ -2605,27 +2687,13 @@ dialog.modal-container {
     padding: 14px;
 }
 
-.vg-quadrante-titulo {
-    font-size: 15px;
-    font-weight: 600;
-    color: #727B8E;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-    display: block;
-}
-
 /* ── Tarefas ── */
-.vg-tarefas-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .vg-tarefas-resumo {
-    font-size: 12px;
+    font-size: 16px;
     color: #727B8E;
     display: flex;
+    justify-content: space-between;
     gap: 10px;
 }
 
@@ -2639,7 +2707,7 @@ dialog.modal-container {
     border: none;
     border-radius: 10px;
     padding: 7px 16px;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
@@ -2831,34 +2899,21 @@ dialog.modal-container {
    VISÃO GERAL — Humor do dia (card único)
    ============================================= */
 
-/* Seção humor dentro do relatório geral */
-.vg-secao-humor {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.vg-quadrante-titulo {
-    margin-top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #121418;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
 
 /* Card visual do humor selecionado —
    mesma estética do btn-humor-card.ativo do acompanhamento */
 .vg-humor-card-ativo {
-    display: inline-flex;
+    background-color: rgb(203, 221, 152);
+    border: 1px solid rgb(203, 221, 152);
+    border-radius: 10px;
+    padding: 12px 8px;
+    margin: 5px 5px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    background-color: #bbeec7;
-    border: 1px solid #88d49a;
-    border-radius: 12px;
-    padding: 10px 16px;
-    width: fit-content;
-    margin-bottom: 15px;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .vg-humor-card-ativo img {

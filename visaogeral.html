@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuida+ | Visão Geral</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="painel">
-    
+
     <aside class="barra-lateral">
         <header class="logotipo">
             <img src="assets/icons/logo.svg" alt="Logotipo Cuida+">
         </header>
- 
+
         <nav class="menu-navegacao">
             <ul>
                 <li class="selecionado">
@@ -47,18 +49,18 @@
                 </li>
             </ul>
         </nav>
- 
+
         <section class="rodape-lateral">
             <a href="#" class="botao-escuro gerenciarPlanos">
                 <img src="assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos">
                 <span>Gerenciar Planos</span>
             </a>
-            
+
             <a href="#configuracoes" class="link-configuracoes">
                 <img src="assets/icons/configuracoes.svg" alt="Ícone Configurações">
                 <span>Configurações</span>
             </a>
- 
+
             <section class="perfil-usuario">
                 <figure class="informacoes-usuario">
                     <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil">
@@ -68,12 +70,13 @@
                     </figcaption>
                 </figure>
                 <a href="login.html" class="botao-sair" title="Sair da conta">
-                    <button style="border: none; background:transparent;"><img src="assets/icons/logout.svg" alt="Ícone Sair" class="sair"></button>
+                    <button style="border: none; background:transparent;"><img src="assets/icons/logout.svg"
+                            alt="Ícone Sair" class="sair"></button>
                 </a>
             </section>
         </section>
     </aside>
- 
+
     <main class="conteudo-principal">
         <!-- Cabeçalho com nome + chip do idoso + emergência -->
         <header class="cabecalho-topo">
@@ -93,32 +96,36 @@
                 <span>Emergência</span>
             </a>
         </header>
- 
+
         <!-- Dashboard principal -->
         <div class="vg-dashboard">
             <article class="vg-card vg-card-relatorio">
-                <h2>Relatório Geral</h2>
-                    <div class="vg-relatorio-corpo-limpo">
-                        <div class="vg-secao-humor">
-                            <span class="vg-quadrante-titulo">Humor do dia:</span>
-                            <div id="vg-relatorio-humor" class="vg-humor-container"></div>
-                        </div>
+                <h2 style="font-size: 20px;">Relatório Geral</h2>
+                <div class="vg-relatorio-corpo-limpo">
+                    <div class="vg-conteiner-humor vg-conteiner">
+                        <span class="vg-quadrante-titulo">Humor do dia</span>
+                        <div id="vg-relatorio-humor" class="vg-humor-container"></div>
+                    </div>
 
-                        <div class="vg-linha-notas-relatorio">
-                            <span class="vg-quadrante-titulo">Notas e Observações Recentes</span>
-                            <div id="vg-lista-notas-painel" class="vg-notas-painel-lista">
-                                </div>
+                    <div class="vg-conteiner-notas vg-conteiner">
+                        <span class="vg-quadrante-titulo">Notas e Observações Recentes</span>
+                        <div id="vg-lista-notas-painel" class="vg-notas-painel-lista">
                         </div>
                     </div>
+                    <div class="vg-conteiner-humorSemanal vg-conteiner">
+                        <div>oi eu to aqui</div>
+                    </div>
+
+                </div>
             </article>
- 
+
             <article class="vg-card vg-card-indicadores">
-                <h2>Indicadores</h2>
+                <h2 style="font-size: 20px;">Indicadores</h2>
                 <div class="vg-indicadores-corpo"></div>
             </article>
- 
+
             <article class="vg-card vg-card-consultas">
-                <h2>Consultas</h2>
+                <h2 style="font-size: 20px;">Consultas</h2>
                 <div class="vg-consultas-corpo">
                     <div class="vg-vazio">
                         <img src="assets/icons/sino.svg" alt="Sino">
@@ -127,36 +134,44 @@
                     </div>
                 </div>
             </article>
- 
+
             <article class="vg-card vg-card-tarefas">
-                <div class="vg-tarefas-header">
-                    <h2>Tarefas do dia</h2>
+                <div class="checklist-resumo">
+                    <h2 style="font-size: 20px;">Tarefas do dia</h2>
                     <div class="vg-tarefas-resumo">
                         <span>Criadas <strong id="vg-checkTotal">0</strong></span>
-                        <span>Concluídas <strong id="vg-checkConcluidas">0</strong> de <strong id="vg-checkTotalRepeat">0</strong></span>
-                    </div>
+                        <span id="span-concluidas">Concluídas
+                            <div id="mini-conteiner-concluidas-vg"><strong id="vg-checkConcluidas">0</strong> de <strong id="vg-checkTotalRepeat">0</strong></div>
+                        </span>
                 </div>
-                <button class="vg-btn-add" id="vg-btnAdicionarCheck">+ Nova tarefa</button>
-                <ul class="vg-checklist-lista checklist-lista" id="vg-checkLista"></ul>
-            </article>
- 
-            <article class="vg-card vg-card-medicamentos">
-                <h2>Medicamentos </h2>
- 
-                <!-- Estado vazio -->
-                <div id="vg-medVazio" class="vg-vazio">
-                    <img src="assets/icons/sino.svg" alt="Sino">
-                    <h3>Nenhum medicamento</h3>
-                    <p>Cadastre medicamentos para vê-los aqui.</p>
-                </div>
- 
-                <!-- Grid de cards mini -->
-                <div class="vg-med-grid" id="vg-medGrid" hidden></div>
-            </article>
- 
+        </div>
+        <button class="vg-btn-add" id="vg-btnAdicionarCheck">+ Nova tarefa</button>
+        <ul class="vg-checklist-lista checklist-lista" id="vg-checkLista"></ul>
+        </article>
+
+        <article class="vg-card vg-card-medicamentos">
+            <h2 style="font-size: 20px;">Medicamentos </h2>
+
+            <!-- Estado vazio -->
+            <div id="vg-medVazio" class="vg-vazio">
+                <img src="assets/icons/sino.svg" alt="Sino">
+                <h3>Nenhum medicamento</h3>
+                <p>Cadastre medicamentos para vê-los aqui.</p>
+            </div>
+
+            <!-- Grid de cards mini -->
+            <div class="vg-med-grid" id="vg-medGrid" hidden></div>
+        </article>
+
+        <button class="vgBotaoMedicamento">
+            <img src="imagens/Capsule & Pill.svg" alt="Imagem de pílula">
+            Registro
+        </button>
+
+
         </div><!-- /vg-dashboard -->
     </main>
- 
+
     <!-- =============================================
          MODAL: ADICIONAR CHECK (visão geral)
          ============================================= -->
@@ -175,7 +190,8 @@
             </div>
         </div>
     </div>
- 
+
     <script src="visaogeral.js"></script>
 </body>
+
 </html>
