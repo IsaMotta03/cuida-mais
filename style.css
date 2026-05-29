@@ -1938,7 +1938,7 @@ dialog.modal-container {
 
 .checklist-resumo {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: #727B8E;
     justify-content: space-between;
     width: 100%;
@@ -2116,7 +2116,7 @@ dialog.modal-container {
 
 .titulo-quadrante {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   color: #2e2e48;
   display: block;
 }
@@ -2705,7 +2705,7 @@ dialog.modal-container {
 }
 
 .vg-vazio h3 {
-  font-size: 14px;
+  font-size: 16px;
   color: #c0c8d6;
   margin: 0;
 }
