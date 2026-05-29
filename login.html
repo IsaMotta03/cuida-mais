@@ -1,78 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cuida+ | Login</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="grid-login">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/icons/logo-favicon.ico"
+    />
+  </head>
+  <body class="grid-login">
     <div class="fundo-azul-onda"></div>
     <!-- ── LADO ESQUERDO ── -->
     <div class="lado-ilustracao">
-        <header class="logotipo">
-            <img src="assets/icons/logo.svg" alt="Logotipo Cuida+" >
-        </header>
+      <header class="logotipo">
+        <img src="assets/icons/logo.svg" alt="Logotipo Cuida+" />
+      </header>
 
-        <div class="bolha"></div>
-        <img src="assets/icons/imgLogin.svg" alt="Cuidador ajudando idoso" class="ilustracao-pessoas">
+      <div class="bolha"></div>
+      <img
+        src="assets/icons/imgLogin.svg"
+        alt="Cuidador ajudando idoso"
+        class="ilustracao-pessoas"
+      />
     </div>
- 
-    <!-- ── LADO DIREITO ── -->
-    <div class="lado-formulario" style="position:relative;">
- 
-        <p class="link-cadastro-topo">Não possui conta? <a href="cadastro.html">Cadastre-se</a></p>
- 
-        <p class="login-bemvindo">Bem-vindo a <strong style="color:#80CEF4;">Cuida+</strong></p>
-        <h1 class="login-titulo">Login</h1>
- 
-        <!-- Botões sociais -->
-        <div class="botoes-sociais">
-            <a href="#" class="btn-social">
-                <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" fill="#34A853"/><path d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
-                Entrar com o Google
-            </a>
-            <a href="#" class="btn-social-icone" title="Entrar com Facebook">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.234 2.686.234v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-            </a>
-            <a href="#" class="btn-social-icone" title="Entrar com X">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-        </div>
- 
-        <div class="divisor">ou</div>
-        <div class="msg-erro" id="msgErro">E-mail ou senha incorretos.</div>
- 
-        <!-- Campos -->
-        <div class="campo-grupo">
-            <label for="emailInput">Usuário ou email</label>
-            <div class="campo-wrapper">
-                <span class="campo-icone">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                </span>
-                <input type="email" id="emailInput" placeholder="fulano@seusite.com" autocomplete="email">
-            </div>
-        </div>
- 
-        <div class="campo-grupo">
-            <label for="senhaInput">Senha</label>
-            <div class="campo-wrapper">
-                <span class="campo-icone">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                </span>
-                <input type="password" id="senhaInput" placeholder="••••••••••••" autocomplete="current-password">
-            </div>
-        </div>
- 
-        <a href="#" class="link-esqueceu">Esqueceu a senha?</a>
-            <button class="btn-entrar" id="btnEntrar" type="button" style="width: 100%;">Sign in</button>
 
- 
-        <p class="link-cadastro-rodape">
-            Não possui conta? <a href="cadastro.html">Cadastre-se</a>
-        </p>
+    <!-- ── LADO DIREITO ── -->
+    <div class="lado-formulario" style="position: relative">
+      <p class="link-cadastro-topo">
+        Não possui conta? <a href="cadastro.html">Cadastre-se</a>
+      </p>
+
+      <p class="login-bemvindo">
+        Bem-vindo a <strong style="color: #80cef4">Cuida+</strong>
+      </p>
+      <h1 class="login-titulo">Login</h1>
+
+      <!-- Botões sociais -->
+      <div class="botoes-sociais">
+        <a href="#" class="btn-social">
+          <svg width="18" height="18" viewBox="0 0 18 18">
+            <path
+              d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+              fill="#4285F4"
+            />
+            <path
+              d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"
+              fill="#34A853"
+            />
+            <path
+              d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"
+              fill="#FBBC05"
+            />
+            <path
+              d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"
+              fill="#EA4335"
+            />
+          </svg>
+          Entrar com o Google
+        </a>
+        <a href="#" class="btn-social-icone" title="Entrar com Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2">
+            <path
+              d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.234 2.686.234v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"
+            />
+          </svg>
+        </a>
+        <a href="#" class="btn-social-icone" title="Entrar com X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#000">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <div class="divisor">ou</div>
+      <div class="msg-erro" id="msgErro">E-mail ou senha incorretos.</div>
+
+      <!-- Campos -->
+      <div class="campo-grupo">
+        <label for="emailInput">Usuário ou email</label>
+        <div class="campo-wrapper">
+          <span class="campo-icone">
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </span>
+          <input
+            type="email"
+            id="emailInput"
+            placeholder="fulano@seusite.com"
+            autocomplete="email"
+          />
+        </div>
+      </div>
+
+      <div class="campo-grupo">
+        <label for="senhaInput">Senha</label>
+        <div class="campo-wrapper">
+          <span class="campo-icone">
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </span>
+          <input
+            type="password"
+            id="senhaInput"
+            placeholder="••••••••••••"
+            autocomplete="current-password"
+          />
+        </div>
+      </div>
+
+      <a href="#" class="link-esqueceu">Esqueceu a senha?</a>
+      <button
+        class="btn-entrar"
+        id="btnEntrar"
+        type="button"
+        style="width: 100%"
+      >
+        Sign in
+      </button>
+
+      <p class="link-cadastro-rodape">
+        Não possui conta? <a href="cadastro.html">Cadastre-se</a>
+      </p>
     </div>
 
     <script src="login.js"></script>
-</body>
+  </body>
 </html>

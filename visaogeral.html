@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 
 <head>
@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuida+ | Visão Geral</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/icons/logo-favicon.ico">
 </head>
 
 <body class="painel">
@@ -141,32 +142,33 @@
                     <div class="vg-tarefas-resumo">
                         <span>Criadas <strong id="vg-checkTotal">0</strong></span>
                         <span id="span-concluidas">Concluídas
-                            <div id="mini-conteiner-concluidas-vg"><strong id="vg-checkConcluidas">0</strong> de <strong id="vg-checkTotalRepeat">0</strong></div>
+                            <div id="mini-conteiner-concluidas-vg"><strong id="vg-checkConcluidas">0</strong> de <strong
+                                    id="vg-checkTotalRepeat">0</strong></div>
                         </span>
+                    </div>
                 </div>
-        </div>
-        <button class="vg-btn-add" id="vg-btnAdicionarCheck">+ Nova tarefa</button>
-        <ul class="vg-checklist-lista checklist-lista" id="vg-checkLista"></ul>
-        </article>
+                <button class="vg-btn-add" id="vg-btnAdicionarCheck">+ Nova tarefa</button>
+                <ul class="vg-checklist-lista checklist-lista" id="vg-checkLista"></ul>
+            </article>
 
-        <article class="vg-card vg-card-medicamentos">
-            <h2 style="font-size: 20px;">Medicamentos </h2>
+            <article class="vg-card vg-card-medicamentos">
+                <h2 style="font-size: 20px;">Medicamentos </h2>
 
-            <!-- Estado vazio -->
-            <div id="vg-medVazio" class="vg-vazio">
-                <img src="assets/icons/sino.svg" alt="Sino">
-                <h3>Nenhum medicamento</h3>
-                <p>Cadastre medicamentos para vê-los aqui.</p>
-            </div>
+                <!-- Estado vazio -->
+                <div id="vg-medVazio" class="vg-vazio">
+                    <img src="assets/icons/sino.svg" alt="Sino">
+                    <h3>Nenhum medicamento</h3>
+                    <p>Cadastre medicamentos para vê-los aqui.</p>
+                </div>
 
-            <!-- Grid de cards mini -->
-            <div class="vg-med-grid" id="vg-medGrid" hidden></div>
-        </article>
+                <!-- Grid de cards mini -->
+                <div class="vg-med-grid" id="vg-medGrid" hidden></div>
+            </article>
 
-        <button class="vgBotaoMedicamento">
-            <img src="imagens/Capsule & Pill.svg" alt="Imagem de pílula">
-            Registro
-        </button>
+            <button class="vgBotaoMedicamento">
+                <img src="imagens/Capsule & Pill.svg" alt="Imagem de pílula">
+                Registro
+            </button>
 
 
         </div><!-- /vg-dashboard -->
@@ -179,14 +181,18 @@
         <div class="cartao">
             <div class="form-header">
                 <h1>Nova Tarefa</h1>
-                <button class="btn-fechar" id="vg-btnFecharCheck" aria-label="Fechar modal">x</button>
+                <button class="btn-fechar" id="vg-btnFecharCheck" aria-label="Fechar modal">
+                    x
+                </button>
             </div>
-            <div class="formulario" style="display:flex;flex-direction:column;gap:16px;">
+            <div class="formulario" style="display: flex; flex-direction: column; gap: 16px">
                 <div class="inputs col-span-full">
                     <label for="vg-checkTexto">Tarefa</label>
-                    <input type="text" id="vg-checkTexto" placeholder="Ex: Ingestão regular de água" maxlength="80">
+                    <input type="text" id="vg-checkTexto" placeholder="Ex: Ingestão regular de água" maxlength="80" />
                 </div>
-                <button class="botao-adicionar" id="vg-btnSalvarCheck" style="width:100%;">Adicionar</button>
+                <button class="botao-adicionar" id="vg-btnSalvarCheck" style="width: 100%">
+                    Adicionar
+                </button>
             </div>
         </div>
     </div>
