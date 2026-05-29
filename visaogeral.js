@@ -33,8 +33,8 @@ function carregarChipIdoso() {
     const lista = lerStorage('cuida_idosos', []);
     const idoso = lista[0];
 
-    const chipEl  = document.getElementById('chipIdoso');
-    const nomeEl  = document.getElementById('chipIdosoNome');
+    const chipEl = document.getElementById('chipIdoso');
+    const nomeEl = document.getElementById('chipIdosoNome');
     const idadeEl = document.getElementById('chipIdosoIdade');
 
     if (!idoso || !idoso.nome) { chipEl.hidden = true; return; }
@@ -59,7 +59,7 @@ const CHAVE_CHECKS = 'cuida_checks';
 
 function carregarChecklist() {
     const checks = lerStorage(CHAVE_CHECKS, []);
-    const lista  = document.getElementById('vg-checkLista');
+    const lista = document.getElementById('vg-checkLista');
     if (!lista) return;
     lista.innerHTML = '';
     checks.forEach(c => lista.appendChild(criarItemCheck(c)));
@@ -68,7 +68,7 @@ function carregarChecklist() {
 
 function criarItemCheck(check) {
     const li = document.createElement('li');
-    li.className  = `check-item${check.concluido ? ' check-item--concluido' : ''}`;
+    li.className = `check-item${check.concluido ? ' check-item--concluido' : ''}`;
     li.dataset.id = check.id;
     const labelId = `vg-check-${check.id}`;
     li.innerHTML = `
@@ -100,11 +100,11 @@ function removerCheck(id) {
 function atualizarContadoresCheck() {
     const checks = lerStorage(CHAVE_CHECKS, []);
     const total = checks.length, concluidas = checks.filter(c => c.concluido).length;
-    const elTotal  = document.getElementById('vg-checkTotal');
-    const elConc   = document.getElementById('vg-checkConcluidas');
+    const elTotal = document.getElementById('vg-checkTotal');
+    const elConc = document.getElementById('vg-checkConcluidas');
     const elRepeat = document.getElementById('vg-checkTotalRepeat');
-    if (elTotal)  elTotal.textContent  = total;
-    if (elConc)   elConc.textContent   = concluidas;
+    if (elTotal) elTotal.textContent = total;
+    if (elConc) elConc.textContent = concluidas;
     if (elRepeat) elRepeat.textContent = total;
 }
 
@@ -138,8 +138,8 @@ function salvarCheck() {
 const CHAVE_MEDS = 'cuida_medicamentos';
 
 function carregarMedicamentosGrid() {
-    const meds  = lerStorage(CHAVE_MEDS, []);
-    const grid  = document.getElementById('vg-medGrid');
+    const meds = lerStorage(CHAVE_MEDS, []);
+    const grid = document.getElementById('vg-medGrid');
     const vazio = document.getElementById('vg-medVazio');
     if (!grid) return;
     grid.innerHTML = '';
@@ -176,10 +176,10 @@ function carregarConsultasVG() {
     if (!corpo) return;
 
     const todas = lerStorage(CHAVE_CONSULTAS, []).map(c => ({ ...c, data: new Date(c.data) }));
-    const hoje  = new Date(); hoje.setHours(0, 0, 0, 0);
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
 
     const proximas = todas
-        .filter(c => { const d = new Date(c.data); d.setHours(0,0,0,0); return d >= hoje; })
+        .filter(c => { const d = new Date(c.data); d.setHours(0, 0, 0, 0); return d >= hoje; })
         .sort((a, b) =>
             new Date(a.data).setHours(a.hora, a.minuto) - new Date(b.data).setHours(b.hora, b.minuto)
         )
@@ -197,16 +197,16 @@ function carregarConsultasVG() {
 
     corpo.innerHTML = '';
     proximas.forEach(c => {
-        const cor    = CATEGORIAS_COR[c.categoria] || CATEGORIAS_COR.consulta;
+        const cor = CATEGORIAS_COR[c.categoria] || CATEGORIAS_COR.consulta;
         const dataFmt = new Date(c.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' });
-        const item   = document.createElement('div');
+        const item = document.createElement('div');
         item.className = 'vg-consulta-item';
         item.innerHTML = `
-            <span class="vg-consulta-cor" style="background:${cor}"></span>
             <div class="vg-consulta-info">
+                <span class="vg-consulta-cor" style="background:${cor}"></span>
                 <strong class="vg-consulta-nome">${escapeHtml(c.especialidade)}</strong>
                 ${c.profissional ? `<span class="vg-consulta-sub">${escapeHtml(c.profissional)}</span>` : ''}
-                ${c.hospital     ? `<span class="vg-consulta-sub">${escapeHtml(c.hospital)}</span>`     : ''}
+                ${c.hospital ? `<span class="vg-consulta-sub">${escapeHtml(c.hospital)}</span>` : ''}
             </div>
             <div class="vg-consulta-data">
                 <span class="vg-consulta-dia">${dataFmt}</span>
@@ -220,12 +220,12 @@ function carregarConsultasVG() {
    INDICADORES DE SAÚDE
 ============================================= */
 function carregarIndicadoresSaude() {
-    const dadosSaude       = lerStorage('dados_saude_inputs', {});
+    const dadosSaude = lerStorage('dados_saude_inputs', {});
     const corpoIndicadores = document.querySelector('.vg-indicadores-corpo');
     if (!corpoIndicadores) return;
 
-    const pressao     = escapeHtml(dadosSaude.pressao     || '—');
-    const glicose     = escapeHtml(dadosSaude.glicose     || '—');
+    const pressao = escapeHtml(dadosSaude.pressao || '—');
+    const glicose = escapeHtml(dadosSaude.glicose || '—');
     const temperatura = escapeHtml(dadosSaude.temperatura || '—');
 
     corpoIndicadores.innerHTML = `
@@ -249,16 +249,16 @@ function carregarIndicadoresSaude() {
    mostrando apenas o humor selecionado.
 ============================================= */
 const MAPA_HUMOR = {
-    feliz:      { emoji: 'assets/icons/feliz.svg',      label: 'Feliz'      },
-    neutro:     { emoji: 'assets/icons/neutro.svg',     label: 'Neutro'     },
-    triste:     { emoji: 'assets/icons/triste.svg',     label: 'Triste'     },
+    feliz: { emoji: 'assets/icons/feliz.svg', label: 'Feliz' },
+    neutro: { emoji: 'assets/icons/neutro.svg', label: 'Neutro' },
+    triste: { emoji: 'assets/icons/triste.svg', label: 'Triste' },
     depressivo: { emoji: 'assets/icons/depressivo.svg', label: 'Depressivo' },
 };
 
 function carregarRelatorioSincronizado() {
     // ── Humor ──────────────────────────────────────
     const humorSalvo = lerStorage('relatorio_humor_atual', null);
-    const elHumor    = document.getElementById('vg-relatorio-humor');
+    const elHumor = document.getElementById('vg-relatorio-humor');
 
     if (elHumor) {
         const h = MAPA_HUMOR[humorSalvo];
@@ -275,7 +275,7 @@ function carregarRelatorioSincronizado() {
     }
 
     // ── Notas ──────────────────────────────────────
-    const notas          = lerStorage('cuida_notas', lerStorage('cuida_notes', []));
+    const notas = lerStorage('cuida_notas', lerStorage('cuida_notes', []));
     const containerNotas = document.getElementById('vg-lista-notas-painel');
     if (!containerNotas) return;
     containerNotas.innerHTML = '';
@@ -286,16 +286,17 @@ function carregarRelatorioSincronizado() {
     }
 
     [...notas].reverse().forEach(nota => {
-        const div     = document.createElement('div');
+        const div = document.createElement('div');
         div.className = 'vg-nota-item-feed';
-        const autor   = nota.autor ? `Por: ${escapeHtml(nota.autor)}` : 'Autor não informado';
-        const dataStr = nota.data  ? new Date(nota.data).toLocaleDateString('pt-BR') : '';
+        const autor = nota.autor ? `Por: ${escapeHtml(nota.autor)}` : 'Autor não informado';
+        const dataStr = nota.data ? new Date(nota.data).toLocaleDateString('pt-BR') : '';
         div.innerHTML = `
-            <div class="nota-texto">${escapeHtml(nota.texto)}</div>
             <div class="nota-meta">
                 <span><strong>${autor}</strong></span>
                 <span>${dataStr}</span>
-            </div>`;
+            </div>
+            <div class="nota-texto">${escapeHtml(nota.texto)}</div>
+            `;
         containerNotas.appendChild(div);
     });
 }
