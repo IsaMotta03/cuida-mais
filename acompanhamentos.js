@@ -461,4 +461,5 @@ document.addEventListener("DOMContentLoaded", () => {
   inicializarSelecaoHumor();
   calcularEExibirIMC();
   inicializarAlteracaoStatusSaude();
+
 });

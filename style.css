@@ -1231,7 +1231,7 @@ dialog.modal-container {
 
 #familiar .familiar-modelo-estatico,
 .card-familiar {
-    background-color: #a8d8f0;
+    background-color: #DEEBCF;
     display: flex;
     align-items: center;
     gap: 14px;
@@ -1690,7 +1690,7 @@ dialog.modal-container {
     color: rgba(255, 255, 255, 0.85);
 }
 
-.area-conteudo-acompanhamento#galeria {
+.area-conteudo-acompanhamento #galeria {
     padding: 20px;
     align-items: flex-start;
     justify-content: flex-start;
@@ -1749,14 +1749,15 @@ dialog.modal-container {
 
 .galeria-item {
     position: relative;
-    border-radius: 10px;
     aspect-ratio: 1 / 1;
+    padding-block: 10px;
 }
 
 .galeria-item__img {
     width: 90%;
     height: 90%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .galeria-item__remover {
@@ -2661,12 +2662,14 @@ dialog.modal-container {
 .vg-conteiner-notas {
     grid-row: 2 / 3;
     grid-column: 1 / 4;
+    margin-bottom: 30px;
 }
 
 .vg-notas-painel-lista {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    overflow-x: auto;
 }
 
 .vg-nota-item-feed {
@@ -2674,6 +2677,10 @@ dialog.modal-container {
     flex-direction: column;
     border: 2px solid #D5E4B6;
     border-radius: 5px;
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    background-color: #DEEBCF;
 }
 
 .nota-meta {
@@ -2684,6 +2691,9 @@ dialog.modal-container {
 .nota-texto {
     background-color: #DEEBCF;
     padding: 5px;
+    overflow-y: auto;
+    max-height: 120px;
+    word-break: break-word;
 }
 
 .vgBotaoMedicamento {
@@ -3028,6 +3038,26 @@ dialog.modal-container {
     transition: all 0.2s ease-in-out;
 }
 
+.vg-humor-card-ativo.humor-feliz {
+    background-color: #cbdd98;
+    border-color: #cbdd98;
+}
+
+.vg-humor-card-ativo.humor-neutro {
+    background-color: #f0d080;
+    border-color: #f0d080;
+}
+
+.vg-humor-card-ativo.humor-triste {
+    background-color: #90b8e0;
+    border-color: #90b8e0;
+}
+
+.vg-humor-card-ativo.humor-depressivo {
+    background-color: #e08080;
+    border-color: #e08080;
+}
+
 .vg-humor-card-ativo img {
     width: 28px;
     height: 28px;
@@ -3370,4 +3400,491 @@ dialog.modal-container {
     font-size: 0.85rem;
     margin-bottom: 20px;
     text-align: center;
+}
+
+@media (max-width: 1024px) {
+
+    /* Layout principal */
+    body.painel {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    /* Barra lateral vira barra de topo */
+    .barra-lateral {
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 20px;
+        height: auto;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logotipo {
+        margin: 0;
+        padding: 0;
+    }
+
+    .menu-navegacao ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .menu-navegacao a {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .menu-navegacao li img {
+        margin-right: 8px;
+    }
+
+    .menu-navegacao li.selecionado::after {
+        right: auto;
+        bottom: 0;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 4px;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .rodape-lateral {
+        margin-top: 0;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .gerenciarPlanos {
+        width: auto;
+    }
+
+    .botao-escuro {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    /* Conteúdo principal */
+    .conteudo-principal {
+        padding: 20px 24px;
+    }
+
+    .cabecalho-topo {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .cabecalho-topo h1 {
+        font-size: 22px;
+    }
+
+    .botao-emergencia,
+    .botao-adicionar {
+        width: auto;
+        padding: 12px 24px;
+        font-size: 15px;
+        height: auto;
+    }
+
+    /* Painel de pessoas */
+    .painel-pessoas {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+    }
+
+    #familiar {
+        grid-column: span 2;
+    }
+
+    #cuidador {
+        grid-column: span 2;
+    }
+
+    /* Painel de acompanhamento */
+    .painel-acompanhamento {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "relatorio"
+            "galeria"
+            "checklist"
+            "notas";
+        height: auto;
+    }
+
+    /* Login */
+    .lado-ilustracao {
+        display: none;
+    }
+
+    .lado-formulario {
+        width: 100%;
+        max-width: 480px;
+        margin: 40px auto;
+    }
+
+    .fundo-azul-onda {
+        height: 40vh;
+    }
+
+    /* Visão geral */
+    .painel-visao-geral {
+        grid-template-columns: 1fr;
+    }
+
+    .vg-dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "vgRelatorio"
+            "vgIndicadores"
+            "vgConsultas"
+            "vgTarefas"
+            "vgMedicamentos"
+            "botaoMedicamento";
+        height: auto;
+        overflow-y: visible;
+    }
+
+    .vgBotaoMedicamento {
+        width: 100%;
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Layout principal */
+    body.painel {
+        flex-direction: column;
+        overflow: auto;
+        height: auto;
+    }
+
+    /* Barra lateral vira navbar inferior */
+    .barra-lateral {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        border-radius: 20px 20px 0 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 8px;
+        height: 64px;
+        z-index: 100;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+    }
+
+    .logotipo {
+        display: none;
+    }
+
+    .menu-navegacao {
+        flex: 1;
+    }
+
+    .menu-navegacao ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .menu-navegacao li {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .menu-navegacao a {
+        flex-direction: column;
+        padding: 4px 6px;
+        font-size: 10px;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .menu-navegacao li img {
+        margin-right: 0;
+        width: 22px;
+        height: 22px;
+    }
+
+    .menu-navegacao li.selecionado::after {
+        display: none;
+    }
+
+    /* Ocultar rodapé lateral no mobile (mostrar apenas ícone de config) */
+    .rodape-lateral {
+        display: none;
+    }
+
+    /* Conteúdo principal com padding para a navbar inferior */
+    .conteudo-principal {
+        padding: 16px 16px 80px 16px;
+        min-height: 100vh;
+    }
+
+    /* Cabeçalho topo */
+    .cabecalho-topo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .cabecalho-topo h1 {
+        font-size: 20px;
+    }
+
+    .titulos-cabecalho p {
+        font-size: 14px;
+    }
+
+    .botao-emergencia,
+    .botao-adicionar,
+    .superior {
+        width: 100%;
+        font-size: 15px;
+        height: 50px;
+        padding: 12px 20px;
+    }
+
+    /* Área de conteúdo */
+    .area-conteudo {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    /* Painel de pessoas */
+    .painel-pessoas {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 12px;
+    }
+
+    #idoso {
+        padding: 60px 16px 16px 16px;
+    }
+
+    #familiar {
+        grid-column: span 1;
+        padding: 16px;
+    }
+
+    #familiar section {
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #cuidador {
+        grid-column: span 1;
+        padding: 60px 16px 16px 16px;
+    }
+
+    /* Painel de acompanhamento */
+    .painel-acompanhamento {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "relatorio"
+            "galeria"
+            "checklist"
+            "notas";
+        height: auto;
+        gap: 12px;
+    }
+
+    #relatorioConteudo {
+        grid-template-areas:
+            "saude saude"
+            "humor humor"
+            "medidas imc";
+    }
+
+    /* Cards dinâmicos */
+    .card-idoso {
+        min-width: 100%;
+    }
+
+    .card-cuidador {
+        min-width: 140px;
+        max-width: 100%;
+        flex: 1 1 140px;
+    }
+
+    /* Modais - caber na tela mobile */
+    .cartao,
+    .cartao-cuidador {
+        width: 95%;
+        max-width: 100%;
+        max-height: 90vh;
+        overflow: hidden;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+ 
+    /* Scroll interno no formulario */
+    .cartao .formulario,
+    .cartao-cuidador .formulario-cuidador {
+        overflow-y: auto;
+        max-height: calc(90vh - 120px);
+    }
+    
+    .formulario {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .col-5, .col-4, .col-2, .col-7, .col-6, .col-8 {
+        grid-column: span 12;
+    }
+
+    .column-left, .coluna-esq,
+    .column-right, .coluna-dir {
+        grid-column: span 12;
+    }
+
+    dialog.modal-container {
+        width: 95%;
+    }
+
+    .modal-container form.modal-caixa {
+        padding: 16px;
+    }
+
+    .modal-container article.input-linha {
+        flex-direction: column;
+    }
+
+    .formulario-cuidador {
+        margin: 50px 10px 80px;
+        padding: 16px;
+        grid-template-columns: 1fr;
+    }
+
+    /* Calendário/Consultas */
+    .consulta-datetime {
+        flex-direction: column;
+    }
+
+    .cal-dia-corpo {
+        grid-template-columns: 44px 1fr;
+    }
+
+    /* Login */
+    .grid-login {
+        flex-direction: column;
+    }
+
+    .fundo-azul-onda {
+        height: 30vh;
+        border-bottom-right-radius: 60px;
+        border-bottom-left-radius: 60px;
+    }
+
+    .lado-ilustracao {
+        display: none;
+    }
+
+    .lado-formulario {
+        width: 92%;
+        max-width: 420px;
+        margin: 20px auto 40px;
+        padding: 28px 22px;
+    }
+
+    .login-titulo {
+        font-size: 1.7rem;
+    }
+
+    .link-cadastro-topo {
+        display: none;
+    }
+
+    .link-cadastro-rodape {
+        display: block;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 20px;
+    }
+
+    /* Botões sociais */
+    .botoes-sociais {
+        flex-direction: column;
+    }
+
+    .btn-social-icone {
+        flex: 1;
+    }
+
+    /* Perfil usuário compacto */
+    .perfil-usuario {
+        padding: 6px 10px;
+    }
+
+    .email-usuario {
+        display: none;
+    }
+
+    /* h2, h3 menores */
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    /* Barra de mês */
+    .barra-mes {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Galeria */
+    .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Indicadores saúde */
+    .indicador-card--colesterol {
+        grid-column: span 2;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Medicamentos — coluna única */
+    .med-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Visão geral — grid */
+    .painel-visao-geral {
+        grid-template-columns: 1fr;
+    }
+
+    /* Footer da barra lateral no mobile aparece como botão de configurações */
+    .area-conteudo-pessoas footer {
+        position: static;
+        right: auto;
+        margin-top: 12px;
+        width: 100%;
+        text-align: center;
+    }
 }

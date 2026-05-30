@@ -265,7 +265,7 @@ function carregarRelatorioSincronizado() {
         if (h) {
             // Card visual com o mesmo estilo de btn-humor-card.ativo
             elHumor.innerHTML = `
-                <div class="vg-humor-card-ativo">
+                <div class="vg-humor-card-ativo humor-${humorSalvo}">
                     <img src="${h.emoji}" alt="${h.label}" onerror="this.style.display='none'">
                     <span>${h.label}</span>
                 </div>`;
