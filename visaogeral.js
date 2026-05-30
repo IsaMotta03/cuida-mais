@@ -152,10 +152,10 @@ function carregarMedicamentosGrid() {
         card.innerHTML = `
             <img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med">
             <div class="med-card-info">
-                <strong class="med-card-nome">${escapeHtml(med.nome)}</strong>
-                <span class="med-card-sub">Dosagem: ${escapeHtml(med.dosagem || '—')}</span>
-                <span class="med-card-sub">Frequência: ${escapeHtml(med.recorrencia || '—')}</span>
-                <div class="med-card-horarios">${chipsHTML}</div>
+                <strong class="med-card-nome" style="font-size: 15px">${escapeHtml(med.nome)}</strong>
+                <span class="med-card-sub" style="font-size: 12px">Dosagem: ${escapeHtml(med.dosagem || '—')}</span>
+                <span class="med-card-sub" style="font-size: 12px">Frequência: ${escapeHtml(med.recorrencia || '—')}</span>
+                <div class="med-card-horarios" style="font-size: 12px">${chipsHTML}</div>
             </div>`;
         grid.appendChild(card);
     });
@@ -202,15 +202,15 @@ function carregarConsultasVG() {
         const item = document.createElement('div');
         item.className = 'vg-consulta-item';
         item.innerHTML = `
-            <div class="vg-consulta-info">
+            <div class="vg-consulta-info" style="border-bottom: solid 1px; border-color: #2e2e48; padding-bottom: 5px;">
                 <span class="vg-consulta-cor" style="background:${cor}"></span>
-                <strong class="vg-consulta-nome">${escapeHtml(c.especialidade)}</strong>
-                ${c.profissional ? `<span class="vg-consulta-sub">${escapeHtml(c.profissional)}</span>` : ''}
-                ${c.hospital ? `<span class="vg-consulta-sub">${escapeHtml(c.hospital)}</span>` : ''}
+                <strong class="vg-consulta-nome" style="font-size: 20px">${escapeHtml(c.especialidade)}</strong>
+                ${c.profissional ? `<span class="vg-consulta-sub" style="font-size: 15px">${escapeHtml(c.profissional)}</span>` : ''}
+                ${c.hospital ? `<span class="vg-consulta-sub" style="font-size: 15px">${escapeHtml(c.hospital)}</span>` : ''}
             </div>
-            <div class="vg-consulta-data">
-                <span class="vg-consulta-dia">${dataFmt}</span>
-                <span class="vg-consulta-hora">${escapeHtml(c.horarioLabel)}</span>
+            <div class="vg-consulta-data" >
+                <span class="vg-consulta-dia" style="font-size: 20px">${dataFmt}</span>
+                <span class="vg-consulta-hora" style="font-size: 15px">${escapeHtml(c.horarioLabel)}</span>
             </div>`;
         corpo.appendChild(item);
     });
@@ -230,15 +230,15 @@ function carregarIndicadoresSaude() {
 
     corpoIndicadores.innerHTML = `
         <div class="indicador-item-card indicador-item-card--topo indicador-card--batimentos">
-            <div class="indicador-header"><span>🫀</span><span>Pressão Arterial</span></div>
+            <div class="indicador-header" ><span>🫀</span><span style="font-size: 15px">Pressão Arterial</span></div>
             <div class="indicador-valor">${pressao} <span>mmHg</span></div>
         </div>
         <div class="indicador-item-card indicador-item-card--topo indicador-card--glicose">
-            <div class="indicador-header"><span>🩸</span><span>Glicose</span></div>
+            <div class="indicador-header"><span>🩸</span><span style="font-size: 15px">Glicose</span></div>
             <div class="indicador-valor">${glicose} <span>mg/dL</span></div>
         </div>
         <div class="indicador-item-card indicador-card--colesterol">
-            <div class="indicador-header"><span>🌡️</span><span>Temperatura</span></div>
+            <div class="indicador-header"><span>🌡️</span><span style="font-size: 15px">Temperatura</span></div>
             <div class="indicador-valor">${temperatura} <span>°C</span></div>
         </div>`;
 }

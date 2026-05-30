@@ -1857,9 +1857,8 @@ dialog.modal-container {
     overflow-x: auto;
     align-items: flex-start;
     width: 100%;
-    margin-top: 8px;
     padding-bottom: 4px;
-    max-height: 160px;
+    max-height: 110px;
 }
 
 .nota-card {
@@ -1985,7 +1984,7 @@ dialog.modal-container {
     width: 100%;
     margin-top: 12px;
     overflow-y: auto;
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .checklist-lista {
@@ -2105,13 +2104,6 @@ dialog.modal-container {
 }
 
 /* RELATÓRIO */
-.btn-humor.ativo {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745;
-    font-weight: 600;
-}
-
 .btn-humor {
     width: 42px;
     height: 42px;
@@ -2195,19 +2187,15 @@ dialog.modal-container {
     transform: scale(1.1);
 }
 
-.btn-humor-card.ativo {
-    background-color: #cbdd98;
-    border-color: #cbdd98;
-}
-
 .btn-humor-card.ativo-feliz {
     background-color: #cbdd98;
     border-color: #cbdd98;
 }
 
 .btn-humor-card.ativo-triste {
-    background-color: #90b8e0;
-    border-color: #90b8e0;
+    background-color: #f0d080;
+    border-color: #f0d080;
+    
 }
 
 .btn-humor-card.ativo-depressivo {
@@ -2216,8 +2204,8 @@ dialog.modal-container {
 }
 
 .btn-humor-card.ativo-neutro {
-    background-color: #f0d080;
-    border-color: #f0d080;
+    background-color: #90b8e0;
+    border-color: #90b8e0;
 }
 
 .btn-humor-card.ativo span {
@@ -3056,13 +3044,14 @@ dialog.modal-container {
 }
 
 .vg-humor-card-ativo.humor-neutro {
-    background-color: #f0d080;
-    border-color: #f0d080;
+    background-color: #90b8e0;
+    border-color: #90b8e0;
 }
 
 .vg-humor-card-ativo.humor-triste {
-    background-color: #90b8e0;
-    border-color: #90b8e0;
+    background-color: #f0d080;
+    border-color: #f0d080;
+    
 }
 
 .vg-humor-card-ativo.humor-depressivo {
