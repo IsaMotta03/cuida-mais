@@ -456,6 +456,34 @@ function inicializarAlteracaoStatusSaude() {
   });
 }
 
+(function menuHamb() {
+  const btn      = document.getElementById('btnHamburguer');
+  const gaveta   = document.getElementById('gavetaMobile');
+  const overlay  = document.getElementById('overlayGaveta');
+  const btnFechar = document.getElementById('btnFecharGaveta');
+
+  if (!btn || !gaveta) return; // segurança: sai se o HTML ainda não tiver a gaveta
+
+  function abrirGaveta() {
+    gaveta.classList.add('aberta');
+    overlay.classList.add('visivel');
+    btn.classList.add('aberto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharGaveta() {
+    gaveta.classList.remove('aberta');
+    overlay.classList.remove('visivel');
+    btn.classList.remove('aberto');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', abrirGaveta);
+  btnFechar.addEventListener('click', fecharGaveta);
+  overlay.addEventListener('click', fecharGaveta);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharGaveta(); });
+})();
+
 /* =============================================
    INICIALIZAÇÃO GERAL
    ============================================= */
@@ -468,5 +496,6 @@ document.addEventListener("DOMContentLoaded", () => {
   inicializarSelecaoHumor();
   calcularEExibirIMC();
   inicializarAlteracaoStatusSaude();
+  menuHamb();
 
 });
