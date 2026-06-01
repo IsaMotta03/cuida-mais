@@ -223,16 +223,15 @@ body.painel {
   margin-top: 4px;
 }
 
-
 .botao-emergencia {
-    padding: 26px 36px;
-    font-size: 19px;
-    border-radius: 18px;
-    width: clamp(210px, 19vw, 280px);
-    min-height: 92px;
-    height: auto;
-    box-shadow: 0 4px 5px rgba(46, 46, 72, 0.32);
-    gap: 10px;
+  padding: 26px 36px;
+  font-size: 19px;
+  border-radius: 18px;
+  width: clamp(210px, 19vw, 280px);
+  min-height: 92px;
+  height: auto;
+  box-shadow: 0 4px 5px rgba(46, 46, 72, 0.32);
+  gap: 10px;
 }
 
 .botao-emergencia img {
@@ -350,7 +349,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-    width: calc(100% - 48px);
+  width: calc(100% - 48px);
 }
 
 #familiar {
@@ -378,10 +377,10 @@ h3 {
   padding: 70px 20px 20px 20px;
 }
 #cuidador header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-        width: calc(100% - 48px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 48px);
 }
 
 .area-conteudo-pessoas footer {
@@ -1340,9 +1339,14 @@ dialog.modal-container {
   line-height: 1;
 }
 
-.btn-dia:hover {
+.btn-dia:hover:not(:disabled) {
   background-color: rgba(0, 0, 0, 0.06);
   color: #2e2e48;
+}
+
+.btn-dia:disabled {
+  opacity: 0.25;
+  cursor: default;
 }
 
 .calendario-inline {
@@ -1541,10 +1545,17 @@ dialog.modal-container {
   transform: translateX(16px);
 }
 
+/* =============================================
+   GRADE DE CONSULTAS — visualização por lista
+   ============================================= */
+/* =============================================
+   GRADE DE CONSULTAS — visualização por lista
+   ============================================= */
 .area-conteudo.com-consultas {
   padding: 0;
   align-items: stretch;
   justify-content: stretch;
+  overflow: hidden;
 }
 
 .calendario-dia {
@@ -1558,165 +1569,1403 @@ dialog.modal-container {
 .cal-dia-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 14px 24px;
+  justify-content: space-between;
+  padding: 20px 28px 16px;
   border-bottom: 1px solid #f0f4fa;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.cal-dia-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   font-weight: 600;
   color: #2e2e48;
-  flex-shrink: 0;
 }
 
-.cal-dia-header img {
+.cal-dia-titulo img {
   width: 18px;
   height: 18px;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
-.cal-dia-corpo {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  overflow-y: auto;
-  position: relative;
-}
-
-.cal-horas-col {
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid #f0f4fa;
+.cal-subtitulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: #727b8e;
+  padding: 14px 28px 10px;
   flex-shrink: 0;
 }
 
-.cal-hora-label {
-  height: 52px;
+.cal-lista-corpo {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 40px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Wrapper hora + card */
+.cal-item-wrapper {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
-  padding: 6px 8px 0 0;
-  font-size: 10px;
-  color: #aeafbd;
-  font-weight: 500;
-  flex-shrink: 0;
+  gap: 16px;
 }
 
-.cal-eventos-col {
-  position: relative;
-}
-
-.cal-linha-hora {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background-color: #f0f4fa;
-}
-
-.cal-evento {
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  min-height: 34px;
-  border-radius: 8px;
-  padding: 8px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: filter 0.15s;
-  z-index: 2;
-}
-
-.cal-evento:hover {
-  filter: brightness(0.91);
-}
-
-.cal-evento-nome {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-
-.cal-evento-hora {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 500;
-}
-
-.cal-legenda {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding: 10px 20px;
-  border-top: 1px solid #f0f4fa;
-  flex-wrap: wrap;
-  flex-shrink: 0;
-}
-
-.cal-legenda-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  color: #727b8e;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-}
-
-.cal-legenda-bolinha {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.chip-idoso {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #80cef4;
-  border-radius: 50px;
-  padding: 8px 18px 8px 8px;
-  margin-top: 8px;
-}
-
-.chip-idoso__foto {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #fff;
-}
-
-.chip-idoso__info {
+.cal-item-horario {
   display: flex;
   flex-direction: column;
-  line-height: 1.25;
+  align-items: flex-end;
+  min-width: 48px;
+  flex-shrink: 0;
+  padding-top: 18px;
 }
 
-.chip-idoso__nome {
-  font-size: 14px;
+.cal-item-horario .hora-inicio {
+  font-size: 15px;
   font-weight: 700;
-  color: #fff;
+  color: #2e2e48;
+  line-height: 1;
 }
 
-.chip-idoso__idade {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.85);
+.cal-item-horario .hora-fim {
+  font-size: 13px;
+  color: #9aa3b4;
+  margin-top: 3px;
 }
 
-#chipIdosoFoto {
+/* Card de consulta */
+.consulta-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 20px 24px;
+  min-height: 80px;
+  box-shadow: 0 2px 8px rgba(46, 46, 72, 0.1);
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  background-color: #cbdd98;
+}
+
+.consulta-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(46, 46, 72, 0.15);
+}
+
+.consulta-card__faixa {
+  display: none;
+}
+.consulta-card__horario {
   display: none;
 }
 
-#chipIdoso:not([hidden]) #chipIdosoFoto {
+.consulta-card__corpo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  min-width: 0;
+  flex: 1;
+}
+
+.consulta-card__nome {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.consulta-card__detalhe {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =============================================
+   MEDICAMENTOS
+   ============================================= */
+.med-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+  align-content: start;
+  padding: 8px 2px;
+  overflow-y: auto;
+}
+
+.area-conteudo.tem-medicamentos {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px 30px;
+  overflow-y: auto;
+}
+
+.med-card {
+  background: #ffffff;
+  border: 2px solid #d4edf9;
+  border-radius: 20px;
+  padding: 30px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.med-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+.icone-med {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.med-card-icone {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.med-card-icone svg {
+  width: 44px;
+  height: 44px;
+}
+
+.med-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.med-card-nome {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1d1d2e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.med-card-sub {
+  font-size: 0.9rem;
+  color: #30353f;
+}
+
+.med-card-horarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.med-chip-horario {
+  background: #cbdd98;
+  color: #2e2e48;
+  border-radius: 50px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.med-chip-horario button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #5a7000;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.med-chip-horario--card {
+  background: #cbdd98;
+  color: #fff;
+}
+
+.med-btn-comprovante {
+  background: #80cef4;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 30px 14px;
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  min-width: 90px;
+  align-self: center;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+  flex-shrink: 0;
+}
+
+.med-btn-comprovante:hover {
+  background: #5bbee8;
+  transform: scale(1.04);
+}
+.med-btn-comprovante--ok {
+  background: #7ec87e !important;
+}
+
+.cartao-med-form {
+  max-width: 640px;
+  width: 95%;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.med-horarios-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.med-horario-esq {
+  flex: 0 0 auto;
+}
+.med-horario-dir {
+  flex: 1;
+}
+
+.med-drum-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.med-btn-add-horario {
+  background: #80cef4;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.med-btn-add-horario:hover {
+  background: #5bbee8;
+}
+
+.med-horarios-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 36px;
+}
+.med-horarios-vazio {
+  font-size: 12px;
+  color: #aaa;
+  font-style: italic;
+}
+.cartao-comprovante-form {
+  max-width: 540px;
+  width: 95%;
+}
+
+/* =============================================
+   VISÃO GERAL — Dashboard
+   ============================================= */
+.vg-dashboard {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
+    minmax(0, 1fr);
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+    "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+    "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+    "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento"
+    "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento";
+  grid-gap: 24px;
+  overflow-y: auto;
+  padding: 2px 4px 8px 0;
+}
+
+.vg-card-relatorio {
+  display: flex;
+  flex-direction: column;
+  grid-area: vgRelatorio;
+  min-height: 0;
+}
+
+.vg-card-indicadores {
+  grid-area: vgIndicadores;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vg-card-consultas {
+  grid-area: vgConsultas;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vg-card-tarefas {
+  display: flex;
+  flex-direction: column;
+  grid-area: vgTarefas;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vg-card-medicamentos {
+  grid-area: vgMedicamentos;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vgBotaoMedicamento {
+  grid-area: botaoMedicamento;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: #78c0e6c9;
+  border: 1px solid #78c0e6;
+  border-radius: 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(46, 46, 72, 0.1);
+  padding: 12px 8px;
+  min-width: 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.vgBotaoMedicamento:hover {
+  background-color: #78c0e6;
+}
+
+.vgBotaoMedicamento img {
+  width: 65px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .vgBotaoMedicamento img {
+    width: 45px;
+  }
+}
+
+.vgBotaoMedicamento span,
+.vgBotaoMedicamento > *:not(img) {
+  text-align: center;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.vg-relatorio-corpo-limpo {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 10px;
+  overflow: visible;
+}
+
+.vg-conteiner {
+  border: 1px solid #d8eefac4;
+  background-color: #78c0e627;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.vg-conteiner-humorSemanal {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  grid-row: 1 / 2;
+  grid-column: 1 / 3;
+  min-width: 0;
+}
+
+.vg-conteiner-humorSemanal span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1c30ab;
+}
+
+.vg-conteiner-humorSemanal h4 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.vg-conteiner-humor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-row: 1 / 2;
+  grid-column: 3 / 4;
+  min-width: 0;
+}
+
+.vg-conteiner-notas {
+  grid-row: 2 / 3;
+  grid-column: 1 / 4;
+  margin-bottom: 30px;
+  min-width: 0;
+}
+
+.vg-notas-painel-lista {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.vg-nota-item-feed {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #d5e4b6;
+  border-radius: 5px;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  background-color: #deebcf;
+}
+
+.nota-meta {
+  background-color: #d5e4b6;
+  padding: 5px;
+}
+.nota-texto {
+  background-color: #deebcf;
+  padding: 5px;
+  overflow-y: auto;
+  max-height: 120px;
+  word-break: break-word;
+}
+
+.vgBotaoMedicamento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #80cef4;
+  border: 1px solid #80cef4;
+  border-radius: 14px;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.05;
+  text-align: center;
+  padding: 14px 10px;
+}
+
+.vgBotaoMedicamento img {
+  width: 68px;
+  margin-bottom: 12px;
+}
+
+#vg-checkTotal {
+  border-radius: 10px;
+  background-color: rgba(207, 224, 160, 0.624);
+  padding: 2px 5px;
+}
+#mini-conteiner-concluidas-vg {
+  border-radius: 10px;
+  background-color: rgb(186, 228, 249);
+  padding: 2px 5px;
+}
+#span-concluidas {
+  display: flex;
+  gap: 4px;
+}
+
+.vg-med-card {
+  border: 1px solid #78c0e6c4;
+  background-color: #78c0e61e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 8px;
+}
+
+.vg-med-card .icone-med {
+  width: 62px;
+  height: 62px;
+  padding: 0;
+}
+
+.med-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card base */
+.vg-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 10px rgba(46, 46, 72, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.vg-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e2e48;
+  margin: 0;
+}
+
+.vg-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+  color: #b0b8c8;
+  font-size: 13px;
+  text-align: center;
+  flex: 1;
+}
+
+.vg-vazio img {
+  width: 36px;
+  opacity: 0.5;
+}
+.vg-vazio h3 {
+  font-size: 16px;
+  color: #c0c8d6;
+  margin: 0;
+}
+
+.vg-relatorio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.vg-quadrante {
+  background: #f4faff;
+  border: 1px solid #d4edf9;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.vg-quadrante-titulo {
+  display: block;
+  color: #2e2e48;
+  line-height: 1.2;
+  margin: 8px;
+  font-size: 0.72rem;
+  color: #2e2e48;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.vg-tarefas-resumo {
+  font-size: 16px;
+  color: #727b8e;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.vg-tarefas-resumo strong {
+  color: #2e2e48;
+}
+
+.vg-btn-add {
+  background: #deecb7;
+  color: #182000;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.vg-btn-add:hover {
+  background: #cfe0a0;
+}
+
+.vg-checklist-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: 200px;
+}
+
+.vg-med-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  overflow-y: auto;
+  padding-bottom: 5px;
+  max-height: 240px;
+}
+
+.vg-med-card {
+  border: 1px solid #78c0e6c4;
+  background-color: #78c0e61e;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  min-height: 150px;
+  display: flex;
+  flex-direction: row;
+  max-height: min-content;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.vg-med-card .icone-med {
+  width: 50px;
+  height: 50px;
+}
+.vg-med-card .med-card-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+}
+.vg-med-card .med-card-nome {
+  font-size: 0.9rem;
+}
+.vg-med-card .med-card-sub {
+  font-size: 0.75rem;
+}
+.vg-med-card .med-btn-comprovante {
+  display: none;
+}
+
+.vg-consultas-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.vg-indicadores-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.vg-indicadores-corpo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+.vg-indicadores-vazio-row {
+  display: flex;
+  gap: 10px;
+}
+
+.vg-ind-box {
+  flex: 1;
+  background: #f4faff;
+  border: 1px solid #d4edf9;
+  border-radius: 12px;
+  padding: 14px 12px;
+  min-height: 60px;
+}
+
+.vg-indicadores-corpo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  min-height: 0;
+}
+
+.indicador-item-card {
+  display: flex;
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 14px;
+  border: 1px solid rgba(128, 206, 244, 0.4);
+}
+
+.indicador-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.indicador-header span:first-child {
+  font-size: 1rem;
+}
+.indicador-header span:last-child {
+  font-size: 0.72rem;
+  color: #2e2e48;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.indicador-valor {
+  font-weight: 700;
+  color: #2e2e48;
+}
+.indicador-valor span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #727b8e;
+}
+
+.indicador-item-card--topo {
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
+}
+.indicador-item-card--topo .indicador-valor {
+  font-size: 1.3rem;
+  margin-left: 8px;
+}
+
+.indicador-card--batimentos {
+  background-color: rgba(128, 206, 244, 0.12);
+  border-bottom: 0;
+}
+.indicador-card--glicose {
+  background-color: rgba(128, 206, 244, 0.12);
+  border-bottom: 0;
+}
+
+.indicador-card--colesterol {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(203, 221, 152, 0.35);
+  border-left: 0;
+  min-height: 76px;
+  padding: 14px 20px;
+}
+
+.indicador-card--colesterol .indicador-valor {
+  font-size: 1.2rem;
+}
+.indicador-card--colesterol .indicador-header {
+  margin-bottom: 0;
+  gap: 8px;
+}
+.indicador-card--colesterol .indicador-header span:first-child {
+  font-size: 1.1rem;
+}
+
+/* =============================================
+   VISÃO GERAL — Humor / Consultas
+   ============================================= */
+.vg-humor-card-ativo {
+  background-color: rgb(203, 221, 152);
+  border: 1px solid rgb(203, 221, 152);
+  border-radius: 10px;
+  padding: 24px 8px;
+  margin: 5px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.vg-humor-card-ativo.humor-feliz {
+  background-color: #cbdd98;
+  border-color: #cbdd98;
+}
+.vg-humor-card-ativo.humor-neutro {
+  background-color: #90b8e0;
+  border-color: #90b8e0;
+}
+.vg-humor-card-ativo.humor-triste {
+  background-color: #f0d080;
+  border-color: #f0d080;
+}
+.vg-humor-card-ativo.humor-depressivo {
+  background-color: #e08080;
+  border-color: #e08080;
+}
+.vg-humor-card-ativo img {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.vg-humor-card-ativo span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2e2e48;
+}
+.vg-humor-nao-registrado {
+  font-size: 13px;
+  color: #b0b8c8;
+  font-style: italic;
+}
+
+.vg-consulta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  border-bottom: 1px solid #f0f4fa;
+}
+.vg-consulta-item:last-child {
+  border-bottom: none;
+}
+.vg-consulta-cor {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.vg-consulta-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.vg-consulta-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e2e48;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vg-consulta-sub {
+  font-size: 11px;
+  color: #727b8e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vg-consulta-data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  flex-shrink: 0;
+}
+.vg-consulta-dia {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2e2e48;
+}
+.vg-consulta-hora {
+  font-size: 11px;
+  color: #727b8e;
+}
+
+/* =============================================
+   LOGIN
+   ============================================= */
+.grid-login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #e8f5fd;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.fundo-azul-onda {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70vh;
+  background-color: #80cef4;
+  border-bottom-right-radius: 120px;
+  border-bottom-left-radius: 120px;
+  z-index: 1;
+}
+
+.lado-ilustracao {
+  width: 50%;
+  height: 60vh;
+  position: relative;
+  padding: 40px;
+  z-index: 2;
+}
+.lado-formulario {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.bolha {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: #c6d9a5;
+  border-radius: 50%;
+  bottom: -50%;
+  left: 50%;
+  z-index: 1;
+}
+.ilustracao-pessoas {
+  position: absolute;
+  bottom: -80%;
+  left: 20%;
+  height: 100vh;
+  width: auto;
+  z-index: 2;
+  object-fit: contain;
+}
+
+.link-cadastro-topo {
+  position: absolute;
+  top: 40px;
+  right: 10%;
+  font-size: 0.85rem;
+  color: #666;
+}
+.link-cadastro-topo a,
+.link-cadastro-rodape a {
+  color: #80cef4;
+  text-decoration: none;
+  font-weight: 600;
+}
+.link-cadastro-rodape {
+  display: none;
+}
+
+.lado-formulario {
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin: 40px auto;
+  max-width: 450px;
+  padding: 40px;
+  justify-content: flex-start;
+}
+
+.login-bemvindo {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+.login-titulo {
+  font-size: 2.2rem;
+  color: #1a1a1a;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.botoes-sociais {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.btn-social {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  border-radius: 10px;
+  padding: 12px;
+  color: #4a5568;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-social-icone {
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  border-radius: 10px;
+  padding: 12px;
+  transition: background 0.2s;
+}
+
+.btn-social:hover,
+.btn-social-icone:hover {
+  background-color: #edf2f7;
+}
+
+.divisor {
+  text-align: center;
+  color: #a0aec0;
+  font-size: 0.85rem;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.campo-grupo {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.campo-grupo label {
+  font-size: 0.85rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+.campo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.campo-icone {
+  position: absolute;
+  left: 14px;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+}
+.campo-wrapper input {
+  width: 100%;
+  padding: 14px 14px 14px 42px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  outline: none;
+  background-color: #fff;
+}
+.campo-wrapper input::placeholder {
+  color: #cbd5e1;
+}
+.campo-olho {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+}
+.link-esqueceu {
+  display: block;
+  text-align: right;
+  color: #80cef4;
+  font-size: 0.8rem;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.btn-entrar {
+  width: 100%;
+  background-color: #c6d9a5;
+  color: #1d1e23;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(198, 217, 165, 0.3);
+  transition: background 0.2s;
+}
+
+.btn-entrar:hover {
+  filter: brightness(0.95);
+}
+
+.msg-erro {
+  display: none;
+  background-color: #fed7d7;
+  color: #c53030;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* =============================================
+   RELATÓRIO
+   ============================================= */
+.btn-humor {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background-color: #e6f5fd;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.titulo-quadrante {
+  font-weight: 500;
+  font-size: 16px;
+  color: #2e2e48;
   display: block;
 }
+
+.grade-humor-2x2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr 1fr;
+  height: calc(100% - 31px);
+  grid-template-areas:
+    "feliz neutro"
+    "triste depressivo";
+  gap: 10px;
+  width: 100%;
+}
+
+#feliz {
+  grid-area: feliz;
+}
+#neutro {
+  grid-area: neutro;
+}
+#triste {
+  grid-area: triste;
+}
+#depressivo {
+  grid-area: depressivo;
+}
+
+.btn-humor-card {
+  background-color: #dfdcdc;
+  border: 1px solid #e2eef5;
+  border-radius: 10px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-humor-card img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.btn-humor-card span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a4a68;
+}
+
+.btn-humor-card:hover {
+  background-color: #ebf5fc;
+}
+.btn-humor-card:hover img {
+  transform: scale(1.1);
+}
+.btn-humor-card.ativo-feliz {
+  background-color: #cbdd98;
+  border-color: #cbdd98;
+}
+.btn-humor-card.ativo-triste {
+  background-color: #90b8e0;
+  border-color: #90b8e0;
+}
+.btn-humor-card.ativo-depressivo {
+  background-color: #e08080;
+  border-color: #e08080;
+}
+.btn-humor-card.ativo-neutro {
+  background-color: #f0d080;
+  border-color: #f0d080;
+}
+.btn-humor-card.ativo span {
+  font-weight: 600;
+}
+
+.label-medida-altura {
+  background-color: #e0f0b4;
+  padding: 10px;
+  margin-left: -5px;
+  border-radius: 12px 0 0 12px;
+}
+
+.valor-medida-altura {
+  background-color: #e0f0b4;
+  padding: 10px;
+  margin-left: -5px;
+  border-radius: 0 12px 12px 0;
+}
+
+.label-medida-peso {
+  background-color: #a5ddf5;
+  padding: 10px;
+  margin-left: -5px;
+  border-radius: 12px 0 0 12px;
+}
+
+.valor-medida-peso {
+  background-color: #a5ddf5;
+  padding: 10px;
+  margin-left: -5px;
+  border-radius: 0 12px 12px 0;
+}
+
+.valores-medidas {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #d0e3ef;
+  padding-top: 30px;
+  gap: 15px;
+}
+
+.valor-medida-destaque {
+  font-size: 15px;
+  color: #2e2e48;
+}
+.valor-imc-total {
+  font-size: 22px;
+  color: #2e2e48;
+  display: block;
+  margin: 2px 0;
+  padding: 5px;
+}
+.status-imc-texto {
+  font-size: 12px;
+  font-weight: 500;
+  color: #595964;
+  padding: 5px;
+}
+
+.linha-saude-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 0px 4px #b4b4b4;
+  margin-top: 10px;
+  padding: 9px;
+}
+
+.img-saude-medidores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  border-radius: 9px;
+  background-color: #5bbee836;
+}
+
+.label-saude-item {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a4a68;
+}
+
+.campo-saude-sufixo {
+  display: flex;
+  align-items: center;
+  width: 120px;
+}
+
+.campo-saude-sufixo input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e2e48;
+  outline: none;
+  text-align: right;
+  padding-right: 4px;
+}
+
+.campo-saude-sufixo input::-webkit-outer-spin-button,
+.campo-saude-sufixo input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sufixo-saude {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* =============================================
+   CHECKLIST / NOTAS / GALERIA
+   ============================================= */
 .area-conteudo-acompanhamento #galeria {
   padding: 20px;
   align-items: flex-start;
@@ -2122,1287 +3371,50 @@ dialog.modal-container {
   display: none !important;
 }
 
-/* RELATÓRIO */
-.btn-humor {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: none;
-  background-color: #e6f5fd;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.titulo-quadrante {
-  font-weight: 500;
-  font-size: 16px;
-  color: #2e2e48;
-  display: block;
-}
-
-.grade-humor-2x2 {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: 1fr 1fr;
-  height: calc(100% - 31px);
-  grid-template-areas:
-    "feliz neutro"
-    "triste depressivo";
-  gap: 10px;
-  width: 100%;
-}
-
-#feliz {
-  grid-area: feliz;
-}
-#neutro {
-  grid-area: neutro;
-}
-#triste {
-  grid-area: triste;
-}
-#depressivo {
-  grid-area: depressivo;
-}
-
-.btn-humor-card {
-  background-color: #dfdcdc;
-  border: 1px solid #e2eef5;
-  border-radius: 10px;
-  padding: 12px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-humor-card img {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.2s ease;
-}
-
-.btn-humor-card span {
-  font-size: 14px;
-  font-weight: 500;
-  color: #4a4a68;
-}
-
-.btn-humor-card:hover {
-  background-color: #ebf5fc;
-}
-.btn-humor-card:hover img {
-  transform: scale(1.1);
-}
-.btn-humor-card.ativo-feliz {
-  background-color: #cbdd98;
-  border-color: #cbdd98;
-}
-.btn-humor-card.ativo-triste {
-  background-color: #f0d080;
-  border-color: #f0d080;
-}
-.btn-humor-card.ativo-depressivo {
-  background-color: #e08080;
-  border-color: #e08080;
-}
-.btn-humor-card.ativo-neutro {
-  background-color: #90b8e0;
-  border-color: #90b8e0;
-}
-.btn-humor-card.ativo span {
-  font-weight: 600;
-}
-
-.label-medida-altura {
-  background-color: #e0f0b4;
-  padding: 10px;
-  margin-left: -5px;
-  border-radius: 12px 0 0 12px;
-}
-
-.valor-medida-altura {
-  background-color: #e0f0b4;
-  padding: 10px;
-  margin-left: -5px;
-  border-radius: 0 12px 12px 0;
-}
-
-.label-medida-peso {
-  background-color: #a5ddf5;
-  padding: 10px;
-  margin-left: -5px;
-  border-radius: 12px 0 0 12px;
-}
-
-.valor-medida-peso {
-  background-color: #a5ddf5;
-  padding: 10px;
-  margin-left: -5px;
-  border-radius: 0 12px 12px 0;
-}
-
-.valores-medidas {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #d0e3ef;
-  padding-top: 30px;
-  gap: 15px;
-}
-
-.valor-medida-destaque {
-  font-size: 15px;
-  color: #2e2e48;
-}
-.valor-imc-total {
-  font-size: 22px;
-  color: #2e2e48;
-  display: block;
-  margin: 2px 0;
-  padding: 5px;
-}
-.status-imc-texto {
-  font-size: 12px;
-  font-weight: 500;
-  color: #595964;
-  padding: 5px;
-}
-
-.linha-saude-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0px 0px 4px #b4b4b4;
-  margin-top: 10px;
-  padding: 9px;
-}
-
-.img-saude-medidores {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 14px;
-  border-radius: 9px;
-  background-color: #5bbee836;
-}
-
-.label-saude-item {
-  font-size: 14px;
-  font-weight: 500;
-  color: #4a4a68;
-}
-
-.campo-saude-sufixo {
-  display: flex;
-  align-items: center;
-  width: 120px;
-}
-
-.campo-saude-sufixo input {
-  border: none;
-  background: transparent;
-  width: 100%;
-  font-size: 20px;
-  font-weight: 600;
-  color: #2e2e48;
-  outline: none;
-  text-align: right;
-  padding-right: 4px;
-}
-
-.campo-saude-sufixo input::-webkit-outer-spin-button,
-.campo-saude-sufixo input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.sufixo-saude {
-  font-size: 13px;
-  color: #94a3b8;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
 /* =============================================
-   MEDICAMENTOS
+   CHIPS E OUTROS ELEMENTOS
    ============================================= */
-.med-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  width: 100%;
-  align-content: start;
-  padding: 8px 2px;
-  overflow-y: auto;
-}
-
-.area-conteudo.tem-medicamentos {
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 24px 30px;
-  overflow-y: auto;
-}
-
-.med-card {
-  background: #ffffff;
-  border: 2px solid #d4edf9;
-  border-radius: 20px;
-  padding: 30px 20px;
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-
-.med-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
-  transform: translateY(-2px);
-}
-
-.icone-med {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-}
-
-.med-card-icone {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 14px;
-  display: flex;
+.chip-idoso {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-.med-card-icone svg {
-  width: 44px;
-  height: 44px;
-}
-
-.med-card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  flex: 1;
-  min-width: 0;
-}
-
-.med-card-nome {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1d1d2e;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.med-card-sub {
-  font-size: 0.9rem;
-  color: #30353f;
-}
-
-.med-card-horarios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  gap: 10px;
+  background-color: #80cef4;
+  border-radius: 50px;
+  padding: 8px 18px 8px 8px;
   margin-top: 8px;
 }
 
-.med-chip-horario {
-  background: #cbdd98;
-  color: #2e2e48;
-  border-radius: 50px;
-  padding: 4px 12px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.med-chip-horario button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  color: #5a7000;
-  line-height: 1;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.med-chip-horario--card {
-  background: #cbdd98;
-  color: #fff;
-}
-
-.med-btn-comprovante {
-  background: #80cef4;
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  padding: 30px 14px;
-  margin-right: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: "Poppins", sans-serif;
-  min-width: 90px;
-  align-self: center;
-  transition:
-    background 0.2s,
-    transform 0.15s;
-  flex-shrink: 0;
-}
-
-.med-btn-comprovante:hover {
-  background: #5bbee8;
-  transform: scale(1.04);
-}
-.med-btn-comprovante--ok {
-  background: #7ec87e !important;
-}
-
-.cartao-med-form {
-  max-width: 640px;
-  width: 95%;
-  max-height: 92vh;
-  overflow-y: auto;
-}
-
-.med-horarios-wrapper {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-.med-horario-esq {
-  flex: 0 0 auto;
-}
-.med-horario-dir {
-  flex: 1;
-}
-
-.med-drum-wrapper {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.med-btn-add-horario {
-  background: #80cef4;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  width: 38px;
-  height: 38px;
-  font-size: 22px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background 0.2s;
-  font-family: "Poppins", sans-serif;
-}
-
-.med-btn-add-horario:hover {
-  background: #5bbee8;
-}
-
-.med-horarios-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-height: 36px;
-}
-.med-horarios-vazio {
-  font-size: 12px;
-  color: #aaa;
-  font-style: italic;
-}
-.cartao-comprovante-form {
-  max-width: 540px;
-  width: 95%;
-}
-
-/* =============================================
-   VISÃO GERAL — Dashboard
-   ============================================= */
-.vg-dashboard {
-
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas:
-        "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
-        "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
-        "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
-        "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento"
-        "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento";
-    grid-gap: 24px;
-    overflow-y: auto;
-     padding: 2px 4px 8px 0;
-
-}
-
-.vg-card-relatorio {
-    display: flex;
-    flex-direction: column;
-    grid-area: vgRelatorio;
-    min-height: 0;
-}
-
-.vg-card-indicadores {
-  grid-area: vgIndicadores;
-  overflow: hidden;
-  min-width: 0;
-}
-
-.vg-card-consultas {
-  grid-area: vgConsultas;
-  overflow: hidden;
-  min-width: 0;
-}
-
-.vg-card-tarefas {
-  display: flex;
-  flex-direction: column;
-  grid-area: vgTarefas;
-  overflow: hidden;
-  min-width: 0;
-}
-
-.vg-card-medicamentos {
-  grid-area: vgMedicamentos;
-  overflow: hidden;
-  min-width: 0;
-}
-
-/* ── FIX: botão do dashboard — imagem centralizada e contida ── */
-.vgBotaoMedicamento {
-  grid-area: botaoMedicamento;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  background-color: #78c0e6c9;
-  border: 1px solid #78c0e6;
-  border-radius: 20px;
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  box-shadow: 0 2px 10px rgba(46, 46, 72, 0.1);
-  /* impede que a imagem vaze */
-  padding: 12px 8px;
-  min-width: 0;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.vgBotaoMedicamento:hover {
-  background-color: #78c0e6;
-}
-
-/* ── FIX: imagem do botão contida dentro do botão ── */
-.vgBotaoMedicamento img {
-  width: 65px;
-  height: auto;
-  display: block;
-  flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-  .vgBotaoMedicamento img {
-    width: 45px;
-  }
-}
-
-/* Texto do botão não quebra estranhamente */
-.vgBotaoMedicamento span,
-.vgBotaoMedicamento > *:not(img) {
-  text-align: center;
-  word-break: break-word;
-  max-width: 100%;
-}
-
-.vg-relatorio-corpo-limpo {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 10px;
-  overflow: visible;
-}
-
-.vg-conteiner {
-    border: 1px solid #d8eefac4;
-    background-color: #78c0e627;
-    border-radius: 10px;
-    padding: 5px;
-    
-}
-
-.vg-conteiner-humorSemanal {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  grid-row: 1 / 2;
-  grid-column: 1 / 3;
-  min-width: 0;
-}
-
-.vg-conteiner-humorSemanal span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #1a1c30ab;
-}
-
-.vg-conteiner-humorSemanal h4 {
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.vg-conteiner-humor {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-row: 1 / 2;
-  grid-column: 3 / 4;
-  min-width: 0;
-}
-
-.vg-conteiner-notas {
-  grid-row: 2 / 3;
-  grid-column: 1 / 4;
-  margin-bottom: 30px;
-  min-width: 0;
-}
-
-.vg-notas-painel-lista {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  overflow-x: auto;
-}
-
-.vg-nota-item-feed {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #d5e4b6;
-  border-radius: 5px;
-  flex: 1 1 0;
-  min-width: 0;
-  overflow: hidden;
-  background-color: #deebcf;
-}
-
-.nota-meta {
-  background-color: #d5e4b6;
-  padding: 5px;
-}
-.nota-texto {
-  background-color: #deebcf;
-  padding: 5px;
-  overflow-y: auto;
-  max-height: 120px;
-  word-break: break-word;
-}
-
-.vgBotaoMedicamento {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #80cef4;
-    border: 1px solid #80cef4;
-    border-radius: 14px;
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.05;
-    text-align: center;
-    padding: 14px 10px;
-}
-
-.vgBotaoMedicamento img {
-     width: 68px;
-    margin-bottom: 12px;
-}
-
-#vg-checkTotal {
-  border-radius: 10px;
-  background-color: rgba(207, 224, 160, 0.624);
-  padding: 2px 5px;
-}
-#mini-conteiner-concluidas-vg {
-  border-radius: 10px;
-  background-color: rgb(186, 228, 249);
-  padding: 2px 5px;
-}
-#span-concluidas {
-  display: flex;
-  gap: 4px;
-}
-
-.vg-med-card {
-    border: 1px solid #78c0e6c4;
-    background-color: #78c0e61e;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 9px 8px;
-
-}
-
-.vg-med-card .icone-med {
-     width: 62px;
-    height: 62px;
-    padding: 0;
-}
-
-.med-card-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Card base */
-.vg-card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px 22px;
-    box-shadow: 0 2px 10px rgba(46, 46, 72, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    overflow: hidden;
-}
-
-.vg-card h2 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2e2e48;
-    margin: 0;
-}
-
-/* ── Placeholder vazio genérico ── */
-.vg-vazio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 24px 0;
-  color: #b0b8c8;
-  font-size: 13px;
-  text-align: center;
-  flex: 1;
-}
-
-.vg-vazio img {
+.chip-idoso__foto {
   width: 36px;
-  opacity: 0.5;
-}
-.vg-vazio h3 {
-  font-size: 16px;
-  color: #c0c8d6;
-  margin: 0;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
 }
 
-.vg-relatorio-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.vg-quadrante {
-  background: #f4faff;
-  border: 1px solid #d4edf9;
-  border-radius: 12px;
-  padding: 14px;
-}
-
-.vg-quadrante-titulo {
-    display: block;
-    color: #2e2e48;
-    line-height: 1.2;
-    margin: 8px;
-    font-size: 0.72rem;
-    color: #2e2e48;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* ── Tarefas ── */
-
-.vg-tarefas-resumo {
-  font-size: 16px;
-  color: #727b8e;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-.vg-tarefas-resumo strong {
-  color: #2e2e48;
-}
-
-.vg-btn-add {
-  background: #deecb7;
-  color: #182000;
-  border: none;
-  border-radius: 10px;
-  padding: 7px 16px;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: "Poppins", sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.vg-btn-add:hover {
-  background: #cfe0a0;
-}
-
-.vg-checklist-lista {
-  list-style: none;
+.chip-idoso__info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  overflow-y: auto;
-  max-height: 200px;
+  line-height: 1.25;
 }
 
-.vg-med-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  overflow-y: auto;
-  padding-bottom: 5px;
-  max-height: 240px;
-}
-
-.vg-med-card {
-  border: 1px solid #78c0e6c4;
-  background-color: #78c0e61e;
-  padding: 10px;
-  border-radius: 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
-  min-height: 150px;
-  display: flex;
-  flex-direction: row;
-  max-height: min-content;
-  /* ── FIX: evita overflow nas colunas estreitas ── */
-  min-width: 0;
-  overflow: hidden;
-}
-
-.vg-med-card .icone-med {
-  width: 50px;
-  height: 50px;
-}
-.vg-med-card .med-card-icone {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-}
-.vg-med-card .med-card-nome {
-  font-size: 0.9rem;
-}
-.vg-med-card .med-card-sub {
-  font-size: 0.75rem;
-}
-.vg-med-card .med-btn-comprovante {
-  display: none;
-}
-
-/* ── Consultas placeholder ── */
-.vg-consultas-corpo {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-}
-
-/* ── Indicadores placeholder ── */
-.vg-indicadores-corpo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
-}
-.vg-indicadores-corpo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: 100%;
-}
-.vg-indicadores-vazio-row {
-  display: flex;
-  gap: 10px;
-}
-
-.vg-ind-box {
-  flex: 1;
-  background: #f4faff;
-  border: 1px solid #d4edf9;
-  border-radius: 12px;
-  padding: 14px 12px;
-  min-height: 60px;
-}
-
-/* Contêiner principal dos indicadores */
-.vg-indicadores-corpo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    width: 100%;
-    min-height: 0;
-}
-
-/* Estilo base compartilhado por todos os cartões de indicadores */
-.indicador-item-card {
-    display: flex;
-    border-radius: 10px;
-    box-shadow: none;
-    padding: 14px;
-    border: 1px solid rgba(128, 206, 244, 0.4);
-}
-
-.indicador-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-.indicador-header span:first-child {
-  font-size: 1rem;
-}
-.indicador-header span:last-child {
-  font-size: 0.72rem;
-  color: #2e2e48;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.indicador-valor {
-  font-weight: 700;
-  color: #2e2e48;
-}
-.indicador-valor span {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #727b8e;
-}
-
-.indicador-item-card--topo {
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100px;
-}
-.indicador-item-card--topo .indicador-valor {
-  font-size: 1.3rem;
-  margin-left: 8px;
-}
-
-.indicador-card--batimentos {
-    background-color: rgba(128, 206, 244, 0.12);
-    border-bottom: 0;
-}
-.indicador-card--glicose {
-    background-color: rgba(128, 206, 244, 0.12);
-    border-bottom: 0;
-}
-
-.indicador-card--colesterol {
-    grid-column: span 2;
-    /* Faz ocupar a largura total de 2 colunas */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(203, 221, 152, 0.35);
-    border-left: 0;
-    min-height: 76px;
-    padding: 14px 20px;
-}
-
-.indicador-card--colesterol .indicador-valor {
-  font-size: 1.2rem;
-}
-.indicador-card--colesterol .indicador-header {
-  margin-bottom: 0;
-  gap: 8px;
-}
-.indicador-card--colesterol .indicador-header span:first-child {
-  font-size: 1.1rem;
-}
-/* =============================================
-   VISÃO GERAL — Humor / Consultas
-   ============================================= */
-.vg-humor-card-ativo {
-    background-color: rgb(203, 221, 152);
-    border: 1px solid rgb(203, 221, 152);
-    border-radius: 10px;
-    padding: 24px 8px;
-    margin: 5px 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.vg-humor-card-ativo.humor-feliz {
-  background-color: #cbdd98;
-  border-color: #cbdd98;
-}
-.vg-humor-card-ativo.humor-neutro {
-  background-color: #90b8e0;
-  border-color: #90b8e0;
-}
-.vg-humor-card-ativo.humor-triste {
-  background-color: #f0d080;
-  border-color: #f0d080;
-}
-.vg-humor-card-ativo.humor-depressivo {
-  background-color: #e08080;
-  border-color: #e08080;
-}
-.vg-humor-card-ativo img {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-}
-.vg-humor-card-ativo span {
+.chip-idoso__nome {
   font-size: 14px;
-  font-weight: 600;
-  color: #2e2e48;
-}
-.vg-humor-nao-registrado {
-  font-size: 13px;
-  color: #b0b8c8;
-  font-style: italic;
-}
-
-.vg-consulta-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 4px;
-  border-bottom: 1px solid #f0f4fa;
-}
-.vg-consulta-item:last-child {
-  border-bottom: none;
-}
-.vg-consulta-cor {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.vg-consulta-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-.vg-consulta-nome {
-  font-size: 13px;
-  font-weight: 600;
-  color: #2e2e48;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.vg-consulta-sub {
-  font-size: 11px;
-  color: #727b8e;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.vg-consulta-data {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1px;
-  flex-shrink: 0;
-}
-.vg-consulta-dia {
-  font-size: 12px;
-  font-weight: 600;
-  color: #2e2e48;
-}
-.vg-consulta-hora {
-  font-size: 11px;
-  color: #727b8e;
-}
-
-/* =============================================
-   LOGIN
-   ============================================= */
-.grid-login {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  min-height: 100vh;
-  background-color: #e8f5fd;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
-.fundo-azul-onda {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70vh;
-  background-color: #80cef4;
-  border-bottom-right-radius: 120px;
-  border-bottom-left-radius: 120px;
-  z-index: 1;
-}
-
-.lado-ilustracao {
-  width: 50%;
-  height: 60vh;
-  position: relative;
-  padding: 40px;
-  z-index: 2;
-}
-.lado-formulario {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-}
-
-.bolha {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background-color: #c6d9a5;
-  border-radius: 50%;
-  bottom: -50%;
-  left: 50%;
-  z-index: 1;
-}
-.ilustracao-pessoas {
-  position: absolute;
-  bottom: -80%;
-  left: 20%;
-  height: 100vh;
-  width: auto;
-  z-index: 2;
-  object-fit: contain;
-}
-
-.link-cadastro-topo {
-  position: absolute;
-  top: 40px;
-  right: 10%;
-  font-size: 0.85rem;
-  color: #666;
-}
-.link-cadastro-topo a,
-.link-cadastro-rodape a {
-  color: #80cef4;
-  text-decoration: none;
-  font-weight: 600;
-}
-.link-cadastro-rodape {
-  display: none;
-}
-
-.lado-formulario {
-  background: #ffffff;
-  border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  margin: 40px auto;
-  max-width: 450px;
-  padding: 40px;
-  justify-content: flex-start;
-}
-
-.login-bemvindo {
-  font-size: 0.95rem;
-  color: #333;
-  margin-top: 30px;
-  margin-bottom: 5px;
-}
-.login-titulo {
-  font-size: 2.2rem;
-  color: #1a1a1a;
   font-weight: 700;
-  margin-bottom: 30px;
+  color: #fff;
 }
 
-.botoes-sociais {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 25px;
-  width: 100%;
+.chip-idoso__idade {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.btn-social {
-  flex: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 1px solid #e2e8f0;
-  background-color: #f8fafc;
-  border-radius: 10px;
-  padding: 12px;
-  color: #4a5568;
-  font-size: 0.85rem;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-
-.btn-social-icone {
-  flex: 0.5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e2e8f0;
-  background-color: #f8fafc;
-  border-radius: 10px;
-  padding: 12px;
-  transition: background 0.2s;
-}
-
-.btn-social:hover,
-.btn-social-icone:hover {
-  background-color: #edf2f7;
-}
-
-.divisor {
-  text-align: center;
-  color: #a0aec0;
-  font-size: 0.85rem;
-  margin-bottom: 25px;
-  position: relative;
-}
-
-.campo-grupo {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.campo-grupo label {
-  font-size: 0.85rem;
-  color: #4a5568;
-  font-weight: 500;
-}
-.campo-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.campo-icone {
-  position: absolute;
-  left: 14px;
-  color: #a0aec0;
-  display: flex;
-  align-items: center;
-}
-.campo-wrapper input {
-  width: 100%;
-  padding: 14px 14px 14px 42px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: #333;
-  outline: none;
-  background-color: #fff;
-}
-.campo-wrapper input::placeholder {
-  color: #cbd5e1;
-}
-.campo-olho {
-  position: absolute;
-  right: 14px;
-  background: none;
-  border: none;
-  color: #a0aec0;
-  cursor: pointer;
-}
-.link-esqueceu {
-  display: block;
-  text-align: right;
-  color: #80cef4;
-  font-size: 0.8rem;
-  text-decoration: none;
-  margin-bottom: 30px;
-}
-
-.btn-entrar {
-  width: 100%;
-  background-color: #c6d9a5;
-  color: #1D1E23;
-  border: none;
-  padding: 14px;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(198, 217, 165, 0.3);
-  transition: background 0.2s;
-}
-
-.btn-entrar:hover {
-  filter: brightness(0.95);
-}
-
-.msg-erro {
+#chipIdosoFoto {
   display: none;
-  background-color: #fed7d7;
-  color: #c53030;
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  text-align: center;
+}
+
+#chipIdoso:not([hidden]) #chipIdosoFoto {
+  display: block;
 }
 
 /* =============================================
@@ -3449,10 +3461,6 @@ dialog.modal-container {
     grid-template-columns: 1fr 1fr;
     max-height: none;
   }
-
-  /* ── FIX OVERFLOW tablet-grande ──
-     Entre 1025-1280px o dashboard cola em 9 colunas muito apertadas.
-     Reduzimos os indicadores e textos internos para caber. ── */
   .indicador-item-card--topo .indicador-valor {
     font-size: 1.1rem;
   }
@@ -3585,30 +3593,29 @@ dialog.modal-container {
     overflow-y: visible;
   }
 
-    .vgBotaoMedicamento {
-        width: 100%;
-        max-width: none;
-        min-height: 82px;
-        max-height: none;
-        height: auto;
-        flex-direction: row;
-        gap: 12px;
-        padding: 12px 18px;
-        font-size: 15px;
-        line-height: 1.2;
-    }
+  .vgBotaoMedicamento {
+    width: 100%;
+    max-width: none;
+    min-height: 82px;
+    max-height: none;
+    height: auto;
+    flex-direction: row;
+    gap: 12px;
+    padding: 12px 18px;
+    font-size: 15px;
+    line-height: 1.2;
+  }
 
-    .vg-med-grid {
-        grid-template-columns: 1fr 1fr;  
-        max-height: none;                
-    }
+  .vg-med-grid {
+    grid-template-columns: 1fr 1fr;
+    max-height: none;
+  }
 }
 
 .header-mobile {
   display: none;
 }
 
-/* Botão hambúrguer */
 .btn-hamburguer {
   background: none;
   border: none;
@@ -3635,10 +3642,11 @@ dialog.modal-container {
   height: 2px;
   background-color: #2e2e48;
   border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
-/* Animação hambúrguer → X */
 .btn-hamburguer.aberto span:nth-child(1) {
   transform: translateY(7.5px) rotate(45deg);
 }
@@ -3666,7 +3674,6 @@ dialog.modal-container {
   display: block;
 }
 
-/* Cabeçalho da gaveta com logo */
 .gaveta-topo {
   display: flex;
   align-items: center;
@@ -3696,7 +3703,6 @@ dialog.modal-container {
   background-color: rgba(0, 0, 0, 0.08);
 }
 
-/* Navegação dentro da gaveta */
 .gaveta-mobile .menu-navegacao-gaveta ul {
   list-style: none;
 }
@@ -3732,7 +3738,6 @@ dialog.modal-container {
   filter: brightness(0) invert(1);
 }
 
-/* Rodapé da gaveta: Gerenciar Planos, Configs, Conta */
 .rodape-gaveta {
   margin-top: auto;
   padding: 16px 20px 0 20px;
@@ -3764,7 +3769,6 @@ dialog.modal-container {
     height: auto;
   }
 
-  /* Mostra o header mobile no topo */
   .header-mobile {
     display: flex;
     align-items: center;
@@ -3782,7 +3786,6 @@ dialog.modal-container {
     height: 38px;
   }
 
-  /* Oculta a barra lateral original no mobile */
   .barra-lateral {
     display: none;
   }
@@ -3807,7 +3810,6 @@ dialog.modal-container {
     transform: translateX(0);
   }
 
-  /* Overlay */
   .overlay-gaveta {
     position: fixed;
     inset: 0;
@@ -3936,9 +3938,6 @@ dialog.modal-container {
   .consulta-datetime {
     flex-direction: column;
   }
-  .cal-dia-corpo {
-    grid-template-columns: 44px 1fr;
-  }
   .grid-login {
     flex-direction: column;
   }
@@ -4025,37 +4024,31 @@ dialog.modal-container {
     gap: 4px;
     white-space: nowrap;
   }
-
   .label-medida-peso,
   .label-medida-altura {
     white-space: nowrap;
     font-size: 13px;
   }
-
   .valor-medida-peso,
   .valor-medida-altura {
     white-space: nowrap;
     font-size: 13px;
   }
-
   .med-card {
     flex-direction: column;
     align-items: stretch;
     padding: 14px 12px;
     gap: 10px;
   }
-
   .med-card-icone {
     width: 44px;
     height: 44px;
     padding: 4px;
   }
-
   .med-card-icone .icone-med {
     width: 40px;
     height: 40px;
   }
-
   .med-btn-comprovante {
     width: 100%;
     padding: 10px;
@@ -4063,14 +4056,29 @@ dialog.modal-container {
     border-radius: 12px;
     margin-left: 15px;
   }
-
   .med-btn-comprovante img {
     width: 20px;
     height: 20px;
   }
-
   .menu-navegacao a span {
     white-space: nowrap;
     font-size: 9px;
+  }
+  /* Consultas responsivo */
+  .cal-dia-header {
+    padding: 14px 16px 12px;
+  }
+  .cal-lista-corpo {
+    padding: 8px 16px 20px;
+  }
+  .cal-subtitulo {
+    padding: 10px 16px 6px;
+  }
+  .consulta-card__horario {
+    min-width: 60px;
+    padding: 14px 12px;
+  }
+  .consulta-card__hora {
+    font-size: 14px;
   }
 }
