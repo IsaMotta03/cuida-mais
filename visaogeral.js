@@ -318,5 +318,81 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('vg-modalCheck')?.addEventListener('click', e => {
         if (e.target.id === 'vg-modalCheck') fecharModalCheck();
     });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModalCheck(); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            fecharModalCheck();
+            fecharModalComprovanteVG();
+        }
+    });
+
+    document.querySelector('.vgBotaoMedicamento')?.addEventListener('click', abrirModalComprovanteVG);
+
+    document.getElementById('vg-btnFecharComprovante')?.addEventListener('click', fecharModalComprovanteVG);
+
+    document.getElementById('vg-modalComprovante')?.addEventListener('click', e => {
+        if (e.target.id === 'vg-modalComprovante') fecharModalComprovanteVG();
+    });
+
+    document.getElementById('vg-formComprovante')?.addEventListener('submit', salvarComprovanteVG);
+
+    ['vg-compImagem', 'vg-compVideo'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', () => {
+            const compImagem = document.getElementById('vg-compImagem');
+            const compVideo = document.getElementById('vg-compVideo');
+            document.getElementById('vg-compArquivoNome').textContent =
+                compImagem.files[0]?.name || compVideo.files[0]?.name || '';
+        });
+    });
 });
+
+/* =============================================
+   MODAL COMPROVANTE — VISÃO GERAL
+============================================= */
+function abrirModalComprovanteVG() {
+    const medicamentos = lerStorage(CHAVE_MEDS, []);
+    const med = [...medicamentos].reverse()[0];
+
+    if (!med) return;
+
+    document.getElementById('vg-compMedId').value = med.id;
+    document.getElementById('vg-compNome').value = med.nome;
+    document.getElementById('vg-compDosagem').value = med.dosagem || '';
+
+    document.getElementById('vg-compArquivoNome').textContent = '';
+    document.getElementById('vg-formComprovante').reset();
+
+    document.getElementById('vg-compMedId').value = med.id;
+    document.getElementById('vg-compNome').value = med.nome;
+    document.getElementById('vg-compDosagem').value = med.dosagem || '';
+
+    document.getElementById('vg-modalComprovante').classList.add('visivel');
+}
+
+function fecharModalComprovanteVG() {
+    document.getElementById('vg-modalComprovante')?.classList.remove('visivel');
+}
+
+function salvarComprovanteVG(e) {
+    e.preventDefault();
+
+    const medicamentos = lerStorage(CHAVE_MEDS, []);
+    const medId = document.getElementById('vg-compMedId').value;
+    const med = medicamentos.find(m => m.id === medId);
+
+    if (!med) return;
+
+    const compImagem = document.getElementById('vg-compImagem');
+    const compVideo = document.getElementById('vg-compVideo');
+
+    med.comprovantes = med.comprovantes || [];
+
+    med.comprovantes.push({
+        dataHora: new Date().toISOString(),
+        obs: document.getElementById('vg-compObsComp').value.trim(),
+        arquivoNome: compImagem.files[0]?.name || compVideo.files[0]?.name || '',
+    });
+
+    salvarStorage(CHAVE_MEDS, medicamentos);
+    fecharModalComprovanteVG();
+    carregarMedicamentosGrid();
+}

@@ -251,6 +251,110 @@
       </div>
     </div>
 
+    <!-- =============================================
+     MODAL: COMPROVANTE (VISÃO GERAL)
+============================================= -->
+<div
+  class="modal-overlay"
+  id="vg-modalComprovante"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="vg-tituloModalComp"
+>
+  <div class="cartao cartao-comprovante-form">
+    <div class="form-header">
+      <h1 id="vg-tituloModalComp">Tomou a medicação?</h1>
+      <button
+        class="btn-fechar"
+        id="vg-btnFecharComprovante"
+        aria-label="Fechar"
+      >
+        ×
+      </button>
+    </div>
+
+    <form class="formulario" id="vg-formComprovante" novalidate>
+      <input type="hidden" id="vg-compMedId" />
+
+      <div class="inputs col-span-full">
+        <label for="vg-compNome">Nome do Medicamento</label>
+        <input
+          type="text"
+          id="vg-compNome"
+          placeholder="Ex: Novalgina"
+          readonly
+          style="background: #f8fafc"
+        />
+      </div>
+
+      <div class="inputs col-6">
+        <label for="vg-compDosagem">Dosagem</label>
+        <input
+          type="text"
+          id="vg-compDosagem"
+          placeholder="500 mg"
+          readonly
+          style="background: #f8fafc"
+        />
+      </div>
+
+      <div class="inputs col-6">
+        <label for="vg-compObsComp">Observações</label>
+        <input
+          type="text"
+          id="vg-compObsComp"
+          placeholder="Ex: Reclamou do comprimido"
+        />
+      </div>
+
+      <div class="inputs col-span-full">
+        <label>Comprovação</label>
+        <div style="display: flex; gap: 12px">
+          <label
+            class="btn-anexos"
+            style="flex: 1; cursor: pointer; text-align: center"
+          >
+            Imagem
+            <input
+              type="file"
+              id="vg-compImagem"
+              accept="image/*"
+              class="sr-only"
+            />
+          </label>
+
+          <label
+            class="btn-anexos"
+            style="flex: 1; cursor: pointer; text-align: center"
+          >
+            Vídeo
+            <input
+              type="file"
+              id="vg-compVideo"
+              accept="video/*"
+              class="sr-only"
+            />
+          </label>
+        </div>
+
+        <span
+          id="vg-compArquivoNome"
+          style="
+            display: block;
+            font-size: 12px;
+            color: #727b8e;
+            margin-top: 6px;
+          "
+        ></span>
+      </div>
+
+      <div class="form-footer col-span-full">
+        <button type="submit" class="btn-confirmar">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
     <script src="visaogeral.js"></script>
   </body>
 </html>
