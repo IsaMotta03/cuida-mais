@@ -53,7 +53,7 @@ function carregarChipIdoso() {
 }
 
 /* =============================================
-   CHECKLIST
+   CHECKLIST (TAREFAS)
 ============================================= */
 const CHAVE_CHECKS = 'cuida_checks';
 
@@ -111,8 +111,7 @@ function atualizarContadoresCheck() {
 function abrirModalCheck() {
     const inputTexto = document.getElementById('vg-checkTexto');
     if (inputTexto) inputTexto.value = '';
-    const modal = document.getElementById('vg-modalCheck');
-    if (modal) modal.classList.add('visivel');
+    document.getElementById('vg-modalCheck')?.classList.add('visivel');
     if (inputTexto) inputTexto.focus();
 }
 
@@ -133,43 +132,176 @@ function salvarCheck() {
 }
 
 /* =============================================
-   MEDICAMENTOS
+   MEDICAMENTOS DIÁRIOS
 ============================================= */
 const CHAVE_MEDS = 'cuida_medicamentos';
+let horariosTemp = [];
 
 function carregarMedicamentosGrid() {
     const meds = lerStorage(CHAVE_MEDS, []);
     const grid = document.getElementById('vg-medGrid');
     const vazio = document.getElementById('vg-medVazio');
+    const conteudoLayout = document.getElementById('vg-medConteudo');
+    const txtProgresso = document.getElementById('vg-med-txt-progresso');
+    const circuloProgresso = document.getElementById('vg-medCirculoProgresso');
+    
     if (!grid) return;
     grid.innerHTML = '';
-    if (meds.length === 0) { vazio.style.display = 'flex'; grid.style.display = 'none'; return; }
-    vazio.style.display = 'none'; grid.style.display = 'grid';
-    [...meds].reverse().forEach(med => {
-        const chipsHTML = (med.horarios || []).map(h => `<span class="med-chip-horario med-chip-horario--card">${h}</span>`).join('');
+    
+    if (meds.length === 0) {
+        vazio.style.display = 'flex';
+        conteudoLayout.style.display = 'none';
+        if (txtProgresso) txtProgresso.textContent = "0/0";
+        if (circuloProgresso) circuloProgresso.style.background = `conic-gradient(#e2e8f0 0deg, #e2e8f0 360deg)`;
+        return;
+    }
+    
+    vazio.style.display = 'none';
+    conteudoLayout.style.display = 'flex';
+    
+    let tomadosCount = 0;
+    const hojeStr = new Date().toDateString();
+    
+    [...meds].reverse().forEach((med) => {
+        const jaTomouHoje = (med.comprovantes || []).some(comp => new Date(comp.dataHora).toDateString() === hojeStr);
+        if (jaTomouHoje) tomadosCount++;
+        
         const card = document.createElement('div');
-        card.className = 'med-card vg-med-card';
+        card.className = `vg-med-card ${jaTomouHoje ? 'med-card--tomado-hoje' : ''}`;
+        card.style.cursor = 'pointer';
+        
         card.innerHTML = `
             <img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med">
             <div class="med-card-info">
-                <strong class="med-card-nome" style="font-size: 15px">${escapeHtml(med.nome)}</strong>
-                <span class="med-card-sub" style="font-size: 12px">Dosagem: ${escapeHtml(med.dosagem || '—')}</span>
-                <span class="med-card-sub" style="font-size: 12px">Frequência: ${escapeHtml(med.recorrencia || '—')}</span>
-                <div class="med-card-horarios" style="font-size: 12px">${chipsHTML}</div>
+                <strong class="med-card-nome">${escapeHtml(med.nome)}</strong>
+                <span class="med-card-sub">Dosagem: ${escapeHtml(med.dosagem || '—')}</span>
             </div>`;
+            
+        card.addEventListener('click', () => abrirModalComprovante(med));
         grid.appendChild(card);
     });
+
+    if (txtProgresso) txtProgresso.textContent = `${tomadosCount}/${meds.length}`;
+    if (circuloProgresso && meds.length > 0) {
+        const graus = (tomadosCount / meds.length) * 360;
+        circuloProgresso.style.background = `conic-gradient(#cbdd98 ${graus}deg, #e2e8f0 0deg)`;
+    }
+}
+
+function abrirModalComprovante(med) {
+    document.getElementById('vg-compMedId').value = med.id || '';
+    document.getElementById('vg-compNome').value = med.nome || '';
+    document.getElementById('vg-compDosagem').value = med.dosagem || 'Não informada';
+    document.getElementById('vg-compObsComp').value = '';
+    document.getElementById('vg-compArquivoNome').textContent = '';
+    document.getElementById('vg-compImagem').value = '';
+    document.getElementById('vg-compVideo').value = '';
+    document.getElementById('vg-modalComprovante')?.classList.add('visivel');
+}
+
+function fecharModalComprovante() {
+    document.getElementById('vg-modalComprovante')?.classList.remove('visivel');
+}
+
+function salvarComprovante(e) {
+    e.preventDefault();
+    const medId = document.getElementById('vg-compMedId').value;
+    if (!medId) return;
+
+    let meds = lerStorage(CHAVE_MEDS, []);
+    meds = meds.map(med => {
+        if (med.id === medId) {
+            med.comprovantes = med.comprovantes || [];
+            med.comprovantes.push({
+                dataHora: new Date().toISOString(),
+                obs: document.getElementById('vg-compObsComp').value.trim(),
+                arquivoNome: document.getElementById('vg-compImagem').files[0]?.name || document.getElementById('vg-compVideo').files[0]?.name || ""
+            });
+        }
+        return med;
+    });
+
+    salvarStorage(CHAVE_MEDS, meds);
+    fecharModalComprovante();
+    carregarMedicamentosGrid();
 }
 
 /* =============================================
-   CONSULTAS
-   Lê 'cuidamais_consultas', mostra próximas a partir de hoje.
+   MODAL: NOVO MEDICAMENTO (Lógica do Formulário)
+============================================= */
+function popularDrumCol(col, itens, valorPadrao) {
+    if (!col) return;
+    col.innerHTML = itens.map(v => `<div class="drum-item${v === valorPadrao ? ' ativo' : ''}" data-val="${v}">${v}</div>`).join('');
+    col.querySelectorAll('.drum-item').forEach(el => {
+        el.addEventListener('click', () => {
+            col.querySelectorAll('.drum-item').forEach(x => x.classList.remove('ativo'));
+            el.classList.add('ativo');
+            el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        });
+    });
+}
+
+function buildDrum() {
+    const horas = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
+    const minutos = Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, '0'));
+    popularDrumCol(document.getElementById('drumHoras'), horas, '09');
+    popularDrumCol(document.getElementById('drumMinutos'), minutos, '00');
+    popularDrumCol(document.getElementById('drumPeriodo'), ['AM', 'PM'], 'AM');
+}
+
+function getDrumValor(colId) {
+    return document.getElementById(colId)?.querySelector('.drum-item.ativo')?.dataset.val || null;
+}
+
+function lerHorarioAtual() {
+    const h = getDrumValor('drumHoras') || '09';
+    const m = getDrumValor('drumMinutos') || '00';
+    const p = getDrumValor('drumPeriodo') || 'AM';
+    let horas = parseInt(h, 10);
+    if (p === 'PM' && horas !== 12) horas += 12;
+    if (p === 'AM' && horas === 12) horas = 0;
+    return `${String(horas).padStart(2, '0')}:${m}`;
+}
+
+function renderChips() {
+    const container = document.getElementById('horariosChips');
+    if (!container) return;
+    container.innerHTML = '';
+    if (horariosTemp.length === 0) {
+        container.innerHTML = '<span class="med-horarios-vazio">Nenhum horário adicionado</span>';
+        return;
+    }
+    horariosTemp.forEach((h, idx) => {
+        const chip = document.createElement('span');
+        chip.className = 'med-chip-horario';
+        chip.innerHTML = `${h} <button type="button" aria-label="Remover ${h}" data-idx="${idx}">×</button>`;
+        chip.querySelector('button').addEventListener('click', () => {
+            horariosTemp.splice(idx, 1);
+            renderChips();
+        });
+        container.appendChild(chip);
+    });
+}
+
+function abrirModalNovoMed() {
+    document.getElementById('formNovoMed')?.reset();
+    horariosTemp = [];
+    renderChips();
+    const receitaNomeEl = document.getElementById('receitaNome');
+    if (receitaNomeEl) receitaNomeEl.textContent = '';
+    buildDrum();
+    document.getElementById('modalNovoMed')?.classList.add('visivel');
+    document.getElementById('medNome')?.focus();
+}
+
+function fecharModalNovoMed() {
+    document.getElementById('modalNovoMed')?.classList.remove('visivel');
+}
+
+/* =============================================
+   CONSULTAS (Cards brancos do Figma)
 ============================================= */
 const CHAVE_CONSULTAS = 'cuidamais_consultas';
-const CATEGORIAS_COR = {
-    emergencia: '#E07B7B', consulta: '#2E2E48', exame: '#80CEF4',
-    consulta_rotina: '#E8C97A', exame_rotina: '#CBDD98',
-};
 
 function carregarConsultasVG() {
     const corpo = document.querySelector('.vg-consultas-corpo');
@@ -180,10 +312,8 @@ function carregarConsultasVG() {
 
     const proximas = todas
         .filter(c => { const d = new Date(c.data); d.setHours(0, 0, 0, 0); return d >= hoje; })
-        .sort((a, b) =>
-            new Date(a.data).setHours(a.hora, a.minuto) - new Date(b.data).setHours(b.hora, b.minuto)
-        )
-        .slice(0, 5);
+        .sort((a, b) => new Date(a.data).setHours(a.hora, a.minuto) - new Date(b.data).setHours(b.hora, b.minuto))
+        .slice(0, 3);
 
     if (proximas.length === 0) {
         corpo.innerHTML = `
@@ -197,56 +327,38 @@ function carregarConsultasVG() {
 
     corpo.innerHTML = '';
     proximas.forEach(c => {
-        const cor = CATEGORIAS_COR[c.categoria] || CATEGORIAS_COR.consulta;
-        const dataFmt = new Date(c.data).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' });
         const item = document.createElement('div');
         item.className = 'vg-consulta-item';
         item.innerHTML = `
-            <div class="vg-consulta-info" style="border-bottom: solid 1px; border-color: #2e2e48; padding-bottom: 5px;">
-                <span class="vg-consulta-cor" style="background:${cor}"></span>
-                <strong class="vg-consulta-nome" style="font-size: 20px">${escapeHtml(c.especialidade)}</strong>
-                ${c.profissional ? `<span class="vg-consulta-sub" style="font-size: 15px">${escapeHtml(c.profissional)}</span>` : ''}
-                ${c.hospital ? `<span class="vg-consulta-sub" style="font-size: 15px">${escapeHtml(c.hospital)}</span>` : ''}
+            <div class="vg-consulta-cor">🩺</div>
+            <div class="vg-consulta-info">
+                <strong class="vg-consulta-nome">${escapeHtml(c.especialidade)}</strong>
+                <span class="vg-consulta-sub">${escapeHtml(c.profissional || 'Médico não informado')}</span>
             </div>
-            <div class="vg-consulta-data" >
-                <span class="vg-consulta-dia" style="font-size: 20px">${dataFmt}</span>
-                <span class="vg-consulta-hora" style="font-size: 15px">${escapeHtml(c.horarioLabel)}</span>
+            <div class="vg-consulta-data">
+                <span class="vg-consulta-dia">${escapeHtml(c.horarioLabel.split(' ')[0] || '08:00')}</span>
+                <span class="vg-consulta-hora">${escapeHtml(c.horarioLabel.split(' ')[1] || 'AM')}</span>
             </div>`;
         corpo.appendChild(item);
     });
 }
 
 /* =============================================
-   INDICADORES DE SAÚDE
+   INDICADORES DE SAÚDE (Temperatura na base)
 ============================================= */
 function carregarIndicadoresSaude() {
     const dadosSaude = lerStorage('dados_saude_inputs', {});
-    const corpoIndicadores = document.querySelector('.vg-indicadores-corpo');
-    if (!corpoIndicadores) return;
+    const elPeso = document.getElementById('vg-ind-val-peso');
+    const elGlicose = document.getElementById('vg-ind-val-glicose');
+    const elTemperatura = document.getElementById('vg-ind-val-temperatura');
 
-    const pressao = escapeHtml(dadosSaude.pressao || '—');
-    const glicose = escapeHtml(dadosSaude.glicose || '—');
-    const temperatura = escapeHtml(dadosSaude.temperatura || '—');
-
-    corpoIndicadores.innerHTML = `
-        <div class="indicador-item-card indicador-item-card--topo indicador-card--batimentos">
-            <div class="indicador-header" ><span>🫀</span><span style="font-size: 15px">Pressão Arterial</span></div>
-            <div class="indicador-valor">${pressao} <span>mmHg</span></div>
-        </div>
-        <div class="indicador-item-card indicador-item-card--topo indicador-card--glicose">
-            <div class="indicador-header"><span>🩸</span><span style="font-size: 15px">Glicose</span></div>
-            <div class="indicador-valor">${glicose} <span>mg/dL</span></div>
-        </div>
-        <div class="indicador-item-card indicador-card--colesterol">
-            <div class="indicador-header"><span>🌡️</span><span style="font-size: 15px">Temperatura</span></div>
-            <div class="indicador-valor">${temperatura} <span>°C</span></div>
-        </div>`;
+    if (elPeso && dadosSaude.peso) elPeso.textContent = `${dadosSaude.peso} Kg`;
+    if (elGlicose && dadosSaude.glicose) elGlicose.textContent = dadosSaude.glicose;
+    if (elTemperatura && dadosSaude.temperatura) elTemperatura.textContent = `${dadosSaude.temperatura} °C`;
 }
 
 /* =============================================
    RELATÓRIO: HUMOR + NOTAS
-   Humor: exibe um card visual igual ao btn-humor-card do acompanhamento,
-   mostrando apenas o humor selecionado.
 ============================================= */
 const MAPA_HUMOR = {
     feliz: { emoji: 'assets/icons/feliz.svg', label: 'Feliz' },
@@ -256,32 +368,29 @@ const MAPA_HUMOR = {
 };
 
 function carregarRelatorioSincronizado() {
-    // ── Humor ──────────────────────────────────────
     const humorSalvo = lerStorage('relatorio_humor_atual', null);
     const elHumor = document.getElementById('vg-relatorio-humor');
 
     if (elHumor) {
         const h = MAPA_HUMOR[humorSalvo];
         if (h) {
-            // Card visual com o mesmo estilo de btn-humor-card.ativo
             elHumor.innerHTML = `
-                <div class="vg-humor-card-ativo humor-${humorSalvo}">
+                <div class="vg-humor-card-ativo humor-${humorSalvo}" style="margin: 0; padding: 10px;">
                     <img src="${h.emoji}" alt="${h.label}" onerror="this.style.display='none'">
                     <span>${h.label}</span>
                 </div>`;
         } else {
-            elHumor.innerHTML = `<span class="vg-humor-nao-registrado">— Não registrado</span>`;
+            elHumor.innerHTML = `<span class="vg-humor-nao-registrado" style="color: #afb9cf; font-size: 12px;">Não registrado</span>`;
         }
     }
 
-    // ── Notas ──────────────────────────────────────
     const notas = lerStorage('cuida_notas', lerStorage('cuida_notes', []));
     const containerNotas = document.getElementById('vg-lista-notas-painel');
     if (!containerNotas) return;
     containerNotas.innerHTML = '';
 
     if (notas.length === 0) {
-        containerNotas.innerHTML = `<p class="vg-notas-vazio">Nenhuma nota ou observação registrada.</p>`;
+        containerNotas.innerHTML = `<p class="vg-notas-vazio" style="font-size:12px; color:#b0b8c8; font-style:italic; padding-top:4px;">Nenhuma observação registrada.</p>`;
         return;
     }
 
@@ -291,18 +400,17 @@ function carregarRelatorioSincronizado() {
         const autor = nota.autor ? `Por: ${escapeHtml(nota.autor)}` : 'Autor não informado';
         const dataStr = nota.data ? new Date(nota.data).toLocaleDateString('pt-BR') : '';
         div.innerHTML = `
-            <div class="nota-meta">
+            <div class="nota-meta" style="font-size:11px; padding:3px 6px;">
                 <span><strong>${autor}</strong></span>
                 <span>${dataStr}</span>
             </div>
-            <div class="nota-texto">${escapeHtml(nota.texto)}</div>
-            `;
+            <div class="nota-texto" style="font-size:12px; padding:4px 6px; max-height:65px;">${escapeHtml(nota.texto)}</div>`;
         containerNotas.appendChild(div);
     });
 }
 
 /* =============================================
-   INICIALIZAÇÃO
+   INICIALIZAÇÃO DE EVENTOS
 ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
     carregarChipIdoso();
@@ -312,87 +420,87 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarRelatorioSincronizado();
     carregarConsultasVG();
 
+    /* Modais do Checklist */
     document.getElementById('vg-btnAdicionarCheck')?.addEventListener('click', abrirModalCheck);
     document.getElementById('vg-btnFecharCheck')?.addEventListener('click', fecharModalCheck);
     document.getElementById('vg-btnSalvarCheck')?.addEventListener('click', salvarCheck);
     document.getElementById('vg-modalCheck')?.addEventListener('click', e => {
         if (e.target.id === 'vg-modalCheck') fecharModalCheck();
     });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            fecharModalCheck();
-            fecharModalComprovanteVG();
+
+    /* Modais de Medicamentos */
+    document.getElementById('vg-btnAbrirModalMed')?.addEventListener('click', abrirModalNovoMed);
+    document.getElementById('btnFecharModalMed')?.addEventListener('click', fecharModalNovoMed);
+    document.getElementById('modalNovoMed')?.addEventListener('click', e => {
+        if (e.target.id === 'modalNovoMed') fecharModalNovoMed();
+    });
+
+    document.getElementById('btnAddHorario')?.addEventListener('click', () => {
+        const h = lerHorarioAtual();
+        if (!horariosTemp.includes(h)) {
+            horariosTemp.push(h);
+            horariosTemp.sort();
+            renderChips();
         }
     });
 
-    document.querySelector('.vgBotaoMedicamento')?.addEventListener('click', abrirModalComprovanteVG);
-
-    document.getElementById('vg-btnFecharComprovante')?.addEventListener('click', fecharModalComprovanteVG);
-
-    document.getElementById('vg-modalComprovante')?.addEventListener('click', e => {
-        if (e.target.id === 'vg-modalComprovante') fecharModalComprovanteVG();
+    document.getElementById('medReceita')?.addEventListener('change', (e) => {
+        const receitaNomeEl = document.getElementById('receitaNome');
+        if (receitaNomeEl) receitaNomeEl.textContent = e.target.files[0]?.name || "";
     });
 
-    document.getElementById('vg-formComprovante')?.addEventListener('submit', salvarComprovanteVG);
+    document.getElementById('formNovoMed')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nomeInput = document.getElementById('medNome');
+        const nome = nomeInput.value.trim();
+        if (!nome) {
+            nomeInput.classList.add('campo-erro');
+            nomeInput.focus();
+            return;
+        }
+        nomeInput.classList.remove('campo-erro');
 
-    ['vg-compImagem', 'vg-compVideo'].forEach(id => {
-        document.getElementById(id)?.addEventListener('change', () => {
-            const compImagem = document.getElementById('vg-compImagem');
-            const compVideo = document.getElementById('vg-compVideo');
-            document.getElementById('vg-compArquivoNome').textContent =
-                compImagem.files[0]?.name || compVideo.files[0]?.name || '';
+        const meds = lerStorage(CHAVE_MEDS, []);
+        meds.push({
+            id: Date.now().toString(),
+            nome,
+            dosagem: document.getElementById('medDosagem').value.trim(),
+            medico: document.getElementById('medMedico').value.trim(),
+            cid: document.getElementById('medCid').value.trim(),
+            recorrencia: document.getElementById('medRecorrencia').value || "Uso contínuo",
+            obs: document.getElementById('medObs').value.trim(),
+            horarios: [...horariosTemp],
+            comprovantes: []
         });
+
+        salvarStorage(CHAVE_MEDS, meds);
+        carregarMedicamentosGrid();
+        fecharModalNovoMed();
+    });
+
+    /* Modal Comprovante de Medicamento */
+    document.getElementById('vg-btnFecharComprovante')?.addEventListener('click', fecharModalComprovante);
+    document.getElementById('vg-formComprovante')?.addEventListener('submit', salvarComprovante);
+    document.getElementById('vg-modalComprovante')?.addEventListener('click', e => {
+        if (e.target.id === 'vg-modalComprovante') fecharModalComprovante();
+    });
+
+    const monitorarUploads = (idInput) => {
+        document.getElementById(idInput)?.addEventListener('change', (e) => {
+            const nome = e.target.files[0]?.name || '';
+            const txtLabel = document.getElementById('vg-compArquivoNome');
+            if (txtLabel && nome) txtLabel.textContent = `Selecionado: ${nome}`;
+        });
+    };
+    monitorarUploads('vg-compImagem');
+    monitorarUploads('vg-compVideo');
+
+    /* Fechar todos com ESC */
+    document.addEventListener('keydown', e => { 
+        if (e.key === 'Escape') {
+            fecharModalCheck();
+            fecharModalNovoMed();
+            fecharModalComprovante();
+        } 
     });
 });
-
-/* =============================================
-   MODAL COMPROVANTE — VISÃO GERAL
-============================================= */
-function abrirModalComprovanteVG() {
-    const medicamentos = lerStorage(CHAVE_MEDS, []);
-    const med = [...medicamentos].reverse()[0];
-
-    if (!med) return;
-
-    document.getElementById('vg-compMedId').value = med.id;
-    document.getElementById('vg-compNome').value = med.nome;
-    document.getElementById('vg-compDosagem').value = med.dosagem || '';
-
-    document.getElementById('vg-compArquivoNome').textContent = '';
-    document.getElementById('vg-formComprovante').reset();
-
-    document.getElementById('vg-compMedId').value = med.id;
-    document.getElementById('vg-compNome').value = med.nome;
-    document.getElementById('vg-compDosagem').value = med.dosagem || '';
-
-    document.getElementById('vg-modalComprovante').classList.add('visivel');
-}
-
-function fecharModalComprovanteVG() {
-    document.getElementById('vg-modalComprovante')?.classList.remove('visivel');
-}
-
-function salvarComprovanteVG(e) {
-    e.preventDefault();
-
-    const medicamentos = lerStorage(CHAVE_MEDS, []);
-    const medId = document.getElementById('vg-compMedId').value;
-    const med = medicamentos.find(m => m.id === medId);
-
-    if (!med) return;
-
-    const compImagem = document.getElementById('vg-compImagem');
-    const compVideo = document.getElementById('vg-compVideo');
-
-    med.comprovantes = med.comprovantes || [];
-
-    med.comprovantes.push({
-        dataHora: new Date().toISOString(),
-        obs: document.getElementById('vg-compObsComp').value.trim(),
-        arquivoNome: compImagem.files[0]?.name || compVideo.files[0]?.name || '',
-    });
-
-    salvarStorage(CHAVE_MEDS, medicamentos);
-    fecharModalComprovanteVG();
-    carregarMedicamentosGrid();
-}
