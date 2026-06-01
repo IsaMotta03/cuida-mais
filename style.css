@@ -1701,6 +1701,13 @@ dialog.modal-container {
   color: rgba(255, 255, 255, 0.85);
 }
 
+#chipIdosoFoto {
+  display: none;
+}
+
+#chipIdoso:not([hidden]) #chipIdosoFoto {
+  display: block;
+}
 .area-conteudo-acompanhamento #galeria {
   padding: 20px;
   align-items: flex-start;
@@ -3788,5 +3795,59 @@ dialog.modal-container {
     margin-top: 12px;
     width: 100%;
     text-align: center;
+  }
+  .valores-medidas > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .label-medida-peso,
+  .label-medida-altura {
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  .valor-medida-peso,
+  .valor-medida-altura {
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  .med-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 12px;
+    gap: 10px;
+  }
+
+  .med-card-icone {
+    width: 44px;
+    height: 44px;
+    padding: 4px;
+  }
+
+  .med-card-icone .icone-med {
+    width: 40px;
+    height: 40px;
+  }
+
+  .med-btn-comprovante {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 12px;
+    margin-left: 15px;
+  }
+
+  .med-btn-comprovante img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-navegacao a span {
+    white-space: nowrap;
+    font-size: 9px;
   }
 }
