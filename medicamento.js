@@ -1,28 +1,15 @@
 /* =============================================
    medicamento.js — Cuida+
-   Lógica completa da página de Medicamentos
 ============================================= */
-
 "use strict";
-
-/* ── Ícones SVG inline por tipo de medicamento ── */
 
 const pillIcon =
   '<img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med">';
-
-const ICONES_MED = {
-  comprimido: pillIcon,
-  capsula: pillIcon,
-  injecao: pillIcon,
-};
-
-function getIcone(nome) {
+function getIcone() {
   return pillIcon;
 }
 
-/* ── Armazenamento ── */
 const STORAGE_KEY = "cuida_medicamentos";
-
 function carregarMedicamentos() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -30,38 +17,27 @@ function carregarMedicamentos() {
     return [];
   }
 }
-
 function salvarMedicamentos(lista) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
 }
 
-/* ── Estado global ── */
 let medicamentos = carregarMedicamentos();
 
-/* ── Referências DOM ── */
 const estadoVazio = document.getElementById("estadoVazio");
 const gridMedicamentos = document.getElementById("gridMedicamentos");
 const contadorEl = document.getElementById("contadorMedicamentos");
 const areaConteudo = document.getElementById("areaConteudo");
-
-// Modal novo medicamento
 const modalNovoMed = document.getElementById("modalNovoMed");
 const btnAbrirModalMed = document.getElementById("btnAbrirModalMed");
 const btnFecharModalMed = document.getElementById("btnFecharModalMed");
 const formNovoMed = document.getElementById("formNovoMed");
-
-// Drum
 const drumHoras = document.getElementById("drumHoras");
 const drumMinutos = document.getElementById("drumMinutos");
 const drumPeriodo = document.getElementById("drumPeriodo");
 const btnAddHorario = document.getElementById("btnAddHorario");
 const horariosChips = document.getElementById("horariosChips");
-
-// Receita
 const medReceitaInput = document.getElementById("medReceita");
 const receitaNomeEl = document.getElementById("receitaNome");
-
-// Modal comprovante
 const modalComprovante = document.getElementById("modalComprovante");
 const btnFecharComp = document.getElementById("btnFecharComprovante");
 const formComprovante = document.getElementById("formComprovante");
@@ -69,76 +45,55 @@ const compImagem = document.getElementById("compImagem");
 const compVideo = document.getElementById("compVideo");
 const compArquivoNome = document.getElementById("compArquivoNome");
 
-/* ── Horários temporários (durante preenchimento do form) ── */
 let horariosTemp = [];
 
 /* ══════════════════════════════════════════
-   DRUM PICKER
+   DRUM — baseado na abordagem de consultas.js
+   Sem padding, sem ghosts, sem snap complexo.
+   Só popula itens e registra clique.
+   O scroll nativo do browser posiciona os itens.
 ══════════════════════════════════════════ */
-function buildDrum() {
-  // Horas 1–12
-  for (let h = 1; h <= 12; h++) {
-    const el = document.createElement("div");
-    el.className = "drum-item";
-    el.dataset.val = String(h).padStart(2, "0");
-    el.textContent = String(h).padStart(2, "0");
-    drumHoras.appendChild(el);
-  }
-  // Minutos 00–59
-  for (let m = 0; m < 60; m++) {
-    const el = document.createElement("div");
-    el.className = "drum-item";
-    el.dataset.val = String(m).padStart(2, "0");
-    el.textContent = String(m).padStart(2, "0");
-    drumMinutos.appendChild(el);
-  }
+function popularDrumCol(col, itens, valorPadrao) {
+  col.innerHTML = itens
+    .map(
+      (v) =>
+        `<div class="drum-item${v === valorPadrao ? " ativo" : ""}" data-val="${v}">${v}</div>`,
+    )
+    .join("");
 
-  ativarDrum(drumHoras, "09");
-  ativarDrum(drumMinutos, "00");
-  ativarDrum(drumPeriodo, "AM");
+  col.querySelectorAll(".drum-item").forEach((el) => {
+    el.addEventListener("click", () => {
+      col
+        .querySelectorAll(".drum-item")
+        .forEach((x) => x.classList.remove("ativo"));
+      el.classList.add("ativo");
+      // centraliza o item clicado na coluna
+      el.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+  });
 }
 
-function ativarDrum(col, valPadrao) {
-  const items = col.querySelectorAll(".drum-item");
-
-  function ativar(el) {
-    items.forEach((i) => i.classList.remove("ativo"));
-    el.classList.add("ativo");
-    el.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }
-
-  // Ativa padrão
-  const def = [...items].find((i) => i.dataset.val === valPadrao);
-  if (def) ativar(def);
-
-  items.forEach((item) => {
-    item.addEventListener("click", () => ativar(item));
-  });
-
-  // Scroll → atualiza ativo
-  col.addEventListener(
-    "scroll",
-    () => {
-      const centro = col.scrollTop + col.clientHeight / 2;
-      let melhor = null,
-        menorDist = Infinity;
-      items.forEach((item) => {
-        const dist = Math.abs(item.offsetTop + item.offsetHeight / 2 - centro);
-        if (dist < menorDist) {
-          menorDist = dist;
-          melhor = item;
-        }
-      });
-      if (melhor) ativar(melhor);
-    },
-    { passive: true },
+function buildDrum() {
+  const horas = Array.from({ length: 12 }, (_, i) =>
+    String(i + 1).padStart(2, "0"),
   );
+  const minutos = Array.from({ length: 12 }, (_, i) =>
+    String(i * 5).padStart(2, "0"),
+  );
+
+  popularDrumCol(drumHoras, horas, "09");
+  popularDrumCol(drumMinutos, minutos, "00");
+  popularDrumCol(drumPeriodo, ["AM", "PM"], "AM");
+}
+
+function getDrumValor(col) {
+  return col.querySelector(".drum-item.ativo")?.dataset.val || null;
 }
 
 function lerHorarioAtual() {
-  const h = drumHoras.querySelector(".ativo")?.dataset.val || "09";
-  const m = drumMinutos.querySelector(".ativo")?.dataset.val || "00";
-  const p = drumPeriodo.querySelector(".ativo")?.dataset.val || "AM";
+  const h = getDrumValor(drumHoras) || "09";
+  const m = getDrumValor(drumMinutos) || "00";
+  const p = getDrumValor(drumPeriodo) || "AM";
 
   let horas = parseInt(h, 10);
   if (p === "PM" && horas !== 12) horas += 12;
@@ -147,6 +102,9 @@ function lerHorarioAtual() {
   return `${String(horas).padStart(2, "0")}:${m}`;
 }
 
+/* ══════════════════════════════════════════
+   CHIPS DE HORÁRIO
+══════════════════════════════════════════ */
 function renderChips() {
   horariosChips.innerHTML = "";
   if (horariosTemp.length === 0) {
@@ -176,15 +134,15 @@ btnAddHorario.addEventListener("click", () => {
 });
 
 /* ══════════════════════════════════════════
-   RENDERIZAR GRID DE CARDS
+   GRID DE CARDS
 ══════════════════════════════════════════ */
 function renderGrid() {
   const total = medicamentos.length;
   contadorEl.textContent = `${total} medicamento${total !== 1 ? "s" : ""} cadastrado${total !== 1 ? "s" : ""}`;
 
   if (total === 0) {
-    estadoVazio.style.display = ""; // restaura display padrão (flex herdado)
-    gridMedicamentos.style.display = "none"; // esconde o grid
+    estadoVazio.style.display = "";
+    gridMedicamentos.style.display = "none";
     areaConteudo.style.alignItems = "center";
     areaConteudo.style.justifyContent = "center";
     areaConteudo.style.padding = "40px";
@@ -192,15 +150,14 @@ function renderGrid() {
     return;
   }
 
-  estadoVazio.style.display = "none"; // esconde estado vazio
-  gridMedicamentos.style.display = "grid"; // mostra grid
+  estadoVazio.style.display = "none";
+  gridMedicamentos.style.display = "grid";
   areaConteudo.style.alignItems = "flex-start";
   areaConteudo.style.justifyContent = "flex-start";
   areaConteudo.style.padding = "24px 30px";
   areaConteudo.style.overflowY = "auto";
 
   gridMedicamentos.innerHTML = "";
-
   medicamentos.forEach((med) => {
     const card = document.createElement("div");
     card.className = "med-card";
@@ -214,7 +171,7 @@ function renderGrid() {
       .join("");
 
     card.innerHTML = `
-      <div class="med-card-icone">${getIcone(med.nome)}</div>
+      <div class="med-card-icone">${getIcone()}</div>
       <div class="med-card-info">
         <strong class="med-card-nome">${med.nome}</strong>
         <span class="med-card-sub">Responsável: ${med.medico || "—"}</span>
@@ -226,24 +183,24 @@ function renderGrid() {
         <span>Comprovante</span>
       </button>
     `;
-
     gridMedicamentos.appendChild(card);
   });
 
-  // Delegação de eventos nos botões de comprovante
   gridMedicamentos.querySelectorAll(".med-btn-comprovante").forEach((btn) => {
     btn.addEventListener("click", () => abrirModalComprovante(btn.dataset.id));
   });
 }
 
 /* ══════════════════════════════════════════
-   MODAL NOVO MEDICAMENTO — ABRIR / FECHAR
+   MODAL NOVO MEDICAMENTO
 ══════════════════════════════════════════ */
 function abrirModalMed() {
   formNovoMed.reset();
   horariosTemp = [];
   renderChips();
   receitaNomeEl.textContent = "";
+  // Reconstrói o drum toda vez que o modal abre (igual a consultas.js)
+  buildDrum();
   modalNovoMed.classList.add("visivel");
   document.getElementById("medNome").focus();
 }
@@ -257,15 +214,12 @@ btnFecharModalMed.addEventListener("click", fecharModalMed);
 modalNovoMed.addEventListener("click", (e) => {
   if (e.target === modalNovoMed) fecharModalMed();
 });
-
 medReceitaInput.addEventListener("change", () => {
   receitaNomeEl.textContent = medReceitaInput.files[0]?.name || "";
 });
 
-/* ── Submit: novo medicamento ── */
 formNovoMed.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const nome = document.getElementById("medNome").value.trim();
   if (!nome) {
     document.getElementById("medNome").classList.add("campo-erro");
@@ -274,7 +228,7 @@ formNovoMed.addEventListener("submit", (e) => {
   }
   document.getElementById("medNome").classList.remove("campo-erro");
 
-  const novo = {
+  medicamentos.push({
     id: Date.now().toString(),
     nome,
     dosagem: document.getElementById("medDosagem").value.trim(),
@@ -285,31 +239,26 @@ formNovoMed.addEventListener("submit", (e) => {
     obs: document.getElementById("medObs").value.trim(),
     horarios: [...horariosTemp],
     comprovantes: [],
-  };
+  });
 
-  medicamentos.push(novo);
   salvarMedicamentos(medicamentos);
   renderGrid();
   fecharModalMed();
 });
 
 /* ══════════════════════════════════════════
-   MODAL COMPROVANTE — ABRIR / FECHAR
+   MODAL COMPROVANTE
 ══════════════════════════════════════════ */
 function abrirModalComprovante(medId) {
   const med = medicamentos.find((m) => m.id === medId);
   if (!med) return;
-
   document.getElementById("compMedId").value = med.id;
   document.getElementById("compNome").value = med.nome;
   document.getElementById("compDosagem").value = med.dosagem || "";
-  document.getElementById("compObsComp").value = "";
   compArquivoNome.textContent = "";
   formComprovante.reset();
-  // re-setar fields somente-leitura (reset limpa tudo)
   document.getElementById("compNome").value = med.nome;
   document.getElementById("compDosagem").value = med.dosagem || "";
-
   modalComprovante.classList.add("visivel");
 }
 
@@ -324,51 +273,37 @@ modalComprovante.addEventListener("click", (e) => {
 
 [compImagem, compVideo].forEach((input) => {
   input.addEventListener("change", () => {
-    const arquivo = compImagem.files[0] || compVideo.files[0];
-    compArquivoNome.textContent = arquivo ? arquivo.name : "";
+    compArquivoNome.textContent =
+      (compImagem.files[0] || compVideo.files[0])?.name || "";
   });
 });
 
-/* ── Submit: comprovante ── */
 formComprovante.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const medId = document.getElementById("compMedId").value;
   const med = medicamentos.find((m) => m.id === medId);
   if (!med) return;
 
-  const comprovante = {
+  (med.comprovantes = med.comprovantes || []).push({
     dataHora: new Date().toISOString(),
     obs: document.getElementById("compObsComp").value.trim(),
     arquivoNome: compImagem.files[0]?.name || compVideo.files[0]?.name || "",
-  };
-
-  med.comprovantes = med.comprovantes || [];
-  med.comprovantes.push(comprovante);
+  });
   salvarMedicamentos(medicamentos);
-
   fecharModalComprovante();
 
-  // Feedback visual no card
   const card = gridMedicamentos.querySelector(`[data-id="${medId}"]`);
   if (card) {
     const btn = card.querySelector(".med-btn-comprovante");
     btn.classList.add("med-btn-comprovante--ok");
-    btn.innerHTML = `
-      <img src="assets/icons/Save.svg" width="22" height="22" alt="">
-      <span>Registrado</span>
-    `;
+    btn.innerHTML = `<img src="assets/icons/Save.svg" width="22" height="22" alt=""><span>Registrado</span>`;
     setTimeout(() => {
       btn.classList.remove("med-btn-comprovante--ok");
-      btn.innerHTML = `
-        <img src="assets/icons/Save.svg" width="22" height="22" alt="">
-        <span>Comprovante</span>
-      `;
+      btn.innerHTML = `<img src="assets/icons/Save.svg" width="22" height="22" alt=""><span>Comprovante</span>`;
     }, 3000);
   }
 });
 
-/* ── Fechar modais com ESC ── */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     fecharModalMed();
@@ -379,5 +314,4 @@ document.addEventListener("keydown", (e) => {
 /* ══════════════════════════════════════════
    INICIALIZAÇÃO
 ══════════════════════════════════════════ */
-buildDrum();
 renderGrid();

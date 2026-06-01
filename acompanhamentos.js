@@ -27,13 +27,18 @@ function gerarId() {
 function carregarChipIdoso() {
   const lista = lerStorage("cuida_idosos", []);
   const idoso = lista[0];
-
-  if (!idoso || !idoso.nome) return;
-
   const chipEl = document.getElementById("chipIdoso");
+  const fotoEl = document.getElementById("chipIdosoFoto");
+
+  if (!idoso || !idoso.nome) {
+    chipEl.hidden = true;
+    fotoEl.src = "";
+    fotoEl.style.display = "none";
+    return;
+  }
+
   const nomeEl = document.getElementById("chipIdosoNome");
   const idadeEl = document.getElementById("chipIdosoIdade");
-  const fotoEl = document.getElementById("chipIdosoFoto");
 
   nomeEl.textContent = idoso.nome;
 
@@ -45,6 +50,8 @@ function carregarChipIdoso() {
   }
 
   fotoEl.src = "assets/icons/idoso1.svg";
+  fotoEl.style.display = "block";
+  fotoEl.onerror = () => { fotoEl.style.display = "none"; };
   chipEl.hidden = false;
 }
 
