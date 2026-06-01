@@ -10,6 +10,84 @@
 </head>
 
 <body class="painel">
+    <header class="header-mobile">
+        <img src="assets/icons/logo.svg" alt="Logo cuida+" class="logo-header" />
+        <button class="btn-hamburguer" id="btnHamburguer" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+
+      <nav class="gaveta-mobile" id="gavetaMobile" aria-label="Menu principal">
+        <div class="gaveta-topo">
+          <img src="assets/icons/logo.svg" alt="Logo cuida+" class="logo-gaveta" />
+          <button class="btn-fechar-gaveta" id="btnFecharGaveta" aria-label="Fechar menu">&times;</button>
+        </div>
+
+        <div class="menu-navegacao-gaveta">
+          <ul>
+            <li>
+              <a href="visaogeral.html">
+                <img src="assets/icons/visao-geral.svg" alt="Ícone Visão Geral" />
+                <span>Visão Geral</span>
+              </a>
+            </li>
+            <li>
+              <a href="pessoas.html">
+                <img src="assets/icons/pessoas.svg" alt="Ícone Pessoas" />
+                <span>Pessoas</span>
+              </a>
+            </li>
+            <li>
+              <a href="medicamento.html">
+                <img src="assets/icons/medicamentos.svg" alt="Ícone Medicamentos" />
+                <span>Medicamentos</span>
+              </a>
+            </li>
+            <li>
+              <a href="consultas.html">
+                <img src="assets/icons/consultas.svg" alt="Ícone Consultas" />
+                <span>Consultas</span>
+              </a>
+            </li>
+            <li class="selecionado">
+              <a href="acompanhamentos.html">
+                <img src="assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento" />
+                <span>Acompanhamento</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rodape-gaveta">
+          <a href="#" class="botao-escuro gerenciarPlanos">
+            <img src="assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos" />
+            <span>Gerenciar Planos</span>
+          </a>
+          <a href="#configuracoes" class="link-configuracoes">
+            <img src="assets/icons/configuracoes.svg" alt="Ícone Configurações" />
+            <span>Configurações</span>
+          </a>
+          <section class="perfil-usuario">
+            <figure class="informacoes-usuario">
+              <img src="assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil" />
+              <figcaption class="detalhes-usuario">
+                <span class="nome-usuario">Fulano Siclano</span>
+                <span class="email-usuario">fulano@uol.com</span>
+              </figcaption>
+            </figure>
+            <a href="login.html" class="botao-sair" title="Sair da conta">
+              <button style="border: none; background: transparent">
+                <img src="assets/icons/logout.svg" alt="Ícone Sair" class="sair" />
+              </button>
+            </a>
+          </section>
+        </div>
+      </nav>
+
+      <!-- OVERLAY -->
+      <div class="overlay-gaveta" id="overlayGaveta"></div>
 
     <aside class="barra-lateral">
 
