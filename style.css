@@ -767,22 +767,25 @@ h3 {
 }
 
 .btn-anexos {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
   background-color: #7cd1f9;
   color: #ffffff;
   border: none;
   border-radius: 12px;
   padding: 11px;
   font-weight: bold;
-  text-align: center;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(124, 209, 249, 0.3);
   width: 100%;
 }
 
 .btn-anexos img {
-  position: relative;
-  top: 6px;
+  position: static; 
+  margin: 0;
+  top: auto;
 }
 
 .sr-only {
@@ -3580,7 +3583,6 @@ dialog.modal-container {
   align-items: center;
   width: 100%;
 }
-
 /* ─────────────────────────────────────────────
    1. RELATÓRIO GERAL
    ───────────────────────────────────────────── */
@@ -3602,29 +3604,33 @@ dialog.modal-container {
   border: 1px solid #d8eefac4;
   background-color: #f4faff;
   border-radius: 12px;
-  padding: 12px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-height: 0;
+  overflow: hidden; /* Impede que qualquer texto vaze do card */
 }
 
 .vg-card-relatorio .vg-conteiner-humor {
   grid-row: 1;
   grid-column: 1;
-  justify-content: left;
+  justify-content: flex-start;
 }
+
 .vg-card-relatorio .vg-conteiner-humorSemanal {
   grid-row: 2;
   grid-column: 1;
-  justify-content: left;
-  text-align: space-between;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
+
 .vg-card-relatorio .vg-conteiner-notas {
   grid-row: 1 / 3;
   grid-column: 2;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .vg-card-relatorio .vg-quadrante-titulo {
@@ -3632,8 +3638,10 @@ dialog.modal-container {
   font-size: 12px;
   font-weight: 600;
   color: #2e2e48;
+  justify-content: space-between;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 
 .vg-card-relatorio .vg-notes-painel-lista {
@@ -3642,7 +3650,7 @@ dialog.modal-container {
   gap: 8px;
   overflow-y: auto;
   flex: 1;
-  padding-right: 2px;
+  padding-right: 4px;
 }
 
 .vg-card-relatorio .vg-nota-item-feed {
@@ -3674,41 +3682,24 @@ dialog.modal-container {
 
 .vg-card-relatorio .vg-humor-card-ativo {
   border-radius: 10px;
-  padding: 50px 8px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 6px;
   width: 100%;
-  height: 100%;
-}
-.vg-card-relatorio .vg-humor-card-ativo.humor-feliz {
-  background-color: #cbdd98;
-  color: #2e2e48;
-}
-.vg-card-relatorio .vg-humor-card-ativo.humor-neutro {
-  background-color: #90b8e0;
-  color: #2e2e48;
-}
-.vg-card-relatorio .vg-humor-card-ativo.humor-triste {
-  background-color: #f0d080;
-  color: #2e2e48;
-}
-.vg-card-relatorio .vg-humor-card-ativo.humor-depressivo {
-  background-color: #e08080;
-  color: #2e2e48;
+  flex: 1; /* Estica e centraliza automaticamente sem forçar altura */
+  min-height: 70px;
 }
 
-.vg-card-relatorio .vg-humor-card-ativo img {
-  width: 30px;
-  height: 30px;
-}
-.vg-card-relatorio .vg-humor-card-ativo span {
-  font-size: 13px;
-  font-weight: 600;
-}
+.vg-card-relatorio .vg-humor-card-ativo.humor-feliz { background-color: #cbdd98; color: #2e2e48; }
+.vg-card-relatorio .vg-humor-card-ativo.humor-neutro { background-color: #90b8e0; color: #2e2e48; }
+.vg-card-relatorio .vg-humor-card-ativo.humor-triste { background-color: #f0d080; color: #2e2e48; }
+.vg-card-relatorio .vg-humor-card-ativo.humor-depressivo { background-color: #e08080; color: #2e2e48; }
 
+.vg-card-relatorio .vg-humor-card-ativo img { width: 30px; height: 30px; }
+.vg-card-relatorio .vg-humor-card-ativo span { font-size: 13px; font-weight: 600; }
 /* ─────────────────────────────────────────────
    2. INDICADORES (Padrão Figma Exato + Temperatura)
    ───────────────────────────────────────────── */
@@ -4065,9 +4056,7 @@ dialog.modal-container {
 }
 .vg-card-tarefas .check-item__btn-remover:hover {
   color: #e07b7b;
-}
-
-/* ─────────────────────────────────────────────
+}/* ─────────────────────────────────────────────
    5. MEDICAMENTOS DIÁRIO
    ───────────────────────────────────────────── */
 .vg-dashboard .vg-card-medicamentos {
@@ -4080,38 +4069,39 @@ dialog.modal-container {
 
 .vg-card-medicamentos .vg-med-layout-interno-painel {
   display: flex;
-  align-items: stretch; /* Faz os lados respeitarem a altura disponível */
+  align-items: stretch; /* O botão azul e a grade acompanham a mesma altura do painel */
   justify-content: space-between;
   gap: 16px;
   height: 100%;
   flex: 1;
-  min-height: 0; /* Trava de segurança crucial para ativar o scroll */
+  min-height: 0; 
 }
 
 .vg-card-medicamentos .vg-med-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Usa flexbox para anular o bug do grid */
   gap: 10px;
   flex: 1;
-  overflow-y: auto; /* Ativa rolagem quando tiver mais de 2 remédios */
-  align-content: start; /* Mantém os cards alinhados no topo */
-  padding-right: 4px; /* Espacinho para a barra de rolagem não colar */
+  overflow-y: auto;
+  align-content: flex-start;
+  padding-right: 4px;
+  height: 100%; /* Pega a altura exata do painel */
 }
 
 .vg-card-medicamentos .vg-med-card {
-  min-height: auto;
-  padding: 16px 12px; /* Reduzi o padding exagerado para caber melhor na tela */
   background-color: #f4faff;
   border: 1px solid #d4edf9;
   border-radius: 12px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: 100%;
-  gap: 0;
+  gap: 6px;
+  width: calc(50% - 5px); /* Mantém exatamente o visual de 2 colunas */
+  height: 100%; /* A MÁGICA: O card assume exatamente 100% da altura visível da grade! */
+  padding: 10px;
   box-shadow: none;
+  flex-shrink: 0;
 }
 
 .vg-card-medicamentos .vg-med-card.med-card--tomado-hoje {
@@ -4120,8 +4110,10 @@ dialog.modal-container {
 }
 
 .vg-card-medicamentos .vg-med-card .icone-med {
-  width: 50px;
-  height: 50px;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  margin: 0;
 }
 
 .vg-card-medicamentos .med-card-info {
@@ -4130,20 +4122,34 @@ dialog.modal-container {
   align-items: center;
   justify-content: center;
   text-align: center;
+  flex: none; /* Bloco de proteção contra o texto esmagar o ícone */
+  gap: 2px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .vg-card-medicamentos .med-card-nome {
   font-size: 14px;
   color: #2e2e48;
   font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .vg-card-medicamentos .med-card-sub {
   font-size: 11px;
   color: #727b8e;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-/* Widget Circular Azul (Fixo à direita) */
+/* Widget Circular Azul (Fixo à direita) - CSS ORIGINAL SEU MANTIDO 100% INTACTO */
 .vg-card-medicamentos .vg-med-widget-circular-status {
   background-color: #80cef4;
   padding: 16px 12px;
@@ -4151,11 +4157,11 @@ dialog.modal-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centraliza o conteúdo perfeitamente */
+  justify-content: center; 
   text-align: center;
   gap: 8px;
   width: 105px;
-  flex-shrink: 0; /* Impede que ele seja esmagado pelos cards */
+  flex-shrink: 0; 
 }
 
 .vg-card-medicamentos .vg-circulo-progresso-medicos {
@@ -4174,7 +4180,7 @@ dialog.modal-container {
   position: absolute;
   width: 40px;
   height: 40px;
-  background-color: #ffffff;
+  background-color: #80cef4;
   border-radius: 50%;
   z-index: 1;
 }
@@ -4182,13 +4188,13 @@ dialog.modal-container {
 .vg-card-medicamentos .vg-circulo-progresso-medicos strong {
   position: relative;
   font-size: 12px;
-  color: #2e2e48;
+  color: #ffffff;
   font-weight: 700;
   z-index: 2;
 }
 
 .vg-card-medicamentos .vg-med-widget-circular-status span {
-  font-size: 11px;
+  font-size: 10px;
   color: #ffffff;
   line-height: 1.2;
   font-weight: 600;

@@ -411,7 +411,7 @@ function carregarRelatorioSincronizado() {
 }
 
 /* =============================================
-   MENU HAMBÚRGUER (Versão Corrigida para não crachar)
+   MENU HAMBÚRGUER 
 ============================================= */
 function inicializarMenuHamb() {
   const btn      = document.getElementById('btnHamburguer');
