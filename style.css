@@ -3016,32 +3016,33 @@ dialog.modal-container {
     grid-area: vgMedicamentos;
     overflow: hidden;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .vg-card-medicamentos .vg-med-layout-interno-painel {
     display: flex;
-    
-    align-items: center;
+    align-items: stretch; /* Faz os lados respeitarem a altura disponível */
     justify-content: space-between;
     gap: 16px;
     height: 100%;
     flex: 1;
+    min-height: 0; /* Trava de segurança crucial para ativar o scroll */
 }
 
 .vg-card-medicamentos .vg-med-grid {
     display: grid;
-    
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 10px;
     flex: 1;
-
-    overflow-y: auto;
+    overflow-y: auto; /* Ativa rolagem quando tiver mais de 2 remédios */
+    align-content: start; /* Mantém os cards alinhados no topo */
+    padding-right: 4px; /* Espacinho para a barra de rolagem não colar */
 }
 
 .vg-card-medicamentos .vg-med-card {
-  
     min-height: auto;
-    padding: 40px 30px;
+    padding: 16px 12px; /* Reduzi o padding exagerado para caber melhor na tela */
     background-color: #f4faff;
     border: 1px solid #d4edf9;
     border-radius: 12px;
@@ -3049,7 +3050,7 @@ dialog.modal-container {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     box-shadow: none;
 }
 
@@ -3058,35 +3059,43 @@ dialog.modal-container {
     border-color: #80cef4;
 }
 
-.vg-card-medicamentos .vg-med-card .icone-med { width: 50px; height: 50px; }
+.vg-card-medicamentos .vg-med-card .icone-med { 
+    width: 36px; 
+    height: 36px; 
+}
 
 .vg-card-medicamentos .med-card-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .vg-card-medicamentos .med-card-nome { 
-
-     justify-content: center;
      font-size: 14px; 
      color: #2e2e48; 
-     font-weight: 600; }
-.vg-card-medicamentos .med-card-sub { font-size: 11px; color: #727b8e; }
+     font-weight: 600; 
+}
 
-/* Widget Circular */
+.vg-card-medicamentos .med-card-sub { 
+    font-size: 11px; 
+    color: #727b8e; 
+}
+
+/* Widget Circular Azul (Fixo à direita) */
 .vg-card-medicamentos .vg-med-widget-circular-status {
-  background-color: #80cef4;
-  padding: 50px 30px;
+    background-color: #80cef4;
+    padding: 16px 12px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centraliza o conteúdo perfeitamente */
     text-align: center;
-    gap: 4px;
-    width: 90px;
-    flex-shrink: 0;
+    gap: 8px;
+    width: 105px;
+    flex-shrink: 0; /* Impede que ele seja esmagado pelos cards */
 }
 
 .vg-card-medicamentos .vg-circulo-progresso-medicos {
@@ -3111,7 +3120,7 @@ dialog.modal-container {
 }
 
 .vg-card-medicamentos .vg-circulo-progresso-medicos strong {
-   justify-content: center;
+    position: relative;
     font-size: 12px;
     color: #2e2e48;
     font-weight: 700;
@@ -3119,10 +3128,10 @@ dialog.modal-container {
 }
 
 .vg-card-medicamentos .vg-med-widget-circular-status span {
-    font-size: 10px;
+    font-size: 11px;
     color: #ffffff;
     line-height: 1.2;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* ─────────────────────────────────────────────

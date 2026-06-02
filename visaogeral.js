@@ -1,7 +1,7 @@
 'use strict';
 
 /* =============================================
-   visaogeral.js — Cuida+
+   visaogeral.js — Cuida+ (Versão Corrigida)
 ============================================= */
 
 function lerStorage(chave, fallback) {
@@ -184,7 +184,7 @@ function carregarMedicamentosGrid() {
     if (txtProgresso) txtProgresso.textContent = `${tomadosCount}/${meds.length}`;
     if (circuloProgresso && meds.length > 0) {
         const graus = (tomadosCount / meds.length) * 360;
-        circuloProgresso.style.background = `conic-gradient(#cbdd98 ${graus}deg, #e2e8f0 0deg)`;
+        circuloProgresso.style.background = `conic-gradient(#cbdd98 ${graus}deg, #f7fcff 0deg)`;
     }
 }
 
@@ -236,7 +236,8 @@ function popularDrumCol(col, itens, valorPadrao) {
         el.addEventListener('click', () => {
             col.querySelectorAll('.drum-item').forEach(x => x.classList.remove('ativo'));
             el.classList.add('ativo');
-            el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            // Correção de Scroll: 'nearest' impede a página inteira de tremer
+            el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         });
     });
 }
@@ -299,7 +300,7 @@ function fecharModalNovoMed() {
 }
 
 /* =============================================
-   CONSULTAS (Cards brancos do Figma)
+   CONSULTAS
 ============================================= */
 const CHAVE_CONSULTAS = 'cuidamais_consultas';
 
@@ -344,7 +345,7 @@ function carregarConsultasVG() {
 }
 
 /* =============================================
-   INDICADORES DE SAÚDE (Temperatura na base)
+   INDICADORES DE SAÚDE
 ============================================= */
 function carregarIndicadoresSaude() {
     const dadosSaude = lerStorage('dados_saude_inputs', {});
@@ -409,47 +410,50 @@ function carregarRelatorioSincronizado() {
     });
 }
 
-(function menuHamb() {
+/* =============================================
+   MENU HAMBÚRGUER (Versão Corrigida para não crachar)
+============================================= */
+function inicializarMenuHamb() {
   const btn      = document.getElementById('btnHamburguer');
   const gaveta   = document.getElementById('gavetaMobile');
   const overlay  = document.getElementById('overlayGaveta');
   const btnFechar = document.getElementById('btnFecharGaveta');
 
-  if (!btn || !gaveta) return; // segurança: sai se o HTML ainda não tiver a gaveta
+  if (!btn || !gaveta) return;
 
   function abrirGaveta() {
     gaveta.classList.add('aberta');
-    overlay.classList.add('visivel');
+    if (overlay) overlay.classList.add('visivel');
     btn.classList.add('aberto');
     document.body.style.overflow = 'hidden';
   }
 
   function fecharGaveta() {
     gaveta.classList.remove('aberta');
-    overlay.classList.remove('visivel');
+    if (overlay) overlay.classList.remove('visivel');
     btn.classList.remove('aberto');
     document.body.style.overflow = '';
   }
 
   btn.addEventListener('click', abrirGaveta);
   btnFechar.addEventListener('click', fecharGaveta);
-  overlay.addEventListener('click', fecharGaveta);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharGaveta(); });
-})();
+  if (overlay) overlay.addEventListener('click', fecharGaveta);
+}
 
 /* =============================================
-   INICIALIZAÇÃO DE EVENTOS
+   INICIALIZAÇÃO GERAL E EVENTOS GLOBAIS
 ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Renderizar Painéis
     carregarChipIdoso();
     carregarChecklist();
     carregarMedicamentosGrid();
     carregarIndicadoresSaude();
     carregarRelatorioSincronizado();
     carregarConsultasVG();
-    menuHamb();
+    inicializarMenuHamb();
 
-    /* Modais do Checklist */
+    // 2. Modais do Checklist
     document.getElementById('vg-btnAdicionarCheck')?.addEventListener('click', abrirModalCheck);
     document.getElementById('vg-btnFecharCheck')?.addEventListener('click', fecharModalCheck);
     document.getElementById('vg-btnSalvarCheck')?.addEventListener('click', salvarCheck);
@@ -457,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.id === 'vg-modalCheck') fecharModalCheck();
     });
 
-    /* Modais de Medicamentos */
+    // 3. Modais do Registro de Medicamento
     document.getElementById('vg-btnAbrirModalMed')?.addEventListener('click', abrirModalNovoMed);
     document.getElementById('btnFecharModalMed')?.addEventListener('click', fecharModalNovoMed);
     document.getElementById('modalNovoMed')?.addEventListener('click', e => {
@@ -478,6 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (receitaNomeEl) receitaNomeEl.textContent = e.target.files[0]?.name || "";
     });
 
+    // Submeter Novo Medicamento
     document.getElementById('formNovoMed')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const nomeInput = document.getElementById('medNome');
@@ -507,13 +512,14 @@ document.addEventListener('DOMContentLoaded', () => {
         fecharModalNovoMed();
     });
 
-    /* Modal Comprovante de Medicamento */
+    // 4. Modal Comprovante de Medicamento
     document.getElementById('vg-btnFecharComprovante')?.addEventListener('click', fecharModalComprovante);
     document.getElementById('vg-formComprovante')?.addEventListener('submit', salvarComprovante);
     document.getElementById('vg-modalComprovante')?.addEventListener('click', e => {
         if (e.target.id === 'vg-modalComprovante') fecharModalComprovante();
     });
 
+    // Rastrear uploads
     const monitorarUploads = (idInput) => {
         document.getElementById(idInput)?.addEventListener('change', (e) => {
             const nome = e.target.files[0]?.name || '';
@@ -524,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
     monitorarUploads('vg-compImagem');
     monitorarUploads('vg-compVideo');
 
-    /* Fechar todos com ESC */
+    // Fechar todos com ESC
     document.addEventListener('keydown', e => { 
         if (e.key === 'Escape') {
             fecharModalCheck();
