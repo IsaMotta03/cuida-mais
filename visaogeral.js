@@ -419,7 +419,6 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarIndicadoresSaude();
     carregarRelatorioSincronizado();
     carregarConsultasVG();
-    menuHamb();
 
     /* Modais do Checklist */
     document.getElementById('vg-btnAdicionarCheck')?.addEventListener('click', abrirModalCheck);
@@ -505,55 +504,3 @@ document.addEventListener('DOMContentLoaded', () => {
         } 
     });
 });
-
-/* =============================================
-   MODAL COMPROVANTE — VISÃO GERAL
-============================================= */
-function abrirModalComprovanteVG() {
-    const medicamentos = lerStorage(CHAVE_MEDS, []);
-    const med = [...medicamentos].reverse()[0];
-
-    if (!med) return;
-
-    document.getElementById('vg-compMedId').value = med.id;
-    document.getElementById('vg-compNome').value = med.nome;
-    document.getElementById('vg-compDosagem').value = med.dosagem || '';
-
-    document.getElementById('vg-compArquivoNome').textContent = '';
-    document.getElementById('vg-formComprovante').reset();
-
-    document.getElementById('vg-compMedId').value = med.id;
-    document.getElementById('vg-compNome').value = med.nome;
-    document.getElementById('vg-compDosagem').value = med.dosagem || '';
-
-    document.getElementById('vg-modalComprovante').classList.add('visivel');
-}
-
-function fecharModalComprovanteVG() {
-    document.getElementById('vg-modalComprovante')?.classList.remove('visivel');
-}
-
-function salvarComprovanteVG(e) {
-    e.preventDefault();
-
-    const medicamentos = lerStorage(CHAVE_MEDS, []);
-    const medId = document.getElementById('vg-compMedId').value;
-    const med = medicamentos.find(m => m.id === medId);
-
-    if (!med) return;
-
-    const compImagem = document.getElementById('vg-compImagem');
-    const compVideo = document.getElementById('vg-compVideo');
-
-    med.comprovantes = med.comprovantes || [];
-
-    med.comprovantes.push({
-        dataHora: new Date().toISOString(),
-        obs: document.getElementById('vg-compObsComp').value.trim(),
-        arquivoNome: compImagem.files[0]?.name || compVideo.files[0]?.name || '',
-    });
-
-    salvarStorage(CHAVE_MEDS, medicamentos);
-    fecharModalComprovanteVG();
-    carregarMedicamentosGrid();
-}
