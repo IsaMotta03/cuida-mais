@@ -3400,6 +3400,961 @@ dialog.modal-container {
 
 .chip-idoso__nome {
   font-size: 14px;
+}
+
+.med-chip-horario {
+  background: #cbdd98;
+  color: #2e2e48;
+  border-radius: 50px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.med-chip-horario button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #5a7000;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.med-chip-horario--card {
+  background: #cbdd98;
+  color: #fff;
+}
+
+.med-btn-comprovante {
+  background: #80cef4;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 30px 14px;
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  min-width: 90px;
+  align-self: center;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+  flex-shrink: 0;
+}
+
+.med-btn-comprovante:hover {
+  background: #5bbee8;
+  transform: scale(1.04);
+}
+.med-btn-comprovante--ok {
+  background: #7ec87e !important;
+}
+
+.cartao-med-form {
+  max-width: 640px;
+  width: 95%;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.med-horarios-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.med-horario-esq {
+  flex: 0 0 auto;
+}
+.med-horario-dir {
+  flex: 1;
+}
+
+.med-drum-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.med-btn-add-horario {
+  background: #80cef4;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.med-btn-add-horario:hover {
+  background: #5bbee8;
+}
+
+.med-horarios-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 36px;
+}
+.med-horarios-vazio {
+  font-size: 12px;
+  color: #aaa;
+  font-style: italic;
+}
+.cartao-comprovante-form {
+  max-width: 540px;
+  width: 95%;
+}
+
+/* =============================================
+   VISÃO GERAL — Dashboard 
+   ============================================= */
+.vg-dashboard {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  /* Mantém estrutura original de 5 linhas e 9 colunas */
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+      0,
+      1fr
+    ) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+      0,
+      1fr
+    ) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(
+      0,
+      1fr
+    );
+  grid-template-areas:
+    "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+    "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+    "vgRelatorio vgRelatorio vgRelatorio vgRelatorio vgIndicadores vgIndicadores vgIndicadores vgConsultas vgConsultas"
+    "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento"
+    "vgTarefas vgTarefas vgTarefas vgTarefas vgMedicamentos vgMedicamentos vgMedicamentos vgMedicamentos botaoMedicamento";
+  grid-gap: 24px;
+  overflow-y: auto;
+  padding: 2px 4px 8px 0;
+}
+
+/* Base de Todos os Cards */
+.vg-dashboard .vg-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 10px rgba(46, 46, 72, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.vg-dashboard .vg-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e2e48;
+  margin: 0;
+}
+
+.vg-dashboard .vg-card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────────
+   1. RELATÓRIO GERAL
+   ───────────────────────────────────────────── */
+.vg-dashboard .vg-card-relatorio {
+  grid-area: vgRelatorio;
+  min-height: 0;
+}
+
+.vg-card-relatorio .vg-relatorio-corpo-limpo {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr 1.1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 12px;
+}
+
+.vg-card-relatorio .vg-conteiner {
+  border: 1px solid #d8eefac4;
+  background-color: #f4faff;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.vg-card-relatorio .vg-conteiner-humor {
+  grid-row: 1;
+  grid-column: 1;
+  justify-content: left;
+}
+.vg-card-relatorio .vg-conteiner-humorSemanal {
+  grid-row: 2;
+  grid-column: 1;
+  justify-content: left;
+  text-align: space-between;
+}
+.vg-card-relatorio .vg-conteiner-notas {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.vg-card-relatorio .vg-quadrante-titulo {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2e2e48;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.vg-card-relatorio .vg-notes-painel-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 2px;
+}
+
+.vg-card-relatorio .vg-nota-item-feed {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d5e4b6;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.vg-card-relatorio .nota-meta {
+  background-color: #ebf5e1;
+  padding: 6px 10px;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  color: #5a7000;
+}
+
+.vg-card-relatorio .nota-texto {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #4b4f67;
+  line-height: 1.35;
+  max-height: 75px;
+  overflow-y: auto;
+}
+
+.vg-card-relatorio .vg-humor-card-ativo {
+  border-radius: 10px;
+  padding: 50px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+}
+.vg-card-relatorio .vg-humor-card-ativo.humor-feliz {
+  background-color: #cbdd98;
+  color: #2e2e48;
+}
+.vg-card-relatorio .vg-humor-card-ativo.humor-neutro {
+  background-color: #90b8e0;
+  color: #2e2e48;
+}
+.vg-card-relatorio .vg-humor-card-ativo.humor-triste {
+  background-color: #f0d080;
+  color: #2e2e48;
+}
+.vg-card-relatorio .vg-humor-card-ativo.humor-depressivo {
+  background-color: #e08080;
+  color: #2e2e48;
+}
+
+.vg-card-relatorio .vg-humor-card-ativo img {
+  width: 30px;
+  height: 30px;
+}
+.vg-card-relatorio .vg-humor-card-ativo span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   2. INDICADORES (Padrão Figma Exato + Temperatura)
+   ───────────────────────────────────────────── */
+.vg-dashboard .vg-card-indicadores {
+  grid-area: vgIndicadores;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vg-dashboard .vg-btn-editar-link {
+  background: none;
+  border: none;
+  color: #727b8e;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.vg-dashboard .vg-indicadores-conteudo-interno {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+
+.vg-dashboard .vg-ind-card-sub {
+  background-color: #f4faff;
+  border: 1px solid #d4edf9;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.vg-dashboard .vg-ind-card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.vg-dashboard .vg-ind-card-header strong {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2e2e48;
+}
+
+.vg-dashboard .vg-ind-card-header span {
+  font-size: 10px;
+  color: #727b8e;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.vg-dashboard .vg-badge-ind {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.vg-dashboard .vg-badge-ind.green {
+  background-color: #ebf5e1;
+  color: #5a7000;
+}
+.vg-dashboard .vg-badge-ind.blue {
+  background-color: #e1f5fe;
+  color: #0288d1;
+}
+
+.vg-dashboard .vg-ind-mini-barras {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.vg-dashboard .vg-ind-mini-barras div {
+  flex: 1;
+  background-color: #bae4f9;
+  border-radius: 4px;
+}
+.vg-dashboard .vg-ind-mini-barras div.destaque-bar {
+  background-color: #80cef4;
+}
+
+.vg-dashboard .vg-ind-mini-log {
+  list-style: none;
+  font-size: 11px;
+  color: #4b4f67;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vg-dashboard .vg-ind-mini-log li {
+  display: flex;
+  justify-content: space-between;
+}
+.vg-dashboard .destaque-verde {
+  color: #7ec87e;
+  font-weight: 600;
+}
+
+.vg-dashboard .item-pressao-full {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.vg-dashboard .vg-ind-pressao-grafico {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.vg-dashboard .vg-img-pulse {
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ─────────────────────────────────────────────
+   3. CONSULTAS (Padrão Figma Exato)
+   ───────────────────────────────────────────── */
+.vg-dashboard .vg-card-consultas {
+  grid-area: vgConsultas;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vg-dashboard .vg-seletor-mes-figma {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f8fafc;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.vg-dashboard .vg-seletor-mes-figma span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2e2e48;
+}
+
+.vg-dashboard .vg-botoes-setas button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: #727b8e;
+  padding: 0 4px;
+}
+
+.vg-dashboard .vg-consultas-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.vg-dashboard .vg-consulta-item {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vg-dashboard .vg-consulta-cor {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background-color: rgba(128, 206, 244, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.vg-dashboard .vg-consulta-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.vg-dashboard .vg-consulta-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e2e48;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vg-dashboard .vg-consulta-sub {
+  font-size: 11px;
+  color: #727b8e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vg-dashboard .vg-consulta-data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: rgba(128, 206, 244, 0.1);
+  padding: 6px 10px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.vg-dashboard .vg-consulta-dia {
+  font-size: 12px;
+  font-weight: 700;
+  color: #80cef4;
+}
+.vg-dashboard .vg-consulta-hora {
+  font-size: 10px;
+  color: #80cef4;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   4. TAREFAS DO DIA
+   ───────────────────────────────────────────── */
+.vg-dashboard .vg-card-tarefas {
+  grid-area: vgTarefas;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.vg-card-tarefas .checklist-resumo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.vg-card-tarefas .vg-tarefas-resumo {
+  font-size: 13px;
+  color: #727b8e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vg-card-tarefas #vg-checkTotal {
+  border-radius: 8px;
+  background-color: rgba(207, 224, 160, 0.4);
+  padding: 2px 6px;
+  color: #2e2e48;
+}
+
+.vg-card-tarefas #span-concluidas {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vg-card-tarefas #mini-conteiner-concluidas-vg {
+  border-radius: 8px;
+  background-color: rgba(128, 206, 244, 0.15);
+  padding: 2px 6px;
+  color: #2e2e48;
+}
+
+.vg-card-tarefas .vg-btn-add {
+  width: 100%;
+  background: #deecb7;
+  color: #182000;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+.vg-card-tarefas .vg-btn-add:hover {
+  background: #cfe0a0;
+}
+
+.vg-card-tarefas .vg-checklist-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.vg-card-tarefas .check-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+}
+
+.vg-card-tarefas .check-item--concluido {
+  background-color: #ebf5e1;
+  border-color: #cbdd98;
+}
+
+.vg-card-tarefas .check-item__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.vg-card-tarefas .check-item__input {
+  width: 16px;
+  height: 16px;
+  accent-color: #80cef4;
+}
+.vg-card-tarefas .check-item__texto {
+  font-size: 13px;
+  color: #2e2e48;
+  font-weight: 500;
+}
+.vg-card-tarefas .check-item--concluido .check-item__texto {
+  text-decoration: line-through;
+  color: #727b8e;
+}
+
+.vg-card-tarefas .check-item__btn-remover {
+  background: none;
+  border: none;
+  color: #aeafbd;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 4px;
+}
+.vg-card-tarefas .check-item__btn-remover:hover {
+  color: #e07b7b;
+}
+
+/* ─────────────────────────────────────────────
+   5. MEDICAMENTOS DIÁRIO
+   ───────────────────────────────────────────── */
+.vg-dashboard .vg-card-medicamentos {
+  grid-area: vgMedicamentos;
+  overflow: hidden;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.vg-card-medicamentos .vg-med-layout-interno-painel {
+  display: flex;
+  align-items: stretch; /* Faz os lados respeitarem a altura disponível */
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  flex: 1;
+  min-height: 0; /* Trava de segurança crucial para ativar o scroll */
+}
+
+.vg-card-medicamentos .vg-med-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 100%;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto; /* Ativa rolagem quando tiver mais de 2 remédios */
+  align-content: start; /* Mantém os cards alinhados no topo */
+  padding-right: 4px; /* Espacinho para a barra de rolagem não colar */
+}
+
+.vg-card-medicamentos .vg-med-card {
+  min-height: auto;
+  padding: 16px 12px; /* Reduzi o padding exagerado para caber melhor na tela */
+  background-color: #f4faff;
+  border: 1px solid #d4edf9;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+  box-shadow: none;
+}
+
+.vg-card-medicamentos .vg-med-card.med-card--tomado-hoje {
+  background-color: rgba(128, 206, 244, 0.12);
+  border-color: #80cef4;
+}
+
+.vg-card-medicamentos .vg-med-card .icone-med {
+  width: 50px;
+  height: 50px;
+}
+
+.vg-card-medicamentos .med-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.vg-card-medicamentos .med-card-nome {
+  font-size: 14px;
+  color: #2e2e48;
+  font-weight: 600;
+}
+
+.vg-card-medicamentos .med-card-sub {
+  font-size: 11px;
+  color: #727b8e;
+}
+
+/* Widget Circular Azul (Fixo à direita) */
+.vg-card-medicamentos .vg-med-widget-circular-status {
+  background-color: #80cef4;
+  padding: 16px 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centraliza o conteúdo perfeitamente */
+  text-align: center;
+  gap: 8px;
+  width: 105px;
+  flex-shrink: 0; /* Impede que ele seja esmagado pelos cards */
+}
+
+.vg-card-medicamentos .vg-circulo-progresso-medicos {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(#f7fcff 0deg, #cbdd98 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vg-card-medicamentos .vg-circulo-progresso-medicos::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.vg-card-medicamentos .vg-circulo-progresso-medicos strong {
+  position: relative;
+  font-size: 12px;
+  color: #2e2e48;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.vg-card-medicamentos .vg-med-widget-circular-status span {
+  font-size: 11px;
+  color: #ffffff;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   6. BOTÃO DE REGISTRO AZUL DA BASE
+   ───────────────────────────────────────────── */
+.vg-dashboard .vgBotaoMedicamento {
+  grid-area: botaoMedicamento;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #80cef4;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  padding: 14px 10px;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(128, 206, 244, 0.2);
+  transition: background-color 0.2s;
+}
+
+.vg-dashboard .vgBotaoMedicamento:hover {
+  background-color: #5bbee8;
+}
+.vg-dashboard .vgBotaoMedicamento img {
+  width: 44px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+/* Fallbacks Vazios Gerais */
+.vg-dashboard .vg-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 0;
+  color: #b0b8c8;
+  font-size: 12px;
+  text-align: center;
+  flex: 1;
+}
+
+.vg-dashboard .vg-vazio img {
+  width: 24px;
+  opacity: 0.5;
+}
+.vg-dashboard .vg-vazio h3 {
+  font-size: 13px;
+  color: #aeafbd;
+  margin: 0;
+}
+.vg-dashboard .vg-vazio p {
+  font-size: 11px;
+  color: #b0b8c8;
+  margin: 0;
+}
+
+/* =============================================
+   LOGIN
+   ============================================= */
+.grid-login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #e8f5fd;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.fundo-azul-onda {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70vh;
+  background-color: #80cef4;
+  border-bottom-right-radius: 120px;
+  border-bottom-left-radius: 120px;
+  z-index: 1;
+}
+
+.lado-ilustracao {
+  width: 50%;
+  height: 60vh;
+  position: relative;
+  padding: 40px;
+  z-index: 2;
+}
+.lado-formulario {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.bolha {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: #c6d9a5;
+  border-radius: 50%;
+  bottom: -50%;
+  left: 50%;
+  z-index: 1;
+}
+.ilustracao-pessoas {
+  position: absolute;
+  bottom: -80%;
+  left: 20%;
+  height: 100vh;
+  width: auto;
+  z-index: 2;
+  object-fit: contain;
+}
+
+.link-cadastro-topo {
+  position: absolute;
+  top: 40px;
+  right: 10%;
+  font-size: 0.85rem;
+  color: #666;
+}
+.link-cadastro-topo a,
+.link-cadastro-rodape a {
+  color: #80cef4;
+  text-decoration: none;
+  font-weight: 600;
+}
+.link-cadastro-rodape {
+  display: none;
+}
+
+.lado-formulario {
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin: 40px auto;
+  max-width: 450px;
+  padding: 40px;
+  justify-content: flex-start;
+}
+
+.login-bemvindo {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+.login-titulo {
+  font-size: 2.2rem;
+  color: #1a1a1a;
   font-weight: 700;
   color: #fff;
 }
