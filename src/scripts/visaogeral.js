@@ -171,7 +171,7 @@ function carregarMedicamentosGrid() {
         card.style.cursor = 'pointer';
         
         card.innerHTML = `
-            <img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med">
+            <img src="../assets/icons/Pill.png" alt="Remédio" class="icone-med">
             <div class="med-card-info">
                 <strong class="med-card-nome">${escapeHtml(med.nome)}</strong>
                 <span class="med-card-sub">Dosagem: ${escapeHtml(med.dosagem || '—')}</span>
@@ -319,7 +319,7 @@ function carregarConsultasVG() {
     if (proximas.length === 0) {
         corpo.innerHTML = `
             <div class="vg-vazio">
-                <img src="assets/icons/sino.svg" alt="Sino">
+                <img src="../assets/icons/sino.svg" alt="Sino">
                 <h3>Nenhuma consulta</h3>
                 <p>Cadastre consultas para vê-las aqui.</p>
             </div>`;
@@ -362,10 +362,10 @@ function carregarIndicadoresSaude() {
    RELATÓRIO: HUMOR + NOTAS
 ============================================= */
 const MAPA_HUMOR = {
-    feliz: { emoji: 'assets/icons/feliz.svg', label: 'Feliz' },
-    neutro: { emoji: 'assets/icons/neutro.svg', label: 'Neutro' },
-    triste: { emoji: 'assets/icons/triste.svg', label: 'Triste' },
-    depressivo: { emoji: 'assets/icons/depressivo.svg', label: 'Depressivo' },
+    feliz: { emoji: '../assets/icons/feliz.svg', label: 'Feliz' },
+    neutro: { emoji: '../assets/icons/neutro.svg', label: 'Neutro' },
+    triste: { emoji: '../assets/icons/triste.svg', label: 'Triste' },
+    depressivo: { emoji: '../assets/icons/depressivo.svg', label: 'Depressivo' },
 };
 
 function carregarRelatorioSincronizado() {

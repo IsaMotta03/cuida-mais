@@ -49,7 +49,7 @@ function carregarChipIdoso() {
     idadeEl.textContent = `${idade} anos`;
   }
 
-  fotoEl.src = "assets/icons/idoso1.svg";
+  fotoEl.src = "../assets/icons/idoso1.svg";
   fotoEl.style.display = "block";
   fotoEl.onerror = () => { fotoEl.style.display = "none"; };
   chipEl.hidden = false;

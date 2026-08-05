@@ -43,11 +43,21 @@ Ele foi criado com o objetivo de facilitar a rotina de cuidado, reduzir esquecim
 - LocalStorage do navegador
 - Layout responsivo e navegação por múltiplas páginas estáticas
 
+## Estrutura do Projeto
+
+A organização do projeto foi reorganizada em camadas para facilitar manutenção e escalabilidade:
+
+- [src/pages](src/pages): páginas HTML da aplicação, como login, cadastro, visão geral, pessoas, medicamentos, consultas e acompanhamentos;
+- [src/scripts](src/scripts): lógicas JavaScript separadas por módulo da interface;
+- [src/styles](src/styles): folha de estilos centralizada;
+- [src/assets](src/assets): ativos compartilhados da aplicação, organizados em ícones, imagens e ilustrações;
+- [index.html](index.html): entrada principal do projeto com redirecionamento para a tela de login.
+
 ## Instalação
 
 1. Clone este repositório para sua máquina local;
 2. Abra a pasta do projeto;
-3. Para visualizar a página, basta abrir o arquivo login.html em um navegador.
+3. Para visualizar a aplicação, abra o arquivo [index.html](index.html) em um navegador ou utilize um servidor local simples.
 
 ## Aprendizado
 
@@ -63,7 +73,6 @@ Durante o desenvolvimento deste projeto, foi possível ampliar conhecimentos em:
 Algumas melhorias que podem ser implementadas no futuro incluem:
 - criação de versões específicas para diferentes tipos de usuários, como cuidadores, familiares e administradores;
 - transformação do site em um aplicativo, oferecendo uma experiência mais prática e acessível em dispositivos móveis;
-- melhor organização de arquivos;
 - integração com backend e banco de dados real;
 - autenticação segura com usuário e senha persistente;
 - envio de lembretes por e-mail ou notificações;

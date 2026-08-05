@@ -4,7 +4,7 @@
 "use strict";
 
 const pillIcon =
-  '<img src="./assets/icons/Pill.png" alt="Remédio" class="icone-med">';
+  '<img src="../assets/icons/Pill.png" alt="Remédio" class="icone-med">';
 function getIcone() {
   return pillIcon;
 }
@@ -179,7 +179,7 @@ function renderGrid() {
         <div class="med-card-horarios">${chipsHTML}</div>
       </div>
       <button class="med-btn-comprovante" data-id="${med.id}">
-        <img src="assets/icons/Save.svg" width="36" height="36" alt="">
+        <img src="../assets/icons/Save.svg" width="36" height="36" alt="">
         <span>Comprovante</span>
       </button>
     `;
@@ -296,10 +296,10 @@ formComprovante.addEventListener("submit", (e) => {
   if (card) {
     const btn = card.querySelector(".med-btn-comprovante");
     btn.classList.add("med-btn-comprovante--ok");
-    btn.innerHTML = `<img src="assets/icons/Save.svg" width="22" height="22" alt=""><span>Registrado</span>`;
+    btn.innerHTML = `<img src="../assets/icons/Save.svg" width="22" height="22" alt=""><span>Registrado</span>`;
     setTimeout(() => {
       btn.classList.remove("med-btn-comprovante--ok");
-      btn.innerHTML = `<img src="assets/icons/Save.svg" width="22" height="22" alt=""><span>Comprovante</span>`;
+      btn.innerHTML = `<img src="../assets/icons/Save.svg" width="22" height="22" alt=""><span>Comprovante</span>`;
     }, 3000);
   }
 });

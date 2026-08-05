@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuida+ | Visão Geral</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/icons/logo-favicon.ico" />
+  </head>
+
+  
+  <body class="painel">
+    <header class="header-mobile">
+        <img src="../assets/icons/logo.svg" alt="Logo cuida+" class="logo-header" />
+        <button class="btn-hamburguer" id="btnHamburguer" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+
+      <nav class="gaveta-mobile" id="gavetaMobile" aria-label="Menu principal">
+        <div class="gaveta-topo">
+          <img src="../assets/icons/logo.svg" alt="Logo cuida+" class="logo-gaveta" />
+          <button class="btn-fechar-gaveta" id="btnFecharGaveta" aria-label="Fechar menu">&times;</button>
+        </div>
+
+        <div class="menu-navegacao-gaveta">
+          <ul>
+            <li class="selecionado">
+              <a href="visaogeral.html">
+                <img src="../assets/icons/visao-geral.svg" alt="Ícone Visão Geral" />
+                <span>Visão Geral</span>
+              </a>
+            </li>
+            <li>
+              <a href="pessoas.html">
+                <img src="../assets/icons/pessoas.svg" alt="Ícone Pessoas" />
+                <span>Pessoas</span>
+              </a>
+            </li>
+            <li>
+              <a href="medicamento.html">
+                <img src="../assets/icons/medicamentos.svg" alt="Ícone Medicamentos" />
+                <span>Medicamentos</span>
+              </a>
+            </li>
+            <li>
+              <a href="consultas.html">
+                <img src="../assets/icons/consultas.svg" alt="Ícone Consultas" />
+                <span>Consultas</span>
+              </a>
+            </li>
+            <li>
+              <a href="acompanhamentos.html">
+                <img src="../assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento" />
+                <span>Acompanhamento</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rodape-gaveta">
+          <a href="#" class="botao-escuro gerenciarPlanos">
+            <img src="../assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos" />
+            <span>Gerenciar Planos</span>
+          </a>
+          <a href="#configuracoes" class="link-configuracoes">
+            <img src="../assets/icons/configuracoes.svg" alt="Ícone Configurações" />
+            <span>Configurações</span>
+          </a>
+          <section class="perfil-usuario">
+            <figure class="informacoes-usuario">
+              <img src="../assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil" />
+              <figcaption class="detalhes-usuario">
+                <span class="nome-usuario">Fulano Siclano</span>
+                <span class="email-usuario">fulano@uol.com</span>
+              </figcaption>
+            </figure>
+            <a href="login.html" class="botao-sair" title="Sair da conta">
+              <button style="border: none; background: transparent">
+                <img src="../assets/icons/logout.svg" alt="Ícone Sair" class="sair" />
+              </button>
+            </a>
+          </section>
+        </div>
+      </nav>
+
+      <!-- OVERLAY -->
+      <div class="overlay-gaveta" id="overlayGaveta"></div>
+
+    <aside class="barra-lateral">
+      <header class="logotipo">
+        <img src="../assets/icons/logo.svg" alt="Logotipo Cuida+" />
+      </header>
+
+      <nav class="menu-navegacao">
+        <ul>
+          <li class="selecionado">
+            <a href="visaogeral.html">
+              <img src="../assets/icons/visao-geral.svg" alt="Ícone Visão Geral" />
+              <span>Visão Geral</span>
+            </a>
+          </li>
+          <li>
+            <a href="pessoas.html">
+              <img src="../assets/icons/pessoas.svg" alt="Ícone Pessoas" />
+              <span>Pessoas</span>
+            </a>
+          </li>
+          <li>
+            <a href="medicamento.html">
+              <img src="../assets/icons/medicamentos.svg" alt="Ícone Medicamentos" />
+              <span>Medicamentos</span>
+            </a>
+          </li>
+          <li>
+            <a href="consultas.html">
+              <img src="../assets/icons/consultas.svg" alt="Ícone Consultas" />
+              <span>Consultas</span>
+            </a>
+          </li>
+          <li>
+            <a href="acompanhamentos.html">
+              <img src="../assets/icons/acompanhamento.svg" alt="Ícone Acompanhamento" />
+              <span>Acompanhamento</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="rodape-lateral">
+        <a href="#" class="botao-escuro gerenciarPlanos">
+          <img src="../assets/icons/gerenciar-planos.svg" alt="Ícone Gerenciar Planos" />
+          <span>Gerenciar Planos</span>
+        </a>
+
+        <a href="#configuracoes" class="link-configuracoes">
+          <img src="../assets/icons/configuracoes.svg" alt="Ícone Configurações" />
+          <span>Configurações</span>
+        </a>
+
+        <section class="perfil-usuario">
+          <figure class="informacoes-usuario">
+            <img src="../assets/images/avatar.png" alt="Foto de perfil do usuário" class="perfil" />
+            <figcaption class="detalhes-usuario">
+              <span class="nome-usuario">Fulano Siclano</span>
+              <span class="email-usuario">fulano@uol.com</span>
+            </figcaption>
+          </figure>
+          <a href="login.html" class="botao-sair" title="Sair da conta">
+            <button style="border: none; background: transparent">
+              <img src="../assets/icons/logout.svg" alt="Ícone Sair" class="sair" />
+            </button>
+          </a>
+        </section>
+      </section>
+    </aside>
+
+    <main class="conteudo-principal">
+      <header class="cabecalho-topo">
+        <div class="titulos-cabecalho">
+          <h1>Bem-vindo, Fulano!</h1>
+          <div class="chip-idoso" id="chipIdoso" hidden>
+            <img src="../assets/icons/idoso1.svg" alt="Foto do idoso" class="chip-idoso__foto" />
+            <div class="chip-idoso__info">
+              <strong class="chip-idoso__nome" id="chipIdosoNome"></strong>
+              <span class="chip-idoso__idade" id="chipIdosoIdade"></span>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="botao-escuro botao-emergencia">
+          <img src="../assets/icons/emergencia.svg" alt="Ícone Ambulância" />
+          <span>Emergência</span>
+        </a>
+      </header>
+
+      <div class="vg-dashboard">
+        <article class="vg-card vg-card-relatorio">
+          <h2 style="font-size: 20px;">Relatório Geral</h2>
+          <div class="vg-relatorio-corpo-limpo">
+            <div class="vg-conteiner-humor vg-conteiner">
+              <span class="vg-quadrante-titulo"><strong>Humor do dia</strong></span>
+              <div id="vg-relatorio-humor" class="vg-humor-container"></div>
+            </div>
+
+            <div class="vg-conteiner-notas vg-conteiner">
+              <span class="vg-quadrante-titulo"><strong>Observações Recentes</strong></span>
+              <div id="vg-lista-notas-painel" class="vg-notes-painel-lista"></div>
+            </div>
+            
+            <div class="vg-conteiner-humorSemanal vg-conteiner">
+              <h4 class="vg-quadrante-titulo"><strong>Humor semanal</strong></h4>
+              <span style="color: #afb9cf; font-size: 12px; justify-content: left"> <i>Sem dados suficiente</i> </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="vg-card vg-card-indicadores">
+          <div class="vg-card-header-flex">
+            <h2 style="font-size: 20px">Indicadores</h2>
+            <button class="vg-btn-editar-link">Editar ✏️</button>
+          </div>
+          <div class="vg-indicadores-conteudo-interno">
+            <div class="vg-ind-card-sub item-peso">
+              <div class="vg-ind-card-header">
+                <strong id="vg-ind-val-peso">98 Kg</strong>
+                <span>Peso</span>
+              </div>
+              <span class="vg-badge-ind green">+1.2 Kg</span>
+              <div class="vg-ind-mini-barras">
+                <div style="height: 35%"></div>
+                <div style="height: 50%"></div>
+                <div style="height: 65%"></div>
+                <div style="height: 55%"></div>
+                <div style="height: 80%" class="destaque-bar"></div>
+              </div>
+            </div>
+            
+            <div class="vg-ind-card-sub item-glicose">
+              <div class="vg-ind-card-header">
+                <strong id="vg-ind-val-glicose">7.8</strong>
+                <span>Açúcar no Sangue</span>
+              </div>
+              <span class="vg-badge-ind blue">+2%</span>
+              <ul class="vg-ind-mini-log">
+                <li>6.3 mmol/L</li>
+                <li>4.1 mmol/L <span class="destaque-verde">+30%</span></li>
+                <li>4.9 mmol/L</li>
+              </ul>
+            </div>
+            
+            <div class="vg-ind-card-sub item-pressao-full">
+              <div class="vg-ind-pressao-textos">
+                <div class="vg-ind-card-header">
+                  <strong id="vg-ind-val-temperatura">36.1 °C</strong>
+                  <span>Temperatura</span>
+                </div>
+              </div>
+              <div class="vg-ind-pressao-grafico">
+                <img src="../assets/illustrations/Pulse.svg" alt="Gráfico" class="vg-img-pulse">
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="vg-card vg-card-consultas">
+          <div class="vg-card-header-flex">
+            <h2 style="font-size: 20px">Consultas</h2>
+            <div class="vg-seletor-mes-figma">
+              <span>Abril 2026</span>
+              <div class="vg-botoes-setas">
+                <button>&lt;</button>
+                <button>&gt;</button>
+              </div>
+            </div>
+          </div>
+          <div class="vg-consultas-corpo">
+            <div class="vg-vazio">
+              <img src="../assets/icons/sino.svg" alt="Sino" />
+              <h3>Nenhuma consulta</h3>
+              <p>Cadastre consultas para vê-las aqui.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="vg-card vg-card-tarefas">
+          <div class="checklist-resumo">
+            <h2 style="font-size: 20px">Tarefas do dia</h2>
+            <div class="vg-tarefas-resumo">
+              <span>Criadas <strong id="vg-checkTotal">0</strong></span>
+              <span id="span-concluidas">Concluídas
+                <div id="mini-conteiner-concluidas-vg">
+                  <strong id="vg-checkConcluidas">0</strong> de
+                  <strong id="vg-checkTotalRepeat">0</strong>
+                </div>
+              </span>
+            </div>
+          </div>
+          <button class="vg-btn-add" id="vg-btnAdicionarCheck">+ Nova tarefa</button>
+          <ul class="vg-checklist-lista checklist-lista" id="vg-checkLista"></ul>
+        </article>
+
+        <article class="vg-card vg-card-medicamentos">
+          <h2 style="font-size: 20px">Medicamentos</h2>
+          <div id="vg-medVazio" class="vg-vazio">
+            <img src="../assets/icons/sino.svg" alt="Sino" />
+            <h3>Nenhum medicamento</h3>
+            <p>Cadastre medicamentos para vê-los aqui.</p>
+          </div>
+          <div class="vg-med-layout-interno-painel" id="vg-medConteudo" style="display: none;">
+            <div class="vg-med-grid" id="vg-medGrid"></div>
+            <div class="vg-med-widget-circular-status">
+              <div class="vg-circulo-progresso-medicos" id="vg-medCirculoProgresso">
+                <strong id="vg-med-txt-progresso">0/0</strong>
+              </div>
+              <span>Medicamentos já tomados!</span>
+            </div>
+          </div>
+        </article>
+
+        <button class="vgBotaoMedicamento" id="vg-btnAbrirModalMed">
+          <img src="../assets/illustrations/Capsule & Pill.svg" alt="Imagem de pílula">
+          <span>Registro de medicamento</span>
+        </button>
+      </div>
+    </main>
+
+    <div class="modal-overlay" id="vg-modalCheck" role="dialog" aria-modal="true">
+      <div class="cartao">
+        <div class="form-header">
+          <h1>Nova Tarefa</h1>
+          <button class="btn-fechar" id="vg-btnFecharCheck" aria-label="Fechar modal">x</button>
+        </div>
+        <div class="formulario" style="display: flex; flex-direction: column; gap: 16px">
+          <div class="inputs col-span-full">
+            <label for="vg-checkTexto">Tarefa</label>
+            <input type="text" id="vg-checkTexto" placeholder="Ex: Ingestão regular de água" maxlength="80" />
+          </div>
+          <button class="botao-adicionar" id="vg-btnSalvarCheck" style="width: 100%">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modalNovoMed" role="dialog" aria-modal="true" aria-labelledby="tituloModalMed">
+      <div class="cartao cartao-med-form">
+        <div class="form-header">
+          <h1 id="tituloModalMed">Novo Medicamento</h1>
+          <button class="btn-fechar" id="btnFecharModalMed" aria-label="Fechar">×</button>
+        </div>
+        <form class="formulario" id="formNovoMed" novalidate>
+          <div class="inputs col-span-full">
+            <label for="medNome">Nome do Medicamento</label>
+            <input type="text" id="medNome" placeholder="Ex: Novalgina" autocomplete="off" />
+          </div>
+          <div class="inputs col-5">
+            <label for="medDosagem">Dosagem</label>
+            <input type="text" id="medDosagem" placeholder="500 mg" />
+          </div>
+          <div class="inputs col-5">
+            <label for="medMedico">Médico Responsável</label>
+            <input type="text" id="medMedico" placeholder="Dr. José Almeida" />
+          </div>
+          <div class="inputs col-2">
+            <label for="medCid">CID</label>
+            <input type="text" id="medCid" placeholder="000" />
+          </div>
+          <div class="inputs col-5">
+            <label for="medRecorrencia">Recorrência</label>
+            <select id="medRecorrencia" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-size: 14px; font-family: 'Poppins', sans-serif; outline: none; background: #fff; width: 100%;">
+              <option value="" disabled selected>Período</option>
+              <option value="Uso contínuo">Uso contínuo</option>
+              <option value="Diário">Diário</option>
+              <option value="Segundas">Segundas</option>
+              <option value="Terças">Terças</option>
+              <option value="Quartas">Quartas</option>
+              <option value="Quintas">Quintas</option>
+              <option value="Sextas">Sextas</option>
+              <option value="Sábados">Sábados</option>
+              <option value="Domingos">Domingos</option>
+            </select>
+          </div>
+          <div class="inputs col-7">
+            <label for="medObs">Observações</label>
+            <input type="text" id="medObs" placeholder="Ex: Tomar depois de refeição" />
+          </div>
+          <div class="col-span-full med-horarios-wrapper">
+            <div class="med-horario-esq">
+              <label style="font-size: 14px; font-weight: 500; color: #2e2e48; display: block; margin-bottom: 8px;">Selecione o Horário</label>
+              <div class="med-drum-wrapper">
+                <div class="seletor-horario-drum" id="drumHorario">
+                  <div class="drum-col" id="drumHoras"></div>
+                  <div class="drum-col" id="drumMinutos"></div>
+                  <div class="drum-col" id="drumPeriodo">
+                    <div class="drum-item" data-val="AM">AM</div>
+                    <div class="drum-item" data-val="PM">PM</div>
+                  </div>
+                </div>
+                <button type="button" class="med-btn-add-horario" id="btnAddHorario">+</button>
+              </div>
+            </div>
+            <div class="med-horario-dir">
+              <label style="font-size: 14px; font-weight: 500; color: #2e2e48; display: block; margin-bottom: 8px;">Horários definidos</label>
+              <div class="med-horarios-chips" id="horariosChips"><span class="med-horarios-vazio">Nenhum horário adicionado</span></div>
+              <label style="font-size: 14px; font-weight: 500; color: #2e2e48; display: block; margin: 14px 0 8px;">Anexar receita</label>
+              <label class="btn-anexos" style="cursor: pointer">
+                <img src="../assets/icons/clip.svg" alt="" style="width: 18px; height: 18px; margin-right: 6px; vertical-align: middle;" />
+                Receita
+                <input type="file" id="medReceita" accept="image/*,.pdf" class="sr-only" />
+              </label>
+              <span id="receitaNome" style="display: block; font-size: 12px; color: #727b8e; margin-top: 6px;"></span>
+            </div>
+          </div>
+          <div class="form-footer col-span-full">
+            <button type="submit" class="btn-confirmar">Confirmar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="vg-modalComprovante" role="dialog" aria-modal="true" aria-labelledby="vg-tituloModalComp">
+      <div class="cartao cartao-comprovante-form">
+        <div class="form-header">
+          <h1 id="vg-tituloModalComp">Tomou a medicação?</h1>
+          <button class="btn-fechar" id="vg-btnFecharComprovante" aria-label="Fechar">×</button>
+        </div>
+        <form class="formulario" id="vg-formComprovante" novalidate>
+          <input type="hidden" id="vg-compMedId" />
+          <div class="inputs col-span-full">
+            <label for="vg-compNome">Nome do Medicamento</label>
+            <input type="text" id="vg-compNome" placeholder="Ex: Novalgina" readonly style="background: #f8fafc" />
+          </div>
+          <div class="inputs col-6">
+            <label for="vg-compDosagem">Dosagem</label>
+            <input type="text" id="vg-compDosagem" placeholder="500 mg" readonly style="background: #f8fafc" />
+          </div>
+          <div class="inputs col-6">
+            <label for="vg-compObsComp">Observações</label>
+            <input type="text" id="vg-compObsComp" placeholder="Ex: Reclamou do comprimido" />
+          </div>
+          <div class="inputs col-span-full">
+            <label>Comprovação</label>
+            <div style="display: flex; gap: 12px">
+              <label class="btn-anexos" style="flex: 1; cursor: pointer; text-align: center">
+                Imagem
+                <input type="file" id="vg-compImagem" accept="image/*" class="sr-only" />
+              </label>
+              <label class="btn-anexos" style="flex: 1; cursor: pointer; text-align: center">
+                Vídeo
+                <input type="file" id="vg-compVideo" accept="video/*" class="sr-only" />
+              </label>
+            </div>
+            <span id="vg-compArquivoNome" style="display: block; font-size: 12px; color: #727b8e; margin-top: 6px;"></span>
+          </div>
+          <div class="form-footer col-span-full">
+            <button type="submit" class="btn-confirmar">Confirmar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../scripts/visaogeral.js"></script>
+  </body>
+</html>

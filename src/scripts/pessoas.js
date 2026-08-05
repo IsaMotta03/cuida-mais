@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.dataset.id = idoso.id;
         card.innerHTML = `
             <div class="card-idoso-avatar">
-                <img src="assets/icons/idoso1.svg" alt="Avatar de ${idoso.nome}">
+                <img src="../assets/icons/idoso1.svg" alt="Avatar de ${idoso.nome}">
             </div>
             <div class="card-idoso-info">
                 <strong class="card-idoso-nome">${idoso.nome}</strong>
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const idadeTexto = idade !== null ? `${idade} anos` : '';
                 const id         = gerarId();
                 const temCnh     = cnh ? 'Sim.' : 'Não.';
-                const avatar     = avatarAleatorio(['assets/icons/cuidador1.svg', 'assets/icons/cuidador2.svg']);
+                const avatar     = avatarAleatorio(['../assets/icons/cuidador1.svg', '../assets/icons/cuidador2.svg']);
 
                 const novoCuidador = { id, nome, nascimento, turno, dias, temCnh, idadeTexto, avatar };
 
@@ -302,7 +302,7 @@ function renderCardFamiliar(f) {
     const pilula = document.createElement('div');
     pilula.className = `card-familiar ${f.isAdmin ? 'familiar-admin' : 'familiar-observador'}`;
     pilula.innerHTML = `
-        <img src="${f.avatar || 'assets/images/avatar.png'}" alt="Avatar de ${f.nome}" class="card-familiar-avatar">
+        <img src="${f.avatar || '../assets/images/avatar.png'}" alt="Avatar de ${f.nome}" class="card-familiar-avatar">
         <div class="card-familiar-info">
             <strong>${f.nome}</strong>
             <span>${f.parentesco || (f.isAdmin ? 'Administrador' : 'Observador')}</span>
@@ -345,7 +345,7 @@ if (formularioFamiliar) {
             id: `${Date.now()}`,
             nome: nomeInput,
             parentesco: parentescoInput,
-            avatar: 'assets/images/avatar.png',
+            avatar: '../assets/images/avatar.png',
             isAdmin: ehAdmin // Passa o resultado da nossa verificação acima
         };
 

@@ -350,7 +350,7 @@ function renderizarPaginaConsultas() {
             <div class="cal-dia-header">
                 <button class="btn-dia" id="btn-dia-anterior" ${!temAntes ? "disabled" : ""} aria-label="Dia anterior">&#8249;</button>
                 <div class="cal-dia-titulo">
-                    <img src="assets/icons/sino.svg" alt="" onerror="this.style.display='none'">
+                    <img src="../assets/icons/sino.svg" alt="" onerror="this.style.display='none'">
                     <span>${nomeDiaFmt}</span>
                 </div>
                 <button class="btn-dia" id="btn-dia-proximo" ${!temDepois ? "disabled" : ""} aria-label="Próximo dia">&#8250;</button>
@@ -390,7 +390,7 @@ function mostrarEstadoVazio() {
   areaConteudo.classList.remove("com-consultas");
   areaConteudo.innerHTML = `
         <article class="cartao-vazio">
-            <img src="assets/icons/sino.svg" alt="" class="icone-sino" onerror="this.style.display='none'">
+            <img src="../assets/icons/sino.svg" alt="" class="icone-sino" onerror="this.style.display='none'">
             <h2>Nenhuma consulta agendada</h2>
             <p>Cadastre novas consultas pra receber notificações.</p>
         </article>
